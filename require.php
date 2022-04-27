@@ -19,7 +19,7 @@ require __DIR__. '/Model/Manager/UserManager.php';
 require __DIR__. '/Model/Manager/View_publicationManager.php';
 
 require __DIR__ . '/Controller/AbstractController.php';
-require __DIR__ . '/Controller/Character-nameController.php';
+require __DIR__ . '/Controller/CharacterController.php';
 require __DIR__. '/Controller/ErrorController.php';
 require __DIR__. '/Controller/HomeController.php';
 require __DIR__. '/Controller/LoginController.php';
