@@ -6,8 +6,11 @@ class Routeur
         $control = new $controller();
         $control->index();
         switch ($action) {
-            case 'character-name':
-                $control->characterName();
+            case 'character':
+                $control->character();
+                break;
+            case 'update-profil':
+                $control->updateProfil();
                 break;
         }
     }
