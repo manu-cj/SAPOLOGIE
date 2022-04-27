@@ -7,7 +7,9 @@ class Character extends AbstractController
     {
         $this->render('user/character');
     }
-
+     public function characterName() {
+        $this->render('user/character-name');
+     }
 }
 
 

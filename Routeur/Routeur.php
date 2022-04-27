@@ -9,6 +9,9 @@ class Routeur
             case 'logout':
                 $control->logout();
                 break;
+            case 'character-name':
+                $control->characterName();
+                break;
         }
     }
 

@@ -1,5 +1,7 @@
 <?php
+use App\Controller\ErrorController\ErrorController;
 
+session_start();
 
 ?>
 <!doctype html>
@@ -10,23 +12,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Blog</title>
+    <title>W.O.S</title>
 </head>
-
+<body>
 <div class="menu">
     <nav>
         <a href="?c=home">Acceuil</a>
         <a href="?c=profil">Profil</a>
         <a href="?c=login">Se connecter</a>
         <a href="?c=register">S'inscrire</a>
+        <h3 style="color: red">Faire une page contact</h3>
     </nav>
-
 </div>
 
 <?php
+require __DIR__. '/require.php';
+
 $page = isset($_GET['c']) ? Routeur::secureUrl($_GET['c']) : 'home';
 $action = isset($_GET['a']) ? Routeur::secureUrl($_GET['a']) : 'index';
-
 
 switch ($page) {
     case 'home':
@@ -44,15 +47,11 @@ switch ($page) {
     default:
         ErrorController::error404($page);
 }
-
-
 ?>
 
 <div class="footer">
 
 </div>
-
-
 <script src="assets/js/app.js"></script>
 </body>
 </html>
