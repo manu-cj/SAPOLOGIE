@@ -6,9 +6,6 @@ class Routeur
         $control = new $controller();
         $control->index();
         switch ($action) {
-            case 'logout':
-                $control->logout();
-                break;
             case 'character-name':
                 $control->characterName();
                 break;
