@@ -38,6 +38,9 @@ switch ($page) {
     case 'profil':
         Routeur::route('UserController', $action);
         break;
+    case 'character':
+        Routeur::route('CharacterController', $action);
+        break;
     case 'login':
         Routeur::route('LoginController', $action);
         break;

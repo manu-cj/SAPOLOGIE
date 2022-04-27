@@ -1,1 +1,1 @@
-<?php
+<p>Contenu</p>

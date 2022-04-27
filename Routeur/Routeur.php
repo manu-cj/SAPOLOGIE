@@ -9,6 +9,9 @@ class Routeur
             case 'character':
                 $control->character();
                 break;
+            case 'character-name':
+                $control->characterName();
+                break;
             case 'update-profil':
                 $control->updateProfil();
                 break;
