@@ -18,19 +18,17 @@ session_start();
 <body>
 <div class="menu">
     <nav>
-        <a href="?c=home">Acceuil</a>
-        <a href="?c=profil">Profil</a>
+        <a href="?c=home">W.O.S</a>
+        <form action="?c=search" method="post">
+            <input type="text" value="" name="user" placeholder="recherche"/>
+            <input type="submit" name="search" value="🔎"/>
+        </form>
         <a href="?c=login">Se connecter</a>
         <a href="?c=register">S'inscrire</a>
+        <a href="?c=profil">Profil</a>
         <h3 style="color: red">Faire une page contact</h3>
     </nav>
-    <form action="?c=search" method="post">
-        <input type="text" value="" name="user" placeholder="recherche"/>
-        <?php
 
-        ?>
-        <input type="submit" name="search" value="🔎"/>
-    </form>
 </div>
 
 <?php
