@@ -12,6 +12,7 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/4887179.png">
     <title>W.O.S</title>
 </head>
 <body>
@@ -23,6 +24,13 @@ session_start();
         <a href="?c=register">S'inscrire</a>
         <h3 style="color: red">Faire une page contact</h3>
     </nav>
+    <form action="?c=search" method="post">
+        <input type="text" value="" name="user" placeholder="recherche"/>
+        <?php
+
+        ?>
+        <input type="submit" name="search" value="🔎"/>
+    </form>
 </div>
 
 <?php

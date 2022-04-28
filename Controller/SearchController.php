@@ -11,9 +11,13 @@ class SearchController extends AbstractController
             header("Location:?c=search&result=".$_POST['user']."");
         }
         if (isset($_GET['result'])) {
-            $result = htmlentities($_GET['result']);
-            echo $result;
-
+            if ($_GET['result'] !== '') {
+                $result = htmlentities($_GET['result']);
+                echo $result;
+            }
+            else {
+                echo '<p class="alert error">Vous n\'avez pas rempli le champs recherche !</p>';
+            }
         }
     }
 }
