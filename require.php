@@ -18,6 +18,7 @@ require __DIR__. '/Model/Manager/User_roleManager.php';
 require __DIR__. '/Model/Manager/UserManager.php';
 require __DIR__. '/Model/Manager/View_publicationManager.php';
 
+
 require __DIR__ . '/Controller/AbstractController.php';
 require __DIR__ . '/Controller/CharacterController.php';
 require __DIR__. '/Controller/ErrorController.php';
@@ -26,5 +27,6 @@ require __DIR__. '/Controller/LoginController.php';
 require __DIR__. '/Controller/LogoutController.php';
 require __DIR__. '/Controller/RegisterController.php';
 require __DIR__. '/Controller/UserController.php';
+require __DIR__.'/Controller/SearchController.php';
 
 require __DIR__. '/Routeur/Routeur.php';

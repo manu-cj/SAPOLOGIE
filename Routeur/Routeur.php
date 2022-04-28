@@ -6,7 +6,7 @@ class Routeur
         $control = new $controller();
         $control->index();
         switch ($action) {
-            case 'character':
+            case 'add-character':
                 $control->character();
                 break;
             case 'character-name':

@@ -9,5 +9,4 @@
 
 
 
-
-<a href="?c=profil&a=character">Afficher les personnages</a>
+<a href="?c=profil&a=add-character">Afficher les personnages</a>
