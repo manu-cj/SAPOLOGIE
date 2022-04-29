@@ -10,4 +10,7 @@ abstract class AbstractController
         require __DIR__ . '/../View/' . $page . '.html.php';
     }
 
+    public function getPost($name) {
+        return isset($_POST[$name]);
+    }
 }

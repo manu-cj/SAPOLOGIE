@@ -1,10 +1,13 @@
 <?php
+require __DIR__. '/Engine/Connect.php';
+
 require __DIR__. '/Model/Entity/Character.php';
 require __DIR__. '/Model/Entity/Character_image.php';
 require __DIR__. '/Model/Entity/Comment.php';
 require __DIR__. '/Model/Entity/Mail_validate.php';
 require __DIR__. '/Model/Entity/Messages.php';
 require __DIR__. '/Model/Entity/Role.php';
+require __DIR__. '/Model/Entity/User.php';
 require __DIR__. '/Model/Entity/User_role.php';
 require __DIR__. '/Model/Entity/View_publication.php';
 

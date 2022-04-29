@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Entity;
 
+use DateTime;
+
 class User
 {
     private int $id;
@@ -91,7 +93,7 @@ class User
     public function setDate(DateTime $date): self
     {
         $this->date = $date;
+
         return $this;
     }
-
 }
