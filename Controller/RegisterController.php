@@ -48,18 +48,15 @@ class RegisterController extends AbstractController
             }
             else {
                 $user = new User();
-
-
                 $user
                     ->setUsername($username)
                     ->setMail($mail)
                     ->setPassword(password_hash($password, PASSWORD_DEFAULT))
-
                     ;
-
+                UserManager::getMailExist($mail);
+                UserManager::getUsernameExist($username);
                 UserManager::addUser($user);
             }
-
         }
     }
 }

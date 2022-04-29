@@ -70,4 +70,43 @@ class UserManager extends User
             }
         }
     }
+
+    public static function getMailExist(string $mail)
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE mail = :mail");
+        $get->bindValue(':mail', $mail);
+        if ($get->execute()) {
+            $datas = $get->fetchAll();
+            foreach ($datas as $data) {
+                if ($data['mail'] === $mail) {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">L\'adresse e-mail est déjà utilisé !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('LOCATION: ?c=register');
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static function getUsernameExist(string $username)
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE username = :username");
+        $get->bindValue(':username', $username);
+        if ($get->execute()) {
+            $datas = $get->fetchAll();
+            foreach ($datas as $data) {
+                if ($data['username'] === $username) {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">Le nom d\'utilisateur est déjà utilisé !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('LOCATION: ?c=register');
+                    }
+                }
+            }
+        }
+    }
 }
