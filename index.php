@@ -33,6 +33,7 @@ require __DIR__. '/require.php';
         if ( AbstractController::getSession('user')) {
         ?>
         <a href="?c=profil">Profil</a>
+            <a href="?c=logout">Se déconnecter</a>
         <?php
         }
         ?>
@@ -44,7 +45,6 @@ require __DIR__. '/require.php';
 if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
     $errors = $_SESSION['alert'];
     unset($_SESSION['alert']);
-
     foreach($errors as $error) { ?>
         <div class="alert alert-error"><?= $error ?></div> <?php
     }
@@ -71,6 +71,9 @@ switch ($page) {
         break;
     case 'register':
         Routeur::route('RegisterController', $action);
+        break;
+    case 'logout':
+        Routeur::route('LogoutController', $action);
         break;
     default:
         ErrorController::error404($page);
