@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<form method="post" action="?c=user&a=login" id="login">
+<form method="post" action="?c=login" id="login">
     <table>
         <tr>
             <td><label for="mail">Adresse e-mail :</label></td>
