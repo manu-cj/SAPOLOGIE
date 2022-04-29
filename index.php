@@ -2,7 +2,7 @@
 use App\Controller\ErrorController\ErrorController;
 
 session_start();
-
+require __DIR__. '/require.php';
 ?>
 <!doctype html>
 <html lang="fr">
@@ -23,16 +23,28 @@ session_start();
             <input type="text" value="" name="user" placeholder="recherche"/>
             <input type="submit" name="search" value="🔎"/>
         </form>
+        <?php
+        if ( !AbstractController::getSession('user')) {
+        ?>
         <a href="?c=login">Se connecter</a>
         <a href="?c=register">S'inscrire</a>
+        <?php
+        }
+        if ( AbstractController::getSession('user')) {
+
+
+        ?>
         <a href="?c=profil">Profil</a>
+        <?php
+        }
+        ?>
         <h3 style="color: red">Faire une page contact</h3>
     </nav>
 
 </div>
 
 <?php
-require __DIR__. '/require.php';
+
 
 if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
     $errors = $_SESSION['alert'];

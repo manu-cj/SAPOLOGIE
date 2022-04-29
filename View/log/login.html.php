@@ -1,5 +1,7 @@
 <?php
-
+if ( AbstractController::getSession('user')) {
+    header('LOCATION: ?c=home');
+}
 ?>
 <form method="post" action="?c=login" id="login">
     <table>

@@ -14,7 +14,7 @@ abstract class AbstractController
         return isset($_POST[$name]);
     }
 
-    public function getSession($sessionName) {
+    public static function getSession($sessionName) {
         return isset($_SESSION[$sessionName]);
     }
 }
