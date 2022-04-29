@@ -44,7 +44,7 @@ class RegisterController extends AbstractController
 
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=user&a=register');
+                header('LOCATION: ?c=register');
             }
             else {
                 $user = new User();
