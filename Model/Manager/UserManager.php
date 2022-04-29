@@ -12,7 +12,7 @@ class UserManager extends User
         $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_user (username, mail, password, date) 
                                                     VALUES (:username, :mail, :password, :date)");
 
-        date_default_timezone_set('Europe/Amsterdam');
+        date_default_timezone_set('Europe/Brussels');
         $date = date('y-m-d H:i:s');
 
         $insert->bindValue(':username', $user->getUsername());
