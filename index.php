@@ -31,8 +31,6 @@ require __DIR__. '/require.php';
         <?php
         }
         if ( AbstractController::getSession('user')) {
-
-
         ?>
         <a href="?c=profil">Profil</a>
         <?php
@@ -40,12 +38,9 @@ require __DIR__. '/require.php';
         ?>
         <h3 style="color: red">Faire une page contact</h3>
     </nav>
-
 </div>
 
 <?php
-
-
 if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
     $errors = $_SESSION['alert'];
     unset($_SESSION['alert']);
@@ -81,7 +76,6 @@ switch ($page) {
         ErrorController::error404($page);
 }
 ?>
-
 <div class="footer">
 
 </div>
