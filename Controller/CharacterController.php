@@ -6,12 +6,15 @@ class CharacterController extends AbstractController
 
     public function index()
     {
-        $this->render('user/add-character');
-        echo 'test';
+        $this->render('public/character');
+        if (isset($_GET['id'])) {
+            CharacterManager::getCharacterId($_GET['id']);
+        }
+
 
     }
 
-    public function character() {
+    public function addPicture() {
 
     }
 
