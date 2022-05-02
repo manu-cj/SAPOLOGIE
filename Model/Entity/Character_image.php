@@ -3,9 +3,26 @@ namespace App\Model\Entity;
 
 class Character_image
 {
-    private int $id;
     private string $image;
     private string $character_fk;
+    private string $user_fk;
+
+    /**
+     * @return string
+     */
+    public function getUserFk(): string
+    {
+        return $this->user_fk;
+    }
+
+    /**
+     * @param string $user_fk
+     */
+    public function setUserFk(string $user_fk): self
+    {
+        $this->user_fk = $user_fk;
+        return $this;
+    }
 
     /**
      * @return int

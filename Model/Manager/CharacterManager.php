@@ -2,6 +2,7 @@
 
 
 use App\Model\Entity\Character;
+use App\Model\Entity\Character_image;
 
 class CharacterManager
 {
@@ -63,17 +64,41 @@ class CharacterManager
 
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                if ($data['user_fk'] === $_SESSION['user']['id']) {
-                    ?>
-                    <form method="post" action="?c=character&a=add-picture&id=<?=$characterId?>" enctype="multipart/form-data">
-                        <input type="file" name="characterImage">
-                        <input type="submit" name="upload">
-                    </form>
-                    <?php
+                if (isset($_SESSION['user'])) {
+                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                        ?>
+                        <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
+                              enctype="multipart/form-data">
+                            <input type="file" name="characterImage">
+                            <input type="number" name="characterId" value="<?=$characterId?>" style="display: none">
+                            <input type="submit" name="upload">
+                        </form>
+                        <?php
+                    }
                 }
             }
 
         }
+    }
+
+    public static function addPicture(Character_image $character_image)
+    {
+        $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_character_image (image, character_fk, user_fk) 
+                                                    VALUES (:image, :character_fk, :user_fk) ");
+
+        $insert->bindValue(':image', $character_image->getImage());
+        $insert->bindValue(':character_fk', $character_image->getCharacterFk());
+        $insert->bindValue(':user_fk', $character_image->getUserFk());
+
+        if ($insert->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-suces">Votre personnage a été ajouté</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=character&id='.$character_image->getCharacterFk());
+            }
+        }
+
     }
 
 }
