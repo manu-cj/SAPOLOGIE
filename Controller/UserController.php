@@ -24,10 +24,13 @@ class UserController extends AbstractController
             $name = htmlspecialchars($name);
             echo $name;
             $alert = [];
-            if (strlen($name) < 2 or strlen($name) > 12) {
+            if (strlen($name) <= 2 || strlen($name) >= 12) {
                 $alert[] = '<div class="alert-error">Les nom de votre personnage doit contenir entre 2 et 12 charactères</div>';
             }
-
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=profil&a=add-character');
+            }
 
 
         }
