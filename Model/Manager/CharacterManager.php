@@ -136,7 +136,6 @@ class CharacterManager
 
         $select->bindValue(':character_name', $name);
         if ($select->execute()) {
-
             $datas = $select->fetchAll();
             ?>
             <div class="all-character">
@@ -157,7 +156,7 @@ class CharacterManager
             <?php
         }
         if ($select->rowCount() === 0) {
-            echo '<h2>Aucun sapologue ne porte se nom ici !</h2>';
+            echo '<h2>Aucun sapologue ne porte ce nom ici !</h2>';
         }
 
 
