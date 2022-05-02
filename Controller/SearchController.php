@@ -13,7 +13,7 @@ class SearchController extends AbstractController
         if (isset($_GET['result'])) {
             if ($_GET['result'] !== '') {
                 $result = htmlentities($_GET['result']);
-                echo $result;
+                CharacterManager::getNameCharacter($result);
             }
             else {
                 echo '<p class="alert error">Vous n\'avez pas rempli le champs recherche !</p>';

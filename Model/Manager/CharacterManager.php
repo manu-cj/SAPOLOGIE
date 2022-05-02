@@ -65,6 +65,13 @@ class CharacterManager
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
+                    ?>
+                    <div class="character <?= $data['classe'] ?>">
+                        <h1 class="name"><?= $data['character_name'] ?></h1>
+                        <h3 class="classe"><?= $data['classe'] ?></h3>
+                        <h3 class="server"><?= $data['server_name'] ?></h3>
+                    </div>
+                    <?php
                     if ($data['user_fk'] === $_SESSION['user']['id']) {
                         ?>
                         <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
@@ -109,17 +116,50 @@ class CharacterManager
         if ($select->execute()) {
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                $files = glob('uploads/'.$data['image']);
+                $files = glob('uploads/' . $data['image']);
                 foreach ($files as $filename) {
                     echo '<div>
 <form method="post" action="?c=realisations">
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
-<img class="gallerieImage" src="' . $filename . ' "   </img></div>';
+<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
                 }
 
             }
         }
+    }
+
+    public static function getNameCharacter($name)
+    {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE character_name = :character_name");
+
+        $select->bindValue(':character_name', $name);
+        if ($select->execute()) {
+
+            $datas = $select->fetchAll();
+            ?>
+            <div class="all-character">
+
+                <?php
+                foreach ($datas as $data) {
+                    ?>
+                        <a href="?c=character&id=<?=$data['id']?>" >
+                    <div class="character <?= $data['classe'] ?>">
+                        <h1 class="name"><?= $data['character_name'] ?></h1>
+                        <h3 class="classe"><?= $data['classe'] ?></h3>
+                        <h3 class="server"><?= $data['server_name'] ?></h3>
+                    </div></a>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+        }
+        if ($select->rowCount() === 0) {
+            echo 'Aucun sapologue ne porte se nom ici !';
+        }
+
+
     }
 }
