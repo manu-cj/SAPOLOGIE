@@ -8,7 +8,7 @@
         <tr>
             <td><label for="class">Classe du personnage :</label> </td>
             <td>
-                <select required>
+                <select name="classe" required>
                     <option value="default"></option>
                     <option value="guerrier">Guerrier</option>
                     <option value="paladin">Paladin</option>
@@ -32,6 +32,6 @@
         <input type="text" name="user-fk" value="<?=$_SESSION['username']?>" style="display: none">
 
     </table>
-    <input type="submit" value="Ajouter">
+    <input type="submit" name="add" value="Ajouter">
 </form>
 

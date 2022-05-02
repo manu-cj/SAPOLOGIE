@@ -15,6 +15,22 @@ class UserController extends AbstractController
     public function character()
     {
         $this->render('user/add-character');
+
+        if ($this->getPost('add')) {
+            $name = preg_replace('#[^a-zA-Z]#', '', $_POST['username']);
+            $server = preg_replace('#[^a-zA-Z]#', '', $_POST['serveur']);
+            $classe = htmlentities($_POST['classe']);
+
+            $name = htmlspecialchars($name);
+            echo $name;
+            $alert = [];
+            if (strlen($name) < 2 or strlen($name) > 12) {
+                $alert[] = '<div class="alert-error">Les nom de votre personnage doit contenir entre 2 et 12 charactères</div>';
+            }
+
+
+
+        }
     }
 
     public function characterName() {
