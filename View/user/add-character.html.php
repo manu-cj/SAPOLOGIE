@@ -29,7 +29,7 @@
             <td><label for="serveur">Nom du serveur :</label></td>
             <td><input type="text" name="serveur" id="serveur" required></td>
         </tr>
-        <input type="text" name="user-fk" value="<?=$_SESSION['username']?>" style="display: none">
+        <input type="text" name="user-fk" value="<?=$_SESSION['user']['id']?>" style="display: none">
 
     </table>
     <input type="submit" name="add" value="Ajouter">

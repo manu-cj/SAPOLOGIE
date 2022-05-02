@@ -7,7 +7,7 @@ class Character
     private string $user_fk;
     private string $character_name;
     private string $classe;
-    private string $description;
+    private string $server;
 
     /**
      * @return int
@@ -80,17 +80,17 @@ class Character
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getServer(): string
     {
-        return $this->description;
+        return $this->server;
     }
 
     /**
-     * @param string $description
+     * @param string $server
      */
-    public function setDescription(string $description): self
+    public function setServer(string $server): self
     {
-        $this->description = $description;
+        $this->server = $server;
         return $this;
     }
 

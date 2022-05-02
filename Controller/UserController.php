@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\Entity\Character;
+
 class UserController extends AbstractController
 {
 
@@ -20,9 +22,7 @@ class UserController extends AbstractController
             $name = preg_replace('#[^a-zA-Z]#', '', $_POST['username']);
             $server = preg_replace('#[^a-zA-Z]#', '', $_POST['serveur']);
             $classe = htmlentities($_POST['classe']);
-
-            $name = htmlspecialchars($name);
-            echo $server;
+            $userFk = htmlentities($_POST['user-fk']);
             $alert = [];
 
             if (empty($name)) {
@@ -41,7 +41,7 @@ class UserController extends AbstractController
             if ($classe === 'default') {
                 $alert[] = '<div class="alert-error">Veuillez sélectionner la classe de votre personnage</div>';
             }
-            echo $classe;
+
             if (strlen($server) <= 3 || strlen($server) >= 50) {
                 $alert[] = '<div class="alert-error">Les nom de votre serveur doit contenir entre 2 et 50 charactères</div>';
             }
@@ -49,6 +49,19 @@ class UserController extends AbstractController
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil&a=add-character');
+            }
+
+            else {
+                $character = new Character();
+
+                $character
+                    ->setUserFk($userFk)
+                    ->setCharacterName($name)
+                    ->setClasse($classe)
+                    ->setServer($server)
+                ;
+
+                CharacterManager::addCharacter($character);
             }
 
 
