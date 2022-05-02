@@ -157,7 +157,7 @@ class CharacterManager
             <?php
         }
         if ($select->rowCount() === 0) {
-            echo 'Aucun sapologue ne porte se nom ici !';
+            echo '<h2>Aucun sapologue ne porte se nom ici !</h2>';
         }
 
 
