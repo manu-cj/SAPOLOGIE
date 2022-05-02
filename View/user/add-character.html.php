@@ -9,9 +9,9 @@
             <td><label for="class">Classe du personnage :</label> </td>
             <td>
                 <select name="classe" required>
-                    <option value="default"></option>
-                    <option value="guerrier">Guerrier</option>
-                    <option value="paladin">Paladin</option>
+                    <option value="default">Choisir</option>
+                    <option value="Guerrier">Guerrier</option>
+                    <option value="Paladin">Paladin</option>
                     <option value="Mage">Mage</option>
                     <option value="Voleur">Voleur</option>
                     <option value="Druide">Druide</option>
