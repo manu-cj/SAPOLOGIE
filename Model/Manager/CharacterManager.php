@@ -70,7 +70,7 @@ class CharacterManager
                         <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
                               enctype="multipart/form-data">
                             <input type="file" name="characterImage">
-                            <input type="number" name="characterId" value="<?=$characterId?>" style="display: none">
+                            <input type="number" name="characterId" value="<?= $characterId ?>" style="display: none">
                             <input type="submit" name="upload">
                         </form>
                         <?php
@@ -95,10 +95,31 @@ class CharacterManager
             $alert[] = '<div class="alert-suces">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id='.$character_image->getCharacterFk());
+                header('LOCATION: ?c=character&id=' . $character_image->getCharacterFk());
             }
         }
-
     }
 
+    public static function getCharacterPicture(int $characterFK)
+    {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE character_fk = :character_fk");
+
+        $select->bindValue(':character_fk', $characterFK);
+
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                $files = glob('uploads/'.$data['image']);
+                foreach ($files as $filename) {
+                    echo '<div>
+<form method="post" action="?c=realisations">
+<input type="text" name="filename" value="' . $filename . '" style="display: none">
+<input type="submit" name="deletePicture" value="❌" title="Supprimer">
+</form>
+<img class="gallerieImage" src="' . $filename . ' "   </img></div>';
+                }
+
+            }
+        }
+    }
 }
