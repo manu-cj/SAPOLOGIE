@@ -57,7 +57,7 @@ class UserController extends AbstractController
 
                 $character
                     ->setUserFk($userFk)
-                    ->setCharacterName($name)
+                    ->setCharacterName(ucfirst($name))
                     ->setClasse($classe)
                     ->setServer($server)
                 ;

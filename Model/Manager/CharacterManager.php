@@ -32,7 +32,19 @@ public static function getCharacter() {
         $datas = $select->fetchAll();
         foreach ($datas as $data) {
             ?>
-            <a href="?c=character&a=character-name&n=<?=$data['character_name']?>"><h1 class="character-name"><?=$data['character_name']?></h1></a>
+            <br>
+            <div class="character <?=$data['classe']?>">
+                <form action="?c=character&a=character-name&n=<?=$data['id']?>" method="post" style="display: inline">
+                    <input type="number" name="idArticle" value="<?= $data['id'] ?>" style="display: none">
+                    <input type="submit" name="delete" class="submit" value="❌"
+                           style="display: inline; border: none; cursor: pointer"
+                           title="Supprimer le personnage" ">
+                </form>
+            <a href="?c=character&a=character-name&n=<?=$data['character_name']?>" style="display: inline"><h1 class="character-name"><?=$data['character_name']?></h1></a>
+
+                <h3 class="classe"><?=$data['classe']?></h3>
+                <h3 class="classe">Serveur : <?=$data['server_name']?></h3>
+            </div>
 <?php
         }
     }
