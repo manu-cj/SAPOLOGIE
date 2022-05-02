@@ -24,4 +24,18 @@ public static function addCharacter(Character $character) {
     }
 }
 
+public static function getCharacter() {
+    $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE user_fk = :user_fk");
+
+    $select->bindValue(':user_fk', $_SESSION['user']['id']);
+    if ($select->execute()) {
+        $datas = $select->fetchAll();
+        foreach ($datas as $data) {
+            ?>
+            <a href="?c=character&a=character-name&n=<?=$data['character_name']?>"><h1 class="character-name"><?=$data['character_name']?></h1></a>
+<?php
+        }
+    }
+}
+
 }

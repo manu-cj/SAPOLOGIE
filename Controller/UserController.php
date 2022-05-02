@@ -8,6 +8,7 @@ class UserController extends AbstractController
     public function index()
     {
         $this->render('user/profil');
+        CharacterManager::getCharacter();
     }
 
     public function updateProfil() {
