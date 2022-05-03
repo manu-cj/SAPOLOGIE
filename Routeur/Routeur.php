@@ -15,6 +15,9 @@ class Routeur
             case 'update-profil':
                 $control->updateProfil();
                 break;
+            case 'comment':
+                $control->comment();
+                break;
         }
     }
 

@@ -4,10 +4,10 @@ namespace App\Model\Entity;
 class Comment
 {
     private int $id;
-    private string $username;
+    private int $user_fk;
     private string $content;
     private \DateTime $date;
-    private string $character_image_fk;
+    private int $character_image_fk;
 
     /**
      * @return int
@@ -27,19 +27,19 @@ class Comment
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getUsername(): string
+    public function getUserFk(): int
     {
-        return $this->username;
+        return $this->user_fk;
     }
 
     /**
-     * @param string $username
+     * @param int $user_fk
      */
-    public function setUsername(string $username): self
+    public function setUserFk(int $user_fk): self
     {
-        $this->username = $username;
+        $this->user_fk = $user_fk;
         return $this;
     }
 
@@ -78,17 +78,17 @@ class Comment
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getCharacterImageFk(): string
+    public function getCharacterImageFk(): int
     {
         return $this->character_image_fk;
     }
 
     /**
-     * @param string $character_image_fk
+     * @param int $character_image_fk
      */
-    public function setCharacterImageFk(string $character_image_fk): self
+    public function setCharacterImageFk(int $character_image_fk): self
     {
         $this->character_image_fk = $character_image_fk;
         return $this;

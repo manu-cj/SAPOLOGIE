@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\Entity\Character_image;
+use App\Model\Entity\Comment;
 
 class CharacterController extends AbstractController
 {
@@ -50,12 +51,53 @@ class CharacterController extends AbstractController
 
                 CharacterManager::addPicture($pictureData);
             }
-
-
-
         }
     }
 
+    public function comment() {
+        if ($this->getPost('send')){
+
+            $userFk = htmlentities($_POST['userFk']);
+            $idPublication = $_GET['id'];
+            $characterFk = $_POST['characterFk'];
+            $comment = nl2br(htmlentities($_POST['comment']));
+
+            if (empty($_GET['id'])) {
+                $alert[] = '<div class="alert-error">Imposible de se rendre sur la page</div>';
+                if (count($alert) > 0) {
+                    $_SESSION['alert'] = $alert;
+                    header('LOCATION: ?c=home');
+                }
+            }
+
+            $alert = [];
+            if (empty($userFk)) {
+                $alert[] = '<div class="alert-error">Une erreur est survenue</div>';
+            }
+            if (empty($comment)) {
+                $alert[] = '<div class="alert-error">Il manque un champs</div>';
+            }
+
+            if (strlen($comment) < 1 || strlen($comment) >= 255) {
+                $alert[] = '<div class="alert-error">Votre commentaire doit contenir en 1 et 255 caractères</div>';
+            }
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=character&a=comment&id='.$idPublication);
+            }
+
+            else {
+                $addComment = new Comment();
+
+                $addComment
+                    ->setUserFk($userFk)
+                    ->setCharacterImageFk($characterFk)
+                    ->setContent($comment)
+                ;
+                CommentManager::addComment($addComment);
+            }
+        }
+    }
 }
 
 

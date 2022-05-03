@@ -1,6 +1,9 @@
 <?php
 
-$id = $_GET['id'];
+    $id = $_GET['id'];
+
+
+
 
 
 function getRandomName(string $regularName)

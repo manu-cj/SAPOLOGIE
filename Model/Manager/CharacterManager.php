@@ -124,7 +124,7 @@ class CharacterManager
 
         if ($insert->execute()) {
             $alert = [];
-            $alert[] = '<div class="alert-suces">Votre personnage a été ajouté</div>';
+            $alert[] = '<div class="alert-succes">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=character&id=' . $character_image->getCharacterFk());
@@ -182,15 +182,14 @@ class CharacterManager
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
 <form method="post" action="?c=character&a=comment&id='.$data['id'].'">
 <input type="number" name="userFk" value="'.$data['user_fk'].'" style="display: none">
+<input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
 <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
 <input type="submit" name="send" value="▶">
 </form>
 </div>
 <br>';
-
                     }
                 }
-
             }
         }
     }
