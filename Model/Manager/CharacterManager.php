@@ -110,12 +110,14 @@ class CharacterManager
 
     public static function addPicture(Character_image $character_image)
     {
-        $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_character_image (image, character_fk, user_fk) 
-                                                    VALUES (:image, :character_fk, :user_fk) ");
+        $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_character_image (image, character_fk, user_fk, view_fk, description) 
+                                                    VALUES (:image, :character_fk, :user_fk, :view_fk, :description) ");
 
         $insert->bindValue(':image', $character_image->getImage());
         $insert->bindValue(':character_fk', $character_image->getCharacterFk());
         $insert->bindValue(':user_fk', $character_image->getUserFk());
+        $insert->bindValue(':view_fk', $character_image->getViewFk());
+        $insert->bindValue(':description', $character_image->getDescription());
 
         if ($insert->execute()) {
             $alert = [];
@@ -138,11 +140,35 @@ class CharacterManager
             foreach ($datas as $data) {
                 $files = glob('uploads/' . $data['image']);
                 foreach ($files as $filename) {
-                    echo '<div>
+                    echo '<div class="pictureCharacter">
 <form method="post" action="?c=realisations">
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
+<div class="description">'.$data['description'].'</div>
+<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
+                }
+
+            }
+        }
+    }
+
+    public static function getCharacterPictureForHome()
+    {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE view_fk = 2");
+
+
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                $files = glob('uploads/' . $data['image']);
+                foreach ($files as $filename) {
+                    echo '<div class="pictureCharacter">
+<form method="post" action="?c=realisations">
+<input type="text" name="filename" value="' . $filename . '" style="display: none">
+<input type="submit" name="deletePicture" value="❌" title="Supprimer">
+</form>
+<div class="description">'.$data['description'].'</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
                 }
 
