@@ -6,7 +6,7 @@ use App\Model\Entity\Comment;
 class CommentManager
 {
 
-    public static function addComment(Comment $comment)
+    public static function addComment(Comment $comment, int $characterFk)
     {
         $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_comment (user_fk, content, date, character_image_fk) 
                                                     VALUES (:user_fk, :content, :date, :character_image_fk)");
@@ -24,14 +24,14 @@ class CommentManager
             $alert[] = '<div class="alert-succes">Commentaire ajouté !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id=' . $comment->getCharacterImageFk());
+                header('LOCATION: ?c=character&id=' . $characterFk);
             }
         } else {
             $alert = [];
             $alert[] = '<div class="alert-error">Une erreur c\est produite lors de l\'envoi du commentaire !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id=' . $comment->getCharacterImageFk());
+                header('LOCATION: ?c=character&id=' . $characterFk);
             }
         }
     }

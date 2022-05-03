@@ -1,13 +1,20 @@
 <?php
 
     $id = $_GET['id'];
-    if (isset($_GET['id'])) {
-        if ($_GET['id']=== '') {
+    if (isset($_GET['id']) ) {
+        if ($_GET['id']=== '' ) {
             $alert[] = '<div class="alert-error">Imposible de se rendre sur la page</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
             }
+        }
+    }
+    if (!isset($_GET['id'])) {
+        $alert[] = '<div class="alert-error">Imposible de se rendre sur la page</div>';
+        if (count($alert) > 0) {
+            $_SESSION['alert'] = $alert;
+            header('LOCATION: ?c=home');
         }
     }
 

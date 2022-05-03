@@ -157,7 +157,7 @@ class CharacterManager
 <div><h3>'.$data2['username'].'</h3></div>
 <div class="description">' . $data['description'] . '</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
-<form method="post" action="?c=character&a=comment&id='.$data['id'].'">
+<form method="post" action="?c=character&a=comment&id='.$data['character_fk'].'">
 <input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
 <input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
 <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
@@ -196,9 +196,9 @@ class CharacterManager
 <div><h3>'.$data2['username'].'</h3></div>
 <div class="description">' . $data['description'] . '</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
-<form method="post" action="?c=character&a=comment&id='.$data['id'].'">
+<form method="post" action="?c=character&a=comment&id='.$data['character_fk'].'">
 <input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
-<input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
+<input type="number" name="characterImageFk" value="'.$data['id'].'" style="display: none">
 <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
 <input type="submit" name="send" value="▶">
 </form>

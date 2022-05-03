@@ -58,7 +58,7 @@ class CharacterController extends AbstractController
         if ($this->getPost('send')){
             $userFk = htmlentities($_POST['userFk']);
             $idPublication = $_GET['id'];
-            $characterFk = $_POST['characterFk'];
+            $characterFk = $_POST['characterImageFk'];
             $comment = nl2br(htmlentities($_POST['comment']));
 
             if (empty($_GET['id'])) {
@@ -93,7 +93,7 @@ class CharacterController extends AbstractController
                     ->setCharacterImageFk($characterFk)
                     ->setContent($comment)
                 ;
-                CommentManager::addComment($addComment);
+                CommentManager::addComment($addComment, $idPublication);
             }
         }
     }
