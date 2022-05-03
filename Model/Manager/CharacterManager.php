@@ -165,6 +165,7 @@ class CharacterManager
 </form>
 </div>
 <br>';
+                        CommentManager::getComment($data['id']);
                     }
                 }
             }
@@ -203,6 +204,7 @@ class CharacterManager
 </form>
 </div>
 <br>';
+                        CommentManager::getComment($data['id']);
                     }
                 }
             }

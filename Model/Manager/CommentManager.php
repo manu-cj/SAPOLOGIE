@@ -35,4 +35,35 @@ class CommentManager
             }
         }
     }
+
+    public static function getComment(int $id)
+    {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_comment where character_image_fk = :id");
+
+        $select->bindValue(":id", $id);
+
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            ?>
+            <div class="allDataComment">
+            <?php
+            foreach ($datas as $data) {
+                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
+                $select2->bindValue(':id', $data['user_fk']);
+                $select2->execute();
+                $datas2 = $select2->fetchAll();
+                foreach ($datas2 as $data2) {
+                    ?>
+                    <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
+                            :</b> <?= date('d-m-y à H:i:s', strtotime($data['date'])) ?></div>
+                    <br>
+                    <div class="comment"><?= $data['content'] ?></div>
+                    <br>
+                    </div>
+                    <?php
+
+                }
+            }
+        }
+    }
 }
