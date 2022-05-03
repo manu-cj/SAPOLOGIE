@@ -179,7 +179,15 @@ class CharacterManager
 </form>
 <div><h3>'.$data2['username'].'</h3></div>
 <div class="description">' . $data['description'] . '</div>
-<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
+<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
+<form method="post" action="?c=character&a=comment&id='.$data['id'].'">
+<input type="number" name="userFk" value="'.$data['user_fk'].'" style="display: none">
+<input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
+<input type="submit" name="send" value="▶">
+</form>
+</div>
+<br>';
+
                     }
                 }
 
