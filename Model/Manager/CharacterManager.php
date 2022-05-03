@@ -165,7 +165,7 @@ class CharacterManager
 </form>
 </div>
 <br>';
-                        CommentManager::getComment($data['id']);
+                        CommentManager::getLastComment($data['id'], 9999999);
                     }
                 }
             }
@@ -204,7 +204,7 @@ class CharacterManager
 </form>
 </div>
 <br>';
-                        CommentManager::getLastComment($data['id']);
+                        CommentManager::getLastComment($data['id'], 5);
                         echo '<a href="?c=character&id='.$data['character_fk'].'">Voir plus de commentaires ⬇</a>';
                     }
                 }
