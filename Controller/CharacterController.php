@@ -24,8 +24,6 @@ class CharacterController extends AbstractController
             $description = nl2br(htmlentities($_POST['description']));
             $visibility = htmlentities($_POST['visibility']);
 
-            echo $description;
-
             $alert = [];
             if (empty($picture)) {
                 $alert[] = '<div class="alert-error">Aucun fichier sélectionner</div>';

@@ -88,10 +88,13 @@ class CharacterManager
                             <br>
                             <select name="visibility">
                                 <optgroup label="Public">
-                                    <option name="public" value="2"> Ajouter la publication dans le fil d'actualité</option>
+                                    <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
+                                    </option>
                                 </optgroup>
                                 <optgroup label="Profil">
-                                    <option name="profil" value="3"> Ne pas ajouter la publication dans le fil d'actualité</option>
+                                    <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
+                                        d'actualité
+                                    </option>
                                 </optgroup>
                             </select>
                             <br>
@@ -145,7 +148,7 @@ class CharacterManager
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
-<div class="description">'.$data['description'].'</div>
+<div class="description">' . $data['description'] . '</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
                 }
 
@@ -161,15 +164,23 @@ class CharacterManager
         if ($select->execute()) {
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                $files = glob('uploads/' . $data['image']);
-                foreach ($files as $filename) {
-                    echo '<div class="pictureCharacter">
+                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
+                $select2->bindValue(':id', $data['user_fk']);
+                $select2->execute();
+                $datas2 = $select2->fetchAll();
+                foreach ($datas2 as $data2) {
+
+                    $files = glob('uploads/' . $data['image']);
+                    foreach ($files as $filename) {
+                        echo '<div class="pictureCharacter">
 <form method="post" action="?c=realisations">
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
-<div class="description">'.$data['description'].'</div>
+<div><h3>'.$data2['username'].'</h3></div>
+<div class="description">' . $data['description'] . '</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
+                    }
                 }
 
             }
@@ -189,12 +200,13 @@ class CharacterManager
                 <?php
                 foreach ($datas as $data) {
                     ?>
-                        <a href="?c=character&id=<?=$data['id']?>" >
-                    <div class="character <?= $data['classe'] ?>">
-                        <h1 class="name"><?= $data['character_name'] ?></h1>
-                        <h3 class="classe"><?= $data['classe'] ?></h3>
-                        <h3 class="server"><?= $data['server_name'] ?></h3>
-                    </div></a>
+                    <a href="?c=character&id=<?= $data['id'] ?>">
+                        <div class="character <?= $data['classe'] ?>">
+                            <h1 class="name"><?= $data['character_name'] ?></h1>
+                            <h3 class="classe"><?= $data['classe'] ?></h3>
+                            <h3 class="server"><?= $data['server_name'] ?></h3>
+                        </div>
+                    </a>
                     <?php
                 }
                 ?>
