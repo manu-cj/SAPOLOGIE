@@ -5,8 +5,6 @@ use App\Model\Entity\Comment;
 
 class CharacterController extends AbstractController
 {
-
-
     public function index()
     {
         $this->render('public/character');
@@ -14,8 +12,6 @@ class CharacterController extends AbstractController
             CharacterManager::getCharacterId(htmlentities($_GET['id']));
             CharacterManager::getCharacterPicture(htmlentities($_GET['id']));
         }
-
-
     }
 
     public function addPicture() {
