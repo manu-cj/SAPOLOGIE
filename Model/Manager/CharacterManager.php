@@ -132,7 +132,7 @@ class CharacterManager
         }
     }
 
-    public static function getCharacterPicture(int $characterFK)
+    public static function getCharacterPicture(int $characterFK, $limit)
     {
         $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE character_fk = :character_fk");
 
@@ -165,7 +165,7 @@ class CharacterManager
 </form>
 </div>
 <br>';
-                        CommentManager::getLastComment($data['id'], 9999999);
+                        CommentManager::getLastComment($data['id'], $limit);
                     }
                 }
             }
