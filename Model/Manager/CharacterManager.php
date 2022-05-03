@@ -77,14 +77,34 @@ class CharacterManager
                         <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
                               enctype="multipart/form-data">
                             <input type="file" name="characterImage">
+                            <br>
+                            <br>
+                            <label for="description">Description :</label>
+                            <br>
+                            <textarea name="description" cols="45" rows="10"></textarea>
+                            <br>
+                            <label for="visibility">Visibilité :</label>
+                            <br>
+                            <br>
+                            <select name="visibility">
+                                <optgroup label="Public">
+                                    <option name="public" value="2"> Ajouter la publication dans le fil d'actualité</option>
+                                </optgroup>
+                                <optgroup label="Profil">
+                                    <option name="profil" value="3"> Ne pas ajouter la publication dans le fil d'actualité</option>
+                                </optgroup>
+                            </select>
+                            <br>
+                            <br>
                             <input type="number" name="characterId" value="<?= $characterId ?>" style="display: none">
                             <input type="submit" name="upload">
+
                         </form>
+                        <br>
                         <?php
                     }
                 }
             }
-
         }
     }
 

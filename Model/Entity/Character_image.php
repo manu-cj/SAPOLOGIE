@@ -6,6 +6,8 @@ class Character_image
     private string $image;
     private string $character_fk;
     private string $user_fk;
+    private int $view_fk;
+    private string $description;
 
     /**
      * @return string
@@ -72,6 +74,40 @@ class Character_image
     public function setCharacterFk(string $character_fk): self
     {
         $this->character_fk = $character_fk;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewFk(): int
+    {
+        return $this->view_fk;
+    }
+
+    /**
+     * @param int $view_fk
+     */
+    public function setViewFk(int $view_fk): self
+    {
+        $this->view_fk = $view_fk;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
         return $this;
     }
 

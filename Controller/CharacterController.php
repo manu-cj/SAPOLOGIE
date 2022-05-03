@@ -22,7 +22,10 @@ class CharacterController extends AbstractController
             $picture = htmlentities($_SESSION['picture']);
             $id = htmlentities($_POST['characterId']);
 
-            echo $picture;
+            $visibility = htmlentities($_POST['visibility']);
+
+
+
             $alert = [];
             if (empty($picture)) {
                 $alert[] = '<div class="alert-error">Aucun fichier sélectionner</div>';
@@ -33,17 +36,7 @@ class CharacterController extends AbstractController
                 header('LOCATION: ?c=character&id='.$id);
             }
 
-            else {
-                $pictureData = new Character_image();
 
-                $pictureData
-                    ->setImage($picture)
-                    ->setCharacterFk($id)
-                    ->setUserFk($_SESSION['user']['id'])
-                ;
-
-                CharacterManager::addPicture($pictureData);
-            }
 
         }
     }
