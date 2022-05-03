@@ -56,7 +56,6 @@ class CharacterController extends AbstractController
 
     public function comment() {
         if ($this->getPost('send')){
-
             $userFk = htmlentities($_POST['userFk']);
             $idPublication = $_GET['id'];
             $characterFk = $_POST['characterFk'];
@@ -83,7 +82,7 @@ class CharacterController extends AbstractController
             }
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&a=comment&id='.$idPublication);
+                header('LOCATION: ?c=character&id='.$idPublication);
             }
 
             else {

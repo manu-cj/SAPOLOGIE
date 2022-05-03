@@ -141,17 +141,32 @@ class CharacterManager
         if ($select->execute()) {
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                $files = glob('uploads/' . $data['image']);
-                foreach ($files as $filename) {
-                    echo '<div class="pictureCharacter">
+                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
+                $select2->bindValue(':id', $data['user_fk']);
+                $select2->execute();
+                $datas2 = $select2->fetchAll();
+                foreach ($datas2 as $data2) {
+
+                    $files = glob('uploads/' . $data['image']);
+                    foreach ($files as $filename) {
+                        echo '<div class="pictureCharacter">
 <form method="post" action="?c=realisations">
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
+<div><h3>'.$data2['username'].'</h3></div>
 <div class="description">' . $data['description'] . '</div>
-<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img></div>';
+<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
+<form method="post" action="?c=character&a=comment&id='.$data['id'].'">
+<input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
+<input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
+<input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
+<input type="submit" name="send" value="▶">
+</form>
+</div>
+<br>';
+                    }
                 }
-
             }
         }
     }
@@ -181,7 +196,7 @@ class CharacterManager
 <div class="description">' . $data['description'] . '</div>
 <img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
 <form method="post" action="?c=character&a=comment&id='.$data['id'].'">
-<input type="number" name="userFk" value="'.$data['user_fk'].'" style="display: none">
+<input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
 <input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
 <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
 <input type="submit" name="send" value="▶">
