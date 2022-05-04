@@ -64,6 +64,10 @@ class CommentManager
                     <?php
 
                 }
+                $imageFk = $data['character_image_fk'];
+            }
+            if ($select->rowCount() == 5) {
+                echo '<a href="?c=character&id='.$imageFk.'">Voir plus de commentaires ⬇</a>';
             }
         }
     }

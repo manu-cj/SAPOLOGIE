@@ -1,5 +1,5 @@
 
-<form action="?c=profil&a=add-character" method="post" id="register">
+<form action="?c=profil&a=add-character&id=id=<?=$_SESSION['user']['id']?>" method="post" id="register">
     <table>
         <tr>
             <td><label for="username">Nom du personnage :</label></td>

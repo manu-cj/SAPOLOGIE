@@ -8,7 +8,19 @@ class UserController extends AbstractController
     public function index()
     {
         $this->render('user/profil');
-        CharacterManager::getCharacter();
+
+        if (empty($_GET['id'])) {
+            $alert[] = '<div class="alert-error">Imposible de se rendre sur la page</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=home');
+            }
+        }
+        else {
+            $idUser = htmlentities($_GET['id']);
+            CharacterManager::getCharacter($idUser);
+        }
+
     }
 
     public function updateProfil() {

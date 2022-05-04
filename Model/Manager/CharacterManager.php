@@ -26,11 +26,11 @@ class CharacterManager
         }
     }
 
-    public static function getCharacter()
+    public static function getCharacter(int $idUser)
     {
         $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE user_fk = :user_fk");
 
-        $select->bindValue(':user_fk', $_SESSION['user']['id']);
+        $select->bindValue(':user_fk', $idUser);
         if ($select->execute()) {
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
@@ -149,22 +149,29 @@ class CharacterManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        echo '<div class="pictureCharacter">
-<form method="post" action="?c=realisations">
-<input type="text" name="filename" value="' . $filename . '" style="display: none">
-<input type="submit" name="deletePicture" value="❌" title="Supprimer">
-</form>
-<div><h3>'.$data2['username'].'</h3></div>
-<div class="description">' . $data['description'] . '</div>
-<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
-<form method="post" action="?c=character&a=comment&id='.$data['character_fk'].'">
-<input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
-<input type="number" name="characterFk" value="'.$data['id'].'" style="display: none">
-<input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
-<input type="submit" name="send" value="▶">
-</form>
-</div>
-<br>';
+                        ?> '<div class="pictureCharacter">
+                            <form method="post" action="?c=realisations">
+                                <input type="text" name="filename" value="' . $filename . '" style="display: none">
+                                <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                            </form>
+                            <div><h3><?=$data2['username']?></h3></div>
+                            <div class="description"><?=$data['description'] ?></div>
+                            <img class="gallerieImage" src="<?= $filename ?> "  alt="<?= $data['image'] ?>" style="max-width: 900px">
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                ?>
+                                <form method="post" action="?c=character&a=comment&id=<?=$data['character_fk']?>">
+                                    <input type="number" name="userFk" value="<?=$_SESSION['user']['id']?>" style="display: none">
+                                    <input type="number" name="characterImageFk" value="<?=$data['id']?>" style="display: none">
+                                    <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
+                                    <input type="submit" name="send" value="▶">
+                                </form>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <br>'
+                        <?php
                         CommentManager::getLastComment($data['id'], $limit);
                     }
                 }
@@ -188,24 +195,32 @@ class CharacterManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        echo '<div class="pictureCharacter">
+                       ?> '<div class="pictureCharacter">
 <form method="post" action="?c=realisations">
 <input type="text" name="filename" value="' . $filename . '" style="display: none">
 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
 </form>
-<div><h3>'.$data2['username'].'</h3></div>
-<div class="description">' . $data['description'] . '</div>
-<img class="gallerieImage" src="' . $filename . ' "  alt="' . $data['image'] . '" </img>
-<form method="post" action="?c=character&a=comment&id='.$data['character_fk'].'">
-<input type="number" name="userFk" value="'.$_SESSION['user']['id'].'" style="display: none">
-<input type="number" name="characterImageFk" value="'.$data['id'].'" style="display: none">
+<div><h3><?=$data2['username']?></h3></div>
+<div class="description"><?=$data['description'] ?></div>
+<img class="gallerieImage" src="<?= $filename ?> "  alt="<?= $data['image'] ?>"style="max-width: 900px">
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                            ?>
+<form method="post" action="?c=character&a=comment&id=<?=$data['character_fk']?>">
+<input type="number" name="userFk" value="<?=$_SESSION['user']['id']?>" style="display: none">
+<input type="number" name="characterImageFk" value="<?=$data['id']?>" style="display: none">
 <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
 <input type="submit" name="send" value="▶">
 </form>
+                                <?php
+                            }
+                                ?>
 </div>
-<br>';
+<br>'
+                        <?php
                         CommentManager::getLastComment($data['id'], 5);
-                        echo '<a href="?c=character&id='.$data['character_fk'].'">Voir plus de commentaires ⬇</a>';
+
+
                     }
                 }
             }

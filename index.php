@@ -39,7 +39,7 @@ if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
         }
         if ( AbstractController::getSession('user')) {
         ?>
-        <a href="?c=profil">Profil</a>
+        <a href="?c=profil&id=<?=$_SESSION['user']['id']?>">Profil</a>
             <a href="?c=logout">Se déconnecter</a>
         <?php
         }
