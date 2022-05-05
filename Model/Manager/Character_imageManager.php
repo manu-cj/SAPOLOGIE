@@ -20,12 +20,13 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
+
+                            <div><h3><?= $data2['username'] ?></h3></div>
+                            <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <form method="post" action="?c=delete">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
-                            <div><h3><?= $data2['username'] ?></h3></div>
-                            <div class="description"><?= $data['description'] ?></div>
                             <br>
                             <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
                                  style="max-width: 1200px; max-height: 900px">
@@ -72,17 +73,17 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
+                            <h3><?= $data2['username'] ?></h3>
+                            <div class="description"><?= $data['description'] ?></div>
+
                             <form method="post" action="?c=delete">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
-                            <div><h3><?= $data2['username'] ?></h3></div>
-                            <div class="description"><?= $data['description'] ?></div>
-                            <br>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
-                                                                            style="max-width: 400px; max-height: 500px"></a>
+                                                                            style="max-width: 400px; max-height: 500px; display: inline"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -129,13 +130,14 @@ class Character_imageManager
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
                         ?> <div class="pictureCharacter">
+
+                            <h3 style="display: none"><?=$data2['username']?></h3>
+
+                            <div class="description"><?=$data['description'] ?></div>
                             <form method="post" action="?c=delete">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
-                            <div><h3><?=$data2['username']?></h3></div>
-                            <div class="description"><?=$data['description'] ?></div>
-                            <br>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
