@@ -21,7 +21,7 @@ class CharacterManager
             $alert[] = '<div class="alert-succes">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=profil&id='.$character->getUserFk());
+                header('LOCATION: ?c=profil&id=' . $character->getUserFk());
             }
         }
     }
@@ -36,18 +36,20 @@ class CharacterManager
             foreach ($datas as $data) {
                 ?>
                 <br>
-                <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline"><div class="character <?= $data['classe'] ?>">
+                <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
+                    <div class="character <?= $data['classe'] ?>">
 
-                    <h1
+                        <h1
                                 class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
-                    <form method="post" action="?c=delete" style="display: inline">
-                        <input type="text" name="idCharacter" value="<?=$data['id']?>" style="display: none">
-                        <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
-                    </form>
-                    <h3 class="classe"><?= $data['classe'] ?></h3>
-                    <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
+                        <form method="post" action="?c=delete" style="display: inline">
+                            <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
+                            <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
+                        </form>
+                        <h3 class="classe"><?= $data['classe'] ?></h3>
+                        <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
 
-                </div></a>
+                    </div>
+                </a>
 
                 <?php
             }
@@ -61,21 +63,31 @@ class CharacterManager
         $select->bindValue(':id', $characterId);
 
         if ($select->execute()) {
-
+            ?>
+            <h1 id="character">Les Personnages ⬇</h1>
+            <h1 id="hide-character">Cacher</h1>
+            <div id="characters">
+            <?php
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
+
                     <div class="character <?= $data['classe'] ?>">
                         <h1 class="name"><?= $data['character_name'] ?></h1>
                         <h3 class="classe"><?= $data['classe'] ?></h3>
                         <h3 class="server"><?= $data['server_name'] ?></h3>
                     </div>
+
+                    </div>
+
                     <?php
                     if ($data['user_fk'] === $_SESSION['user']['id']) {
                         ?>
+                        <h1 id="sendPicture">Ajouter une image ⬇</h1>
+                        <h1 id="hidden" style="display: none">Cacher ⬆ </h1>
                         <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
-                              enctype="multipart/form-data">
+                              enctype="multipart/form-data" id="addPicture" style="display: none">
                             <input type="file" name="characterImage">
                             <br>
                             <br>
@@ -108,6 +120,7 @@ class CharacterManager
                     }
                 }
             }
+
         }
     }
 
@@ -131,7 +144,6 @@ class CharacterManager
             }
         }
     }
-
 
 
     public static function getNameCharacter($name)
@@ -159,9 +171,10 @@ class CharacterManager
                 ?>
             </div>
             <?php
-             CharacterManager::getClasseCharacter($name);
+            CharacterManager::getClasseCharacter($name);
         }
     }
+
     public static function getClasseCharacter($name)
     {
         $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE classe = :classe");

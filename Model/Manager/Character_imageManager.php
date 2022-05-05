@@ -142,9 +142,7 @@ class Character_imageManager
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
                         ?> <div class="pictureCharacter">
-
                             <h3 style="display: none"><?=$data2['username']?></h3>
-
                             <div class="description" style="display: inline"><?=$data['description'] ?></div>
                             <form method="post" action="?c=picture&id=<?=$data['user_fk']?>&a=update-picture-description" style="display: none" class="updateDescription">
                                 <input type="text" name="description" value="<?=$data['description']?>">
