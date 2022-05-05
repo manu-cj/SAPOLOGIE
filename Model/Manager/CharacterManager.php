@@ -159,11 +159,34 @@ class CharacterManager
                 ?>
             </div>
             <?php
+             CharacterManager::getClasseCharacter($name);
         }
-        if ($select->rowCount() === 0) {
-            echo '<h2>Aucun sapologue ne porte ce nom ici !</h2>';
+    }
+    public static function getClasseCharacter($name)
+    {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE classe = :classe");
+
+        $select->bindValue(':classe', $name);
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            ?>
+            <div class="all-classe">
+
+                <?php
+                foreach ($datas as $data) {
+                    ?>
+                    <a href="?c=character&id=<?= $data['id'] ?>">
+                        <div class="character <?= $data['classe'] ?>">
+                            <h1 class="name"><?= $data['character_name'] ?></h1>
+                            <h3 class="classe"><?= $data['classe'] ?></h3>
+                            <h3 class="server"><?= $data['server_name'] ?></h3>
+                        </div>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
         }
-
-
     }
 }

@@ -27,6 +27,7 @@ class Character_imageManager
                             </form>
                             <div><h3><?= $data2['username'] ?></h3></div>
                             <div class="description"><?= $data['description'] ?></div>
+                            <br>
                             <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
                                  style="max-width: 1200px; max-height: 900px">
                             <?php
@@ -45,7 +46,7 @@ class Character_imageManager
                             }
                             ?>
                         </div>
-                        <br>'
+                        <br>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
                     }
@@ -70,7 +71,7 @@ class Character_imageManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        ?> '
+                        ?>
                         <div class="pictureCharacter">
                             <form method="post" action="?c=realisations">
                                 <input type="text" name="filename" value="' . $filename . '"
@@ -79,10 +80,11 @@ class Character_imageManager
                             </form>
                             <div><h3><?= $data2['username'] ?></h3></div>
                             <div class="description"><?= $data['description'] ?></div>
+                            <br>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
-                                                                            style="max-width: 900px"></a>
+                                                                            style="max-width: 400px; max-height: 500px"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -100,7 +102,7 @@ class Character_imageManager
                             }
                             ?>
                         </div>
-                        <br>'
+                        <br>
                         <?php
                         CommentManager::getLastComment($data['id'], 5);
 
@@ -128,14 +130,18 @@ class Character_imageManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        ?> '<div class="pictureCharacter">
+                        ?> <div class="pictureCharacter">
                             <form method="post" action="?c=realisations">
                                 <input type="text" name="filename" value="' . $filename . '" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?=$data2['username']?></h3></div>
                             <div class="description"><?=$data['description'] ?></div>
-                            <img class="gallerieImage" src="<?= $filename ?> "  alt="<?= $data['image'] ?>" style="max-width: 900px">
+                            <br>
+                            <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
+                                                                            src="<?= $filename ?> "
+                                                                            alt="<?= $data['image'] ?>"
+                                                                            style="max-width: 400px; max-height: 500px"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -149,7 +155,7 @@ class Character_imageManager
                             }
                             ?>
                         </div>
-                        <br>'
+                        <br>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
                     }

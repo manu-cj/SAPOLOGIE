@@ -62,7 +62,6 @@ class CommentManager
                     <br>
                     </div>
                     <?php
-
                 }
                 $id = $data['character_image_fk'];
             }
