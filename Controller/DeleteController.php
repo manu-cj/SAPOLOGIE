@@ -17,5 +17,9 @@ class DeleteController extends AbstractController
             $id = htmlentities($_POST['idComment']);
             CommentManager::deleteComment($id);
         }
+        if ($this->getPost('deleteCharacter')){
+            $id = htmlentities($_POST['idCharacter']);
+            CharacterManager::deleteCharacter($id);
+        }
     }
 }

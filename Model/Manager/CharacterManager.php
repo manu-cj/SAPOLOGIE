@@ -21,7 +21,7 @@ class CharacterManager
             $alert[] = '<div class="alert-succes">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=profil');
+                header('LOCATION: ?c=profil&id='.$character->getUserFk());
             }
         }
     }
@@ -37,11 +37,9 @@ class CharacterManager
                 ?>
                 <br>
                 <div class="character <?= $data['classe'] ?>">
-                    <form action="?c=character&id=<?= $data['id'] ?>" method="post" style="display: inline">
-                        <input type="number" name="idArticle" value="<?= $data['id'] ?>" style="display: none">
-                        <input type="submit" name="delete" class="submit" value="❌"
-                               style="display: inline; border: none; cursor: pointer"
-                               title="Supprimer le personnage" ">
+                    <form method="post" action="?c=delete">
+                        <input type="text" name="idCharacter" value="<?=$data['id']?>" style="display: none">
+                        <input type="submit" name="deleteCharacter" value="❌" title="Supprimer">
                     </form>
                     <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline"><h1
                                 class="character-name"><?= $data['character_name'] ?></h1></a>
@@ -187,6 +185,21 @@ class CharacterManager
                 ?>
             </div>
             <?php
+        }
+    }
+
+    public static function deleteCharacter($id)
+    {
+        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character WHERE id = :id");
+        $delete->bindValue(':id', $id);
+
+        if ($delete->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Le personnage a été supprimé !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=home');
+            }
         }
     }
 }
