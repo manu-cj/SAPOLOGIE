@@ -20,10 +20,14 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-
                             <div><h3><?= $data2['username'] ?></h3></div>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
-                            <form method="post" action="?c=delete">
+                            <form method="post" action="?c=picture&id=<?=$id?>&a=update-picture-description" style="display: none" class="updateDescription">
+                                <input type="text" name="Description" value="<?=$data['description']?>">
+                                <input type="submit" name="updateDescription" value="▶">
+                            </form>
+                            <button style="display: inline" id="updateDescription">📝</button>
+                            <form method="post" action="?c=delete" style="display: inline">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>

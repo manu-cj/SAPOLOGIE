@@ -11,4 +11,8 @@ class PictureController extends AbstractController
             Character_imageManager::getImage($id, 99999999);
         }
     }
+
+    public function updateDescription() {
+
+    }
 }

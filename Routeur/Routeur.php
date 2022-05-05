@@ -18,6 +18,9 @@ class Routeur
             case 'comment':
                 $control->comment();
                 break;
+            case 'update-picture-description':
+                $control->updateDescription();
+                break;
         }
     }
 
