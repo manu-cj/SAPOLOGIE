@@ -18,7 +18,7 @@ class CharacterManager
         $insert->bindValue(':server_name', $character->getServer());
         if ($insert->execute()) {
             $alert = [];
-            $alert[] = '<div class="alert-suces">Votre personnage a été ajouté</div>';
+            $alert[] = '<div class="alert-succes">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil');

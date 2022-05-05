@@ -55,6 +55,10 @@ class CommentManager
                 $datas2 = $select2->fetchAll();
                 foreach ($datas2 as $data2) {
                     ?>
+                    <form method="post" action="?c=delete">
+                        <input type="text" name="filename" value="<?=$data['id']?>" style="display: none">
+                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                    </form>
                     <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
                             :</b> <?= date('d-m-y à H:i:s', strtotime($data['date'])) ?></div>
                     <br>

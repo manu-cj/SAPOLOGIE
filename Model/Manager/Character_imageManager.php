@@ -16,13 +16,12 @@ class Character_imageManager
                 $select2->execute();
                 $datas2 = $select2->fetchAll();
                 foreach ($datas2 as $data2) {
-
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <form method="post" action="?c=realisations">
-                                <input type="text" name="filename" value="' . $filename . '" style="display: none">
+                            <form method="post" action="?c=delete">
+                                <input type="text" name="filename" value="<?=$filename?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?= $data2['username'] ?></h3></div>
@@ -73,9 +72,8 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <form method="post" action="?c=realisations">
-                                <input type="text" name="filename" value="' . $filename . '"
-                                       style="display: none">
+                            <form method="post" action="?c=delete">
+                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?= $data2['username'] ?></h3></div>
@@ -131,8 +129,8 @@ class Character_imageManager
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
                         ?> <div class="pictureCharacter">
-                            <form method="post" action="?c=realisations">
-                                <input type="text" name="filename" value="' . $filename . '" style="display: none">
+                            <form method="post" action="?c=delete">
+                                <input type="text" name="filename" value="<?=$filename?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?=$data2['username']?></h3></div>
@@ -160,6 +158,20 @@ class Character_imageManager
                         CommentManager::getLastComment($data['id'], $limit);
                     }
                 }
+            }
+        }
+    }
+
+    public static function deletePicture($picture) {
+        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character_image WHERE image = :image");
+        $delete->bindValue(':image', $picture);
+
+        if ($delete->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Votre photo a été supprimé !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=home');
             }
         }
     }

@@ -79,6 +79,9 @@ switch ($page) {
     case 'logout':
         Routeur::route('LogoutController', $action);
         break;
+    case 'delete':
+        Routeur::route('DeleteController', $action);
+        break;
     default:
         ErrorController::error404($page);
 }
