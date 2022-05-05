@@ -36,17 +36,19 @@ class CharacterManager
             foreach ($datas as $data) {
                 ?>
                 <br>
-                <div class="character <?= $data['classe'] ?>">
-                    <form method="post" action="?c=delete">
-                        <input type="text" name="idCharacter" value="<?=$data['id']?>" style="display: none">
-                        <input type="submit" name="deleteCharacter" value="❌" title="Supprimer">
-                    </form>
-                    <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline"><h1
-                                class="character-name"><?= $data['character_name'] ?></h1></a>
+                <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline"><div class="character <?= $data['classe'] ?>">
 
+                    <h1
+                                class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
+                    <form method="post" action="?c=delete" style="display: inline">
+                        <input type="text" name="idCharacter" value="<?=$data['id']?>" style="display: none">
+                        <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
+                    </form>
                     <h3 class="classe"><?= $data['classe'] ?></h3>
                     <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
-                </div>
+
+                </div></a>
+
                 <?php
             }
         }
