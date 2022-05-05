@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Model\Entity\Character_image;
+
 class Character_imageManager
 {
     public static function getImage(int $id, int $limit)
@@ -23,7 +25,8 @@ class Character_imageManager
                             <div><h3><?= $data2['username'] ?></h3></div>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <form method="post" action="?c=picture&id=<?=$id?>&a=update-picture-description" style="display: none" class="updateDescription">
-                                <input type="text" name="Description" value="<?=$data['description']?>">
+                                <input type="text" name="description" value="<?=$data['description']?>">
+                                <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
                             </form>
                             <button style="display: inline" id="updateDescription">📝</button>
@@ -180,5 +183,21 @@ class Character_imageManager
                 header('LOCATION: ?c=home');
             }
         }
+    }
+
+    public static function updatePictureDescription(Character_image $description, int $id) {
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description WHERE id = :id");
+        $update->bindValue(':description', $description->getDescription());
+        $update->bindValue(':id', $id);
+
+        if ($update->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Description mise à jour !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=picture&id='.$id);
+            }
+        }
+
     }
 }
