@@ -21,7 +21,7 @@ class Character_imageManager
                         ?>
                         <div class="pictureCharacter">
                             <form method="post" action="?c=delete">
-                                <input type="text" name="filename" value="<?=$filename?>" style="display: none">
+                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?= $data2['username'] ?></h3></div>
@@ -130,7 +130,7 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?> <div class="pictureCharacter">
                             <form method="post" action="?c=delete">
-                                <input type="text" name="filename" value="<?=$filename?>" style="display: none">
+                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <div><h3><?=$data2['username']?></h3></div>
