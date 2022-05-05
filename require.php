@@ -31,5 +31,6 @@ require __DIR__. '/Controller/LogoutController.php';
 require __DIR__. '/Controller/RegisterController.php';
 require __DIR__. '/Controller/UserController.php';
 require __DIR__.'/Controller/SearchController.php';
+require __DIR__. '/Controller/PictureController.php';
 
 require __DIR__. '/Routeur/Routeur.php';

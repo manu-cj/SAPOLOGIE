@@ -67,6 +67,9 @@ switch ($page) {
     case 'character':
         Routeur::route('CharacterController', $action);
         break;
+    case 'picture':
+        Routeur::route('PictureController', $action);
+        break;
     case 'login':
         Routeur::route('LoginController', $action);
         break;

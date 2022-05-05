@@ -64,10 +64,13 @@ class CommentManager
                     <?php
 
                 }
-                $imageFk = $data['character_image_fk'];
+                $id = $data['character_image_fk'];
             }
             if ($select->rowCount() == 5) {
-                echo '<a href="?c=character&id='.$imageFk.'">Voir plus de commentaires ⬇</a>';
+                echo '<a href="?c=picture&id='.$id.'">Voir plus de commentaires ⬇</a>';
+            }
+            if ($select->rowCount() >= 6){
+                echo '<a href="?c=picture&id='.$id.'" style="display: none">Voir plus de commentaires ⬇</a>';
             }
         }
     }

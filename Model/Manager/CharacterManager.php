@@ -202,7 +202,7 @@ class CharacterManager
 </form>
 <div><h3><?=$data2['username']?></h3></div>
 <div class="description"><?=$data['description'] ?></div>
-<img class="gallerieImage" src="<?= $filename ?> "  alt="<?= $data['image'] ?>"style="max-width: 900px">
+                            <a href="?c=picture&id=<?=$data['id']?>" ><img class="gallerieImage" src="<?= $filename ?> "  alt="<?= $data['image'] ?>"style="max-width: 900px"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                             ?>
