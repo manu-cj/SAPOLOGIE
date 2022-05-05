@@ -13,5 +13,9 @@ class DeleteController extends AbstractController
                 Character_imageManager::deletePicture($picture);
             }
         }
+        if ($this->getPost('deleteComment')){
+            $id = htmlentities($_POST['idComment']);
+            CommentManager::deleteComment($id);
+        }
     }
 }

@@ -56,8 +56,8 @@ class CommentManager
                 foreach ($datas2 as $data2) {
                     ?>
                     <form method="post" action="?c=delete">
-                        <input type="text" name="filename" value="<?=$data['id']?>" style="display: none">
-                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                        <input type="text" name="idComment" value="<?=$data['id']?>" style="display: none">
+                        <input type="submit" name="deleteComment" value="❌" title="Supprimer">
                     </form>
                     <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
                             :</b> <?= date('d-m-y à H:i:s', strtotime($data['date'])) ?></div>
@@ -74,6 +74,21 @@ class CommentManager
             }
             if ($select->rowCount() >= 6){
                 echo '<a href="?c=picture&id='.$id.'" style="display: none">Voir plus de commentaires ⬇</a>';
+            }
+        }
+    }
+
+    public static function deleteComment($id)
+    {
+        $delete = Connect::getPDO()->prepare("Delete  From aiu12_comment WHERE id = :id");
+        $delete->bindValue(':id', $id);
+
+        if ($delete->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Le commentaire a été supprimé !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=home');
             }
         }
     }

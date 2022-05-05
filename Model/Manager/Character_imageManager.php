@@ -168,7 +168,7 @@ class Character_imageManager
 
         if ($delete->execute()) {
             $alert = [];
-            $alert[] = '<div class="alert-succes">Votre photo a été supprimé !</div>';
+            $alert[] = '<div class="alert-succes">Le photo a été supprimé !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
