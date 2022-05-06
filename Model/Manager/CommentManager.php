@@ -57,7 +57,7 @@ class CommentManager
                     ?>
 
                     <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
-                            :</b> <?= date('d-m-y à H:i:s', strtotime($data['date'])) ?></div>
+                            :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date']))?></div>
                     <form method="post" action="?c=delete" style="display: inline">
                         <input type="text" name="idComment" value="<?=$data['id']?>" style="display: none">
                         <input type="submit" name="deleteComment" value="❌" title="Supprimer">
