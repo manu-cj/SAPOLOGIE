@@ -116,17 +116,19 @@ class UserManager extends User
         if ($get->execute()) {
             $datas = $get->fetchAll();
             ?>
-            <div class="dataUser"><h1>Information du compte 🔽</h1>
+            <h1 class="showUserData">Information du compte 🔽</h1>
+            <h1 class="hideUserData" style="display: none">Information du compte 🔼</h1>
                 <?php
                 foreach ($datas as $data) {
                     ?>
+                        <div class="userData" style="display: none">
                     <h3>Nom d'utilisateur :<?= $data['username'] ?></h3>
                     <h3>Adresse e-mail :<?= $data['mail'] ?></h3>
                     <h3>Mot de passe : *********</h3>
+                        </div>
                     <?php
                 }
                 ?>
-            </div>
             <?php
         }
     }

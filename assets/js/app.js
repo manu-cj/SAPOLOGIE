@@ -8,6 +8,9 @@ let updateCharacter = document.querySelector('#updateCharacter');
 let formUpdateCharacter = document.querySelector('#formUpdateCharacter');
 let characterData = document.querySelector('.character');
 let previous = document.querySelector('#previous');
+let showUserData = document.querySelector('.showUserData');
+let userData = document.querySelector('.userData');
+let hideUserData = document.querySelector('.hideUserData');
 
 function showElement(show, hide, hide2) {
     show.style.display = 'initial';
@@ -50,6 +53,16 @@ if (previous) {
     previous.addEventListener("click", () => {
         hideElement(previous, characterData, updateCharacter);
         formUpdateCharacter.style.display = 'none';
+    })
+}
+if (showUserData) {
+    showUserData.addEventListener("click", () => {
+        hideElement(showUserData, hideUserData,userData);
+    })
+}
+if (hideUserData) {
+    hideUserData.addEventListener("click", () => {
+        showElement(showUserData, hideUserData,userData);
     })
 }
 

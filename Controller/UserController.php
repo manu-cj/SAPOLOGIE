@@ -26,7 +26,6 @@ class UserController extends AbstractController
                 }
             }
         }
-
     }
 
     public function updateProfil() {
