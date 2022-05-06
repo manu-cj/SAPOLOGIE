@@ -125,7 +125,7 @@ class UserManager extends User
                     <h3 class="usernameData" style="display: inline">Nom d'utilisateur :<?= $data['username'] ?></h3>
                             <button class="changeUsernameButton">📝</button>
                             <br>
-                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                            <form action="?c=profil&a=update-profil" method="post" id="formUsername" style="display: none">
                                 <table>
                                     <tr>
                                         <td><label for="username">Nom d'utilisateur :</label></td>
@@ -139,7 +139,7 @@ class UserManager extends User
                     <h3 class="mailData" style="display: inline">Adresse e-mail :<?= $data['mail'] ?></h3>
                             <button class="changeMailButton">📝</button>
                             <br>
-                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                            <form action="?c=profil&a=update-profil" method="post" id="formMail" style="display: none">
                                 <table>
                                     <tr>
                                         <td><label for="mail">Adresse e-mail :</label></td>
@@ -152,7 +152,7 @@ class UserManager extends User
                             </form>
                     <h3 class="passwordData" style="display: inline">Mot de passe : *********</h3>
                             <button class="changePasswordButton">📝</button>
-                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                            <form action="?c=profil&a=update-profil" method="post" id="formPassword" style="display: none">
                                 <table>
                                     <tr>
                                         <td><label for="password">Mot de passe :</label></td>

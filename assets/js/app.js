@@ -12,6 +12,7 @@ let showUserData = document.querySelector('.showUserData');
 let userData = document.querySelector('.userData');
 let hideUserData = document.querySelector('.hideUserData');
 
+
 function showElement(show, hide, hide2) {
     show.style.display = 'initial';
     hide.style.display = 'none';
@@ -63,6 +64,33 @@ if (showUserData) {
 if (hideUserData) {
     hideUserData.addEventListener("click", () => {
         showElement(showUserData, hideUserData,userData);
+    })
+}
+let changeUsernameButton = document.querySelector('.changeUsernameButton');
+let changeMailButton = document.querySelector('.changeMailButton');
+let changePasswordButton = document.querySelector('.changePasswordButton');
+let usernameData = document.querySelector('.userData');
+let mailData = document.querySelector('.mailData');
+let passwordData = document.querySelector('.passwordData');
+let formUsername = document.querySelector('#formUsername');
+let formMail = document.querySelector('#formMail');
+let formPassword = document.querySelector('#formPassword');
+
+if (changePasswordButton, changeMailButton, changeUsernameButton) {
+    changeUsernameButton.addEventListener("click", () => {
+        formUsername.style.display = 'initial';
+        formMail.style.display = 'none';
+        formPassword.style.display = 'none';
+    })
+    changeMailButton.addEventListener("click", () => {
+        formMail.style.display = 'initial';
+        formUsername.style.display = 'none';
+        formPassword.style.display = 'none';
+    })
+    changePasswordButton.addEventListener("click", () => {
+        formPassword.style.display = 'initial';
+        formMail.style.display = 'none';
+        formUsername.style.display = 'none';
     })
 }
 
