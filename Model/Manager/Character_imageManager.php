@@ -24,30 +24,44 @@ class Character_imageManager
                         <div class="pictureCharacter">
                             <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user']['id'] === $data['user_fk']) {
 
-                            <form method="post" action="?c=picture&id=<?= $id ?>&a=update-picture-description"
-                                  style="display: none" class="updateDescription">
-                                <select name="visibility">
-                                    <optgroup label="Public">
-                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Profil">
-                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
-                                            d'actualité
-                                        </option>
-                                    </optgroup>
-                                </select>
-                                <br>
-                                <textarea name="description" cols="45" rows="10"><?= $data['description'] ?></textarea>
-                                <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
-                                <input type="submit" name="updateDescription" value="▶">
-                            </form>
-                            <button style="display: inline" id="update">📝</button>
-                            <form method="post" action="?c=delete" style="display: inline">
-                                <input type="text" name="filename" value="<?= $data['image'] ?>" style="display: none">
-                                <input type="submit" name="deletePicture" value="❌" title="Supprimer">
-                            </form>
+
+                                    ?>
+                                    <form method="post" action="?c=picture&id=<?= $id ?>&a=update-picture-description"
+                                          style="display: none" class="updateDescription">
+                                        <select name="visibility">
+                                            <optgroup label="Public">
+                                                <option name="public" value="2"> Ajouter la publication dans le fil
+                                                    d'actualité
+                                                </option>
+                                            </optgroup>
+                                            <optgroup label="Profil">
+                                                <option name="profil" value="3"> Ne pas ajouter la publication dans le
+                                                    fil
+                                                    d'actualité
+                                                </option>
+                                            </optgroup>
+                                        </select>
+                                        <br>
+                                        <textarea name="description" cols="45"
+                                                  rows="10"><?= $data['description'] ?></textarea>
+                                        <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
+                                        <input type="submit" name="updateDescription" value="▶">
+                                    </form>
+                                    <button style="display: inline" id="update">📝</button>
+
+                                    <form method="post" action="?c=delete" style="display: inline">
+                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                               style="display: none">
+                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
                             <br>
                             <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
                                  style="max-width: 1200px; max-height: 900px">
