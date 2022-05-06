@@ -25,6 +25,17 @@ class Character_imageManager
                             <div><h3><?= $data2['username'] ?></h3></div>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <form method="post" action="?c=picture&id=<?=$id?>&a=update-picture-description" style="display: none" class="updateDescription">
+                                <select name="visibility">
+                                    <optgroup label="Public">
+                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="Profil">
+                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
+                                            d'actualité
+                                        </option>
+                                    </optgroup>
+                                </select>
                                 <input type="text" name="description" value="<?=$data['description']?>">
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
@@ -83,6 +94,17 @@ class Character_imageManager
                             <h3><?= $data2['username'] ?></h3>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <form method="post" action="?c=picture&id=<?=$data['user_fk']?>&a=update-picture-description" style="display: none" class="updateDescription">
+                                <select name="visibility">
+                                    <optgroup label="Public">
+                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="Profil">
+                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
+                                            d'actualité
+                                        </option>
+                                    </optgroup>
+                                </select>
                                 <input type="text" name="description" value="<?=$data['description']?>">
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
@@ -145,6 +167,17 @@ class Character_imageManager
                             <h3 style="display: none"><?=$data2['username']?></h3>
                             <div class="description" style="display: inline"><?=$data['description'] ?></div>
                             <form method="post" action="?c=picture&id=<?=$data['user_fk']?>&a=update-picture-description" style="display: none" class="updateDescription">
+                                <select name="visibility">
+                                    <optgroup label="Public">
+                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
+                                        </option>
+                                    </optgroup>
+                                    <optgroup label="Profil">
+                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
+                                            d'actualité
+                                        </option>
+                                    </optgroup>
+                                </select>
                                 <input type="text" name="description" value="<?=$data['description']?>">
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
@@ -195,8 +228,9 @@ class Character_imageManager
     }
 
     public static function updatePictureDescription(Character_image $description, int $id) {
-        $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description WHERE id = :id");
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description, view_fk = :view_fk WHERE id = :id");
         $update->bindValue(':description', $description->getDescription());
+        $update->bindValue(':view_fk', $description->getViewFk());
         $update->bindValue(':id', $id);
 
         if ($update->execute()) {

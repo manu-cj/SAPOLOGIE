@@ -17,11 +17,13 @@ class PictureController extends AbstractController
     public function updateDescription() {
         if ($this->getPost('updateDescription')) {
             $description = htmlentities($_POST['description']);
+            $view = htmlentities($_POST['visibility']);
             $id = htmlentities($_POST['id']);
 
             $newDescription = new Character_image();
             $newDescription
                 ->setDescription($description)
+                ->setViewFk($view)
             ;
 
             Character_imageManager::updatePictureDescription($newDescription, $id);
