@@ -122,10 +122,53 @@ class UserManager extends User
                 foreach ($datas as $data) {
                     ?>
                         <div class="userData" style="display: none">
-                    <h3>Nom d'utilisateur :<?= $data['username'] ?></h3>
-                    <h3>Adresse e-mail :<?= $data['mail'] ?></h3>
-                    <h3>Mot de passe : *********</h3>
+                    <h3 class="usernameData" style="display: inline">Nom d'utilisateur :<?= $data['username'] ?></h3>
+                            <button class="changeUsernameButton">📝</button>
+                            <br>
+                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                                <table>
+                                    <tr>
+                                        <td><label for="username">Nom d'utilisateur :</label></td>
+                                        <td><input type="text" name="username" id="username" value="<?=$data['username']?>" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" name="changeUsername" value="Confirmer" required></td>
+                                    </tr>
+                                </table>
+                            </form>
+                    <h3 class="mailData" style="display: inline">Adresse e-mail :<?= $data['mail'] ?></h3>
+                            <button class="changeMailButton">📝</button>
+                            <br>
+                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                                <table>
+                                    <tr>
+                                        <td><label for="mail">Adresse e-mail :</label></td>
+                                        <td><input type="email" name="mail" id="mail" value="<?=$data['mail']?>" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" name="changeMail" value="Confirmer" required></td>
+                                    </tr>
+                                </table>
+                            </form>
+                    <h3 class="passwordData" style="display: inline">Mot de passe : *********</h3>
+                            <button class="changePasswordButton">📝</button>
+                            <form action="?c=profil&a=update-profil" method="post" id="register" style="display: none">
+                                <table>
+                                    <tr>
+                                        <td><label for="password">Mot de passe :</label></td>
+                                        <td><input type="password" name="password" id="password" value="<?=$data['mail']?>" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="password-repeat">Password-repeat :</label></td>
+                                        <td><input type="password" name="password-repeat" id="password-repeat" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" name="changePassword" value="Confirmer" required></td>
+                                    </tr>
+                                </table>
+                            </form>
                         </div>
+
                     <?php
                 }
                 ?>
