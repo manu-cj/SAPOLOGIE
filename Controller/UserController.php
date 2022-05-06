@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\Entity\Character;
+use App\Model\Entity\User;
 
 class UserController extends AbstractController
 {
@@ -29,7 +30,81 @@ class UserController extends AbstractController
     }
 
     public function updateProfil() {
-        $this->render('user/update-profil');
+        if ($this->getPost('changeUsername')) {
+            $username = trim(htmlentities($_POST['username']));
+            $id = htmlentities($_SESSION['user']['id']);
+            $alert = [];
+            if (empty($username)) {
+                $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+            }
+            if (strlen($username) <= 2 || strlen($username) >= 255) {
+                $alert[] = '<div class="alert-error">Le nom d\'utilisateur doit contenir entre 2 et 255 caractères !</div>';
+            }
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=profil&id='.$id);
+            }
+            else {
+                $user = new User();
+                $user
+                    ->setUsername($username)
+                    ;
+                UserManager::getUsernameExist($username);
+            }
+        }
+        if ($this->getPost('changeMail')){
+            $id = htmlentities($_SESSION['user']['id']);
+            $mail = trim(htmlentities(($_POST['mail'])));
+            $alert = [];
+
+            if (empty($mail)) {
+                $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+            }
+
+            if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                $alert[] = '<div class="alert-error">L\'adresse e-mail n\'est pas valide !</div>';
+            }
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=profil&id='.$id);
+            }
+            else {
+                $user = new User();
+                $user
+                    ->setMail($mail)
+                    ;
+                UserManager::getMailExist($mail);
+            }
+        }
+        if ($this->getPost('changePassword')) {
+            $password = ($_POST['password']);
+            $passwordRepeat = trim(strip_tags($_POST['password-repeat']));
+            $alert = [];
+
+            if (empty($password)) {
+                $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+            }
+            if (empty($passwordRepeat)) {
+                $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+            }
+            if (strlen($password) <= 5 || strlen($password) >= 255) {
+                $alert[] = '<div class="alert-error">Le mot de passe doit contenir entre 5 et 255 caractères !</div>';
+            }
+
+            if ($password !== $passwordRepeat) {
+                $alert[] = '<div class="alert-error">Les mots de passe ne correspondent pas !</div>';
+            }
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=profil&id='.$id);
+            }
+            else {
+                $user = new User();
+                $user
+                    ->setPassword(password_hash($password, PASSWORD_DEFAULT))
+                ;
+            }
+        }
     }
 
     public function character()
