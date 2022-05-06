@@ -74,29 +74,29 @@ class CharacterManager
                 if (isset($_SESSION['user'])) {
                     ?>
                     <button id="previous" style="display: none"> ⇦</button>
-                    <form action="?c=profil&a=update-character&id=<?=$_SESSION['user']['id']?>" method="post" id="formUpdateCharacter" style="display: none">
+                    <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post" id="formUpdateCharacter" style="display: none">
                         <table>
                             <tr>
-                                <td><label for="username">Nom du personnage :</label></td>
-                                <td><input type="text" name="username" id="username" value="<?=$data['character_name']?>" required></td>
+                                <td><label for="name">Nom du personnage :</label></td>
+                                <td><input type="text" name="name" id="name" value="<?=$data['character_name']?>" required></td>
                             </tr>
 
                             <tr>
                                 <td><label for="serveur">Nom du serveur :</label></td>
                                 <td><input type="text" name="serveur" id="serveur" value="<?=$data['server_name']?>" required></td>
                             </tr>
-                            <input type="text" name="user-fk" value="<?=$_SESSION['user']['id']?>" style="display: none">
+                            <input type="text" name="id" value="<?= $data['id'] ?>" style="display: none">
 
                         </table>
-                        <input type="submit" name="add" value=" ↻" title="actualiser">
+                        <input type="submit" name="update" value=" ↻" title="actualiser">
                     </form>
-                    <button style="display: inline" id="updateCharacter">📝</button>
+
                     <div class="character <?= $data['classe'] ?>">
                         <h1 class="name"><?= $data['character_name'] ?></h1>
                         <h3 class="classe"><?= $data['classe'] ?></h3>
                         <h3 class="server"><?= $data['server_name'] ?></h3>
                     </div>
-
+                    <button style="display: inline" id="updateCharacter">📝</button>
                     </div>
 
                     <?php
@@ -232,6 +232,38 @@ class CharacterManager
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
+            }
+        }
+        else {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=home');
+            }
+        }
+    }
+
+    public static function updateCharacter(Character $character, $id) {
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_character SET character_name = :character_name, server_name = :server_name
+                                                    WHERE id = :id");
+        $update->bindValue(':character_name', $character->getCharacterName());
+        $update->bindValue(':server_name', $character->getServer());
+        $update->bindValue(':id', $id);
+        if ($update->execute()) {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Le personnage a été mis à jour !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=character&id='.$id);
+            }
+        }
+        else {
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=character&id='.$id);
             }
         }
     }

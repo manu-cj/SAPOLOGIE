@@ -21,6 +21,9 @@ class Routeur
             case 'update-picture-description':
                 $control->updateDescription();
                 break;
+            case 'update-character':
+                $control->updateCharacter();
+                break;
         }
     }
 
