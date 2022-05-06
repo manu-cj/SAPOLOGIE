@@ -10,7 +10,7 @@ function hideElement($show, $show2, $hide2) {
     $hide2.style.display = 'block';
 }
 
-let updateDescription = document.querySelector('#updateDescription');
+let updateDescription = document.querySelector('#update');
 let classUpdateDescription = document.querySelector('.updateDescription');
 let classDescription = document.querySelector('.description');
 
@@ -40,5 +40,22 @@ character.addEventListener("click", ()=> {
     hideElement(character, allCharacters, hideCharacter);
 
 })
+
+let updateCharacter = document.querySelector("#updateCharacter");
+let formUpdateCharacter = document.querySelector('#formUpdateCharacter');
+let characterData = document.querySelector('.character');
+let previous = document.querySelector('#previous');
+updateCharacter.addEventListener("click", () =>{
+    showElement(formUpdateCharacter, updateCharacter, characterData)
+    previous.style.display = 'inline';
+})
+
+previous.addEventListener("click", () => {
+    hideElement(previous, characterData, updateCharacter);
+    formUpdateCharacter.style.display = 'none';
+})
+
+
+
 
 

@@ -36,15 +36,16 @@ class CharacterManager
             foreach ($datas as $data) {
                 ?>
                 <br>
+
+                <form method="post" action="?c=delete" style="display: inline">
+                    <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
+                    <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
+                </form>
                 <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
                     <div class="character <?= $data['classe'] ?>">
-
                         <h1
                                 class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
-                        <form method="post" action="?c=delete" style="display: inline">
-                            <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
-                            <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
-                        </form>
+
                         <h3 class="classe"><?= $data['classe'] ?></h3>
                         <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
 
@@ -72,7 +73,24 @@ class CharacterManager
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
+                    <button id="previous" style="display: none"> ⇦</button>
+                    <form action="?c=profil&a=update-character&id=<?=$_SESSION['user']['id']?>" method="post" id="formUpdateCharacter" style="display: none">
+                        <table>
+                            <tr>
+                                <td><label for="username">Nom du personnage :</label></td>
+                                <td><input type="text" name="username" id="username" value="<?=$data['character_name']?>" required></td>
+                            </tr>
 
+                            <tr>
+                                <td><label for="serveur">Nom du serveur :</label></td>
+                                <td><input type="text" name="serveur" id="serveur" value="<?=$data['server_name']?>" required></td>
+                            </tr>
+                            <input type="text" name="user-fk" value="<?=$_SESSION['user']['id']?>" style="display: none">
+
+                        </table>
+                        <input type="submit" name="add" value=" ↻" title="actualiser">
+                    </form>
+                    <button style="display: inline" id="updateCharacter">📝</button>
                     <div class="character <?= $data['classe'] ?>">
                         <h1 class="name"><?= $data['character_name'] ?></h1>
                         <h3 class="classe"><?= $data['classe'] ?></h3>

@@ -40,7 +40,7 @@ class Character_imageManager
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
                             </form>
-                            <button style="display: inline" id="updateDescription">📝</button>
+                            <button style="display: inline" id="update">📝</button>
                             <form method="post" action="?c=delete" style="display: inline">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
@@ -109,7 +109,7 @@ class Character_imageManager
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
                             </form>
-                            <button style="display: inline" id="updateDescription">📝</button>
+                            <button style="display: inline" id="update">📝</button>
                             <form method="post" action="?c=delete">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
@@ -182,7 +182,7 @@ class Character_imageManager
                                 <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
                             </form>
-                            <button style="display: inline" id="updateDescription">📝</button>
+                            <button style="display: inline" id="update">📝</button>
                             <form method="post" action="?c=delete">
                                 <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
