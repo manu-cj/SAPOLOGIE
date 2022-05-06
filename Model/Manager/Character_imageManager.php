@@ -128,7 +128,7 @@ class Character_imageManager
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
-                                                                            style="max-width: 400px; max-height: 500px; display: inline"></a>
+                                                                            style="max-width: 500px; max-height: 750px; display: inline"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
