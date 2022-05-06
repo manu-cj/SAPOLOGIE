@@ -19,6 +19,12 @@ class UserController extends AbstractController
         else {
             $idUser = htmlentities($_GET['id']);
             CharacterManager::getCharacter($idUser);
+            if (isset($_SESSION['user'])){
+                if ($_GET['id'] === $_SESSION['user']['id']){
+                    $id = $_GET['id'];
+                    UserManager::getDataUser($id);
+                }
+            }
         }
 
     }
@@ -81,9 +87,6 @@ class UserController extends AbstractController
         }
     }
 
-    public function characterName() {
-        $this->render('user/character-name');
-    }
 
 
 }

@@ -53,8 +53,7 @@ class UserManager extends User
                         $_SESSION['alert'] = $alert;
                         header('LOCATION: ?c=home');
                     }
-                }
-                else {
+                } else {
                     $alert[] = '<div class="alert-error">Adresse e-mail ou mot de passe invalide !</div>';
                     if (count($alert) > 0) {
                         $_SESSION['alert'] = $alert;
@@ -107,6 +106,28 @@ class UserManager extends User
                     }
                 }
             }
+        }
+    }
+
+    public static function getDataUser(int $id)
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE id = :id");
+        $get->bindValue(':id', $id);
+        if ($get->execute()) {
+            $datas = $get->fetchAll();
+            ?>
+            <div class="dataUser"><h1>Information du compte 🔽</h1>
+                <?php
+                foreach ($datas as $data) {
+                    ?>
+                    <h3>Nom d'utilisateur :<?= $data['username'] ?></h3>
+                    <h3>Adresse e-mail :<?= $data['mail'] ?></h3>
+                    <h3>Mot de passe : *********</h3>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
         }
     }
 }

@@ -54,6 +54,7 @@ class CharacterManager
 
                 <?php
             }
+
         }
     }
 
