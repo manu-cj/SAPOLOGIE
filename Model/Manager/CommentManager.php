@@ -56,15 +56,17 @@ class CommentManager
                 foreach ($datas2 as $data2) {
                     ?>
 
-                    <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
-                            :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date']))?></div>
-                    <form method="post" action="?c=delete" style="display: inline">
-                        <input type="text" name="idComment" value="<?=$data['id']?>" style="display: none">
-                        <input type="submit" name="deleteComment" value="❌" title="Supprimer">
-                    </form>
-                    <br>
-                    <div class="comment"><?= $data['content'] ?></div>
-                    <br>
+                    <div class="commentContent">
+                        <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
+                                :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
+                        <form method="post" action="?c=delete" style="display: inline">
+                            <input type="text" name="idComment" value="<?= $data['id'] ?>" style="display: none">
+                            <input type="submit" name="deleteComment" value="❌" title="Supprimer">
+                        </form>
+                        <br>
+                        <div class="comment"><?= $data['content'] ?></div>
+                        <br>
+                    </div>
                     </div>
                     <?php
                 }
@@ -72,10 +74,10 @@ class CommentManager
             }
             if (!isset($_GET['picture'])) {
                 if ($select->rowCount() == 5) {
-                    echo '<a href="?c=picture&id='.$id.'">Voir plus de commentaires ⬇</a><br><br>';
+                    echo '<a href="?c=picture&id=' . $id . '">Voir plus de commentaires ⬇</a><br><br>';
                 }
-                if ($select->rowCount() >= 6){
-                    echo '<a href="?c=picture&id='.$id.'" style="display: none">Voir plus de commentaires ⬇</a>';
+                if ($select->rowCount() >= 6) {
+                    echo '<a href="?c=picture&id=' . $id . '" style="display: none">Voir plus de commentaires ⬇</a>';
                 }
             }
 
