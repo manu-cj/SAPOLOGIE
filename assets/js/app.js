@@ -31,5 +31,11 @@ hideCharacter.addEventListener("click", ()=> {
 character.addEventListener("click", ()=> {
     character.style.display = 'none';
     document.querySelector('#characters').style.display = ''
-    hideCharacter.style.display = 'none';
+    hideCharacter.style.display = '';
 })
+
+function hideElement($show, $hide, $hide2) {
+    $hide.style.display = 'none';
+    $show.style.display = '';
+    $hide2.style.display = '';
+}

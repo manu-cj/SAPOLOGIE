@@ -64,8 +64,8 @@ class CharacterManager
 
         if ($select->execute()) {
             ?>
-            <h1 id="character">Les Personnages ⬇</h1>
-            <h1 id="hide-character">Cacher</h1>
+            <h1 id="character" style="display: none">Les Personnages ⬇</h1>
+            <h1 id="hide-character" >Cacher</h1>
             <div id="characters">
             <?php
             $datas = $select->fetchAll();
