@@ -55,14 +55,22 @@ class CommentManager
                 $datas2 = $select2->fetchAll();
                 foreach ($datas2 as $data2) {
                     ?>
-
                     <div class="commentContent">
                         <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
                                 :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
-                        <form method="post" action="?c=delete" style="display: inline">
-                            <input type="text" name="idComment" value="<?= $data['id'] ?>" style="display: none">
-                            <input type="submit" name="deleteComment" value="❌" title="Supprimer">
-                        </form>
+                        <?php
+                        if (isset($_SESSION['user'])) {
+                            if ($_SESSION['user'] === $data['user_fk']) {
+                                ?>
+                                <form method="post" action="?c=delete" style="display: inline">
+                                    <input type="text" name="idComment" value="<?= $data['id'] ?>"
+                                           style="display: none">
+                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer">
+                                </form>
+                                <?php
+                            }
+                        }
+                        ?>
                         <br>
                         <div class="comment"><?= $data['content'] ?></div>
                         <br>

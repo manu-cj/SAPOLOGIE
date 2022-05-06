@@ -65,41 +65,44 @@ class CharacterManager
 
         if ($select->execute()) {
             ?>
-            <h1 id="character" style="display: none">Les Personnages ⬇</h1>
-            <h1 id="hide-character" >Cacher</h1>
-            <div id="characters">
+
+
             <?php
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
+                    <button style="display: inline" id="updateCharacter">📝</button>
                     <button id="previous" style="display: none"> ⇦</button>
-                    <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post" id="formUpdateCharacter" style="display: none">
+                    <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post"
+                          id="formUpdateCharacter" style="display: none">
                         <table>
                             <tr>
                                 <td><label for="name">Nom du personnage :</label></td>
-                                <td><input type="text" name="name" id="name" value="<?=$data['character_name']?>" required></td>
+                                <td><input type="text" name="name" id="name" value="<?= $data['character_name'] ?>"
+                                           required></td>
                             </tr>
 
                             <tr>
                                 <td><label for="serveur">Nom du serveur :</label></td>
-                                <td><input type="text" name="serveur" id="serveur" value="<?=$data['server_name']?>" required></td>
+                                <td><input type="text" name="serveur" id="serveur" value="<?= $data['server_name'] ?>"
+                                           required></td>
                             </tr>
                             <input type="text" name="id" value="<?= $data['id'] ?>" style="display: none">
 
                         </table>
                         <input type="submit" name="update" value=" ↻" title="actualiser">
                     </form>
-
-                    <div class="character <?= $data['classe'] ?>">
-                        <h1 class="name"><?= $data['character_name'] ?></h1>
-                        <h3 class="classe"><?= $data['classe'] ?></h3>
-                        <h3 class="server"><?= $data['server_name'] ?></h3>
-                    </div>
-                    <button style="display: inline" id="updateCharacter">📝</button>
-                    </div>
-
                     <?php
+                }
+                ?>
+                <div class="character <?= $data['classe'] ?>">
+                    <h1 class="name"><?= $data['character_name'] ?></h1>
+                    <h3 class="classe"><?= $data['classe'] ?></h3>
+                    <h3 class="server"><?= $data['server_name'] ?></h3>
+                </div>
+                <?php
+                if (isset($_SESSION['user'])) {
                     if ($data['user_fk'] === $_SESSION['user']['id']) {
                         ?>
                         <h1 id="sendPicture">Ajouter une image ⬇</h1>
@@ -138,7 +141,6 @@ class CharacterManager
                     }
                 }
             }
-
         }
     }
 
@@ -233,8 +235,7 @@ class CharacterManager
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
             }
-        }
-        else {
+        } else {
             $alert = [];
             $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
@@ -244,7 +245,8 @@ class CharacterManager
         }
     }
 
-    public static function updateCharacter(Character $character, $id) {
+    public static function updateCharacter(Character $character, $id)
+    {
         $update = Connect::getPDO()->prepare("UPDATE aiu12_character SET character_name = :character_name, server_name = :server_name
                                                     WHERE id = :id");
         $update->bindValue(':character_name', $character->getCharacterName());
@@ -255,15 +257,14 @@ class CharacterManager
             $alert[] = '<div class="alert-succes">Le personnage a été mis à jour !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id='.$id);
+                header('LOCATION: ?c=character&id=' . $id);
             }
-        }
-        else {
+        } else {
             $alert = [];
             $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id='.$id);
+                header('LOCATION: ?c=character&id=' . $id);
             }
         }
     }

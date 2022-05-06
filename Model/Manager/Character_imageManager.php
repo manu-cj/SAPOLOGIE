@@ -22,10 +22,11 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <div><h3><?= $data2['username'] ?></h3></div>
+                            <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
 
-                            <form method="post" action="?c=picture&id=<?=$id?>&a=update-picture-description" style="display: none" class="updateDescription">
+                            <form method="post" action="?c=picture&id=<?= $id ?>&a=update-picture-description"
+                                  style="display: none" class="updateDescription">
                                 <select name="visibility">
                                     <optgroup label="Public">
                                         <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
@@ -37,12 +38,14 @@ class Character_imageManager
                                         </option>
                                     </optgroup>
                                 </select>
-                                <input type="text" name="description" value="<?=$data['description']?>">
-                                <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
+                                <br>
+                                <textarea name="description" cols="45" rows="10"><?= $data['description'] ?></textarea>
+                                <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
                                 <input type="submit" name="updateDescription" value="▶">
-                            </form>     <button style="display: inline" id="update">📝</button>
+                            </form>
+                            <button style="display: inline" id="update">📝</button>
                             <form method="post" action="?c=delete" style="display: inline">
-                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
+                                <input type="text" name="filename" value="<?= $data['image'] ?>" style="display: none">
                                 <input type="submit" name="deletePicture" value="❌" title="Supprimer">
                             </form>
                             <br>
@@ -91,29 +94,23 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <h3><?= $data2['username'] ?></h3>
+                            <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
-                            <form method="post" action="?c=picture&id=<?=$data['user_fk']?>&a=update-picture-description" style="display: none" class="updateDescription">
-                                <select name="visibility">
-                                    <optgroup label="Public">
-                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Profil">
-                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
-                                            d'actualité
-                                        </option>
-                                    </optgroup>
-                                </select>
-                                <input type="text" name="description" value="<?=$data['description']?>">
-                                <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
-                                <input type="submit" name="updateDescription" value="▶">
-                            </form>
-                            <button style="display: inline" id="update">📝</button>
-                            <form method="post" action="?c=delete">
-                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
-                                <input type="submit" name="deletePicture" value="❌" title="Supprimer">
-                            </form>
+                            <br>
+                            <br>
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user'] === $data['user_fk']) {
+                                    ?>
+                                    <form method="post" action="?c=delete">
+                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                               style="display: none">
+                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
@@ -163,30 +160,25 @@ class Character_imageManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        ?> <div class="pictureCharacter">
-                            <h3 style="display: none"><?=$data2['username']?></h3>
-                            <div class="description" style="display: inline"><?=$data['description'] ?></div>
-                            <form method="post" action="?c=picture&id=<?=$data['user_fk']?>&a=update-picture-description" style="display: none" class="updateDescription">
-                                <select name="visibility">
-                                    <optgroup label="Public">
-                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Profil">
-                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
-                                            d'actualité
-                                        </option>
-                                    </optgroup>
-                                </select>
-                                <input type="text" name="description" value="<?=$data['description']?>">
-                                <input type="number" name="id" value="<?=$data['id']?>" style="display: none">
-                                <input type="submit" name="updateDescription" value="▶">
-                            </form>
-                            <button style="display: inline" id="update">📝</button>
-                            <form method="post" action="?c=delete">
-                                <input type="text" name="filename" value="<?=$data['image']?>" style="display: none">
-                                <input type="submit" name="deletePicture" value="❌" title="Supprimer">
-                            </form>
+                        ?>
+                        <div class="pictureCharacter">
+                            <h3 style="display: none"><?= $data2['username'] ?></h3>
+                            <div class="description" style="display: inline"><?= $data['description'] ?></div>
+                            <br>
+                            <br>
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user'] === $data['user_fk']) {
+                                    ?>
+                                    <form method="post" action="?c=delete">
+                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                               style="display: none">
+                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
@@ -194,10 +186,13 @@ class Character_imageManager
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
-                                <form method="post" action="?c=character&a=comment&id=<?=$data['character_fk']?>">
-                                    <input type="number" name="userFk" value="<?=$_SESSION['user']['id']?>" style="display: none">
-                                    <input type="number" name="characterImageFk" value="<?=$data['id']?>" style="display: none">
-                                    <input type="text" name="comment" placeholder="Ecrire un commentaire" style="display: inline">
+                                <form method="post" action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                    <input type="number" name="userFk" value="<?= $_SESSION['user']['id'] ?>"
+                                           style="display: none">
+                                    <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
+                                           style="display: none">
+                                    <input type="text" name="comment" placeholder="Ecrire un commentaire"
+                                           style="display: inline">
                                     <input type="submit" name="send" value="▶">
                                 </form>
                                 <?php
@@ -213,7 +208,8 @@ class Character_imageManager
         }
     }
 
-    public static function deletePicture($picture) {
+    public static function deletePicture($picture)
+    {
         $delete = Connect::getPDO()->prepare("Delete  From aiu12_character_image WHERE image = :image");
         $delete->bindValue(':image', $picture);
 
@@ -227,7 +223,8 @@ class Character_imageManager
         }
     }
 
-    public static function updatePictureDescription(Character_image $description, int $id) {
+    public static function updatePictureDescription(Character_image $description, int $id)
+    {
         $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description, view_fk = :view_fk WHERE id = :id");
         $update->bindValue(':description', $description->getDescription());
         $update->bindValue(':view_fk', $description->getViewFk());
@@ -238,7 +235,7 @@ class Character_imageManager
             $alert[] = '<div class="alert-succes">Description mise à jour !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=picture&id='.$id);
+                header('LOCATION: ?c=picture&id=' . $id);
             }
         }
 
