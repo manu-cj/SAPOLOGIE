@@ -122,95 +122,131 @@ class UserManager extends User
             ?>
             <h1 class="showUserData">Information du compte 🔽</h1>
             <h1 class="hideUserData" style="display: none">Information du compte 🔼</h1>
-                <?php
-                foreach ($datas as $data) {
-                    ?>
-                        <div class="userData" style="display: none">
-                    <h3 class="usernameData" style="display: inline">Nom d'utilisateur : <?=ucfirst($data['username']) ?></h3>
-                            <button class="changeUsernameButton">📝</button>
-                            <br>
-                            <form action="?c=profil&a=update-profil" method="post" id="formUsername" style="display: none">
-                                <table>
-                                    <tr>
-                                        <td><label for="username">Nom d'utilisateur :</label></td>
-                                        <td><input type="text" name="username" id="username" value="<?=$data['username']?>" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="submit" name="changeUsername" value="Confirmer" required></td>
-                                    </tr>
-                                </table>
-                            </form>
-                    <h3 class="mailData" style="display: inline">Adresse e-mail : ****<?= substr($data['mail'], -11)?></h3>
-                            <button class="changeMailButton">📝</button>
-                            <br>
-                            <form action="?c=profil&a=update-profil" method="post" id="formMail" style="display: none">
-                                <table>
-                                    <tr>
-                                        <td><label for="mail">Adresse e-mail :</label></td>
-                                        <td><input type="email" name="mail" id="mail" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="submit" name="changeMail" value="Confirmer" required></td>
-                                    </tr>
-                                </table>
-                            </form>
-                    <h3 class="passwordData" style="display: inline">Mot de passe : *********</h3>
-                            <button class="changePasswordButton">📝</button>
-                            <form action="?c=profil&a=update-profil" method="post" id="formPassword" style="display: none">
-                                <table>
-                                    <tr>
-                                        <td><label for="password">Mot de passe :</label></td>
-                                        <td><input type="password" name="password" id="password" value="<?=$data['mail']?>" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="password-repeat">Password-repeat :</label></td>
-                                        <td><input type="password" name="password-repeat" id="password-repeat" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="submit" name="changePassword" value="Confirmer" required></td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </div>
-
-                    <?php
-                }
+            <?php
+            foreach ($datas as $data) {
                 ?>
+                <div class="userData" style="display: none">
+                    <h3 class="usernameData" style="display: inline">Nom d'utilisateur
+                        : <?= ucfirst($data['username']) ?></h3>
+                    <button class="changeUsernameButton">📝</button>
+                    <br>
+                    <form action="?c=profil&a=update-profil" method="post" id="formUsername" style="display: none">
+                        <table>
+                            <tr>
+                                <td><label for="username">Nom d'utilisateur :</label></td>
+                                <td><input type="text" name="username" id="username" value="<?= $data['username'] ?>"
+                                           required></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="changeUsername" value="Confirmer" required></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <h3 class="mailData" style="display: inline">Adresse e-mail :
+                        ****<?= substr($data['mail'], -11) ?></h3>
+                    <button class="changeMailButton">📝</button>
+                    <br>
+                    <form action="?c=profil&a=update-profil" method="post" id="formMail" style="display: none">
+                        <table>
+                            <tr>
+                                <td><label for="mail">Adresse e-mail :</label></td>
+                                <td><input type="email" name="mail" id="mail" required></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="changeMail" value="Confirmer" required></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <h3 class="passwordData" style="display: inline">Mot de passe : *********</h3>
+                    <button class="changePasswordButton">📝</button>
+                    <form action="?c=profil&a=update-profil" method="post" id="formPassword" style="display: none">
+                        <table>
+                            <tr>
+                                <td><label for="password">Mot de passe :</label></td>
+                                <td><input type="password" name="password" id="password" required></td>
+                            </tr>
+                            <tr>
+                                <td><label for="newPassword">Nouveau Mot de passe :</label></td>
+                                <td><input type="password" name="newPassword" id="newPassword" required></td>
+                            </tr>
+                            <tr>
+                                <td><label for="password-repeat">Repetez le nouveau mot de passe :</label></td>
+                                <td><input type="password" name="password-repeat" id="password-repeat" required></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" name="changePassword" value="Confirmer" required></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+                <?php
+            }
+            ?>
             <?php
         }
     }
 
-    public static function usernameUpdate(User $user, $id) {
+    public static function usernameUpdate(User $user, $id)
+    {
         $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET username = :username WHERE id = :id");
         $update->bindValue(':username', $user->getUsername());
         $update->bindValue(':id', $id);
         $alert = [];
-        if ($update->execute()){
+        if ($update->execute()) {
             $alert[] = '<div class="alert-error">Le nom d\'utilisateur a été mis à jour !</div>';
             $_SESSION['alert'] = $alert;
-            header('LOCATION: ?c=profil&id='.$id);
-        }
-        else {
+            header('LOCATION: ?c=profil&id=' . $id);
+        } else {
             $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
             $_SESSION['alert'] = $alert;
-            header('LOCATION: ?c=profil&id='.$id);
+            header('LOCATION: ?c=profil&id=' . $id);
         }
     }
 
-    public static function mailUpdate(User $user, $id) {
+    public static function mailUpdate(User $user, $id)
+    {
         $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET mail = :mail WHERE id = :id");
         $update->bindValue(':mail', $user->getMail());
         $update->bindValue(':id', $id);
         $alert = [];
-        if ($update->execute()){
+        if ($update->execute()) {
             $alert[] = '<div class="alert-error">L\'adresse mail a été mis à jour !</div>';
             $_SESSION['alert'] = $alert;
-            header('LOCATION: ?c=profil&id='.$id);
-        }
-        else {
+            header('LOCATION: ?c=profil&id=' . $id);
+        } else {
             $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
             $_SESSION['alert'] = $alert;
-            header('LOCATION: ?c=profil&id='.$id);
+            header('LOCATION: ?c=profil&id=' . $id);
         }
     }
+
+    public static function passwordUpdate(User $user, $id, $password)
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE id = :id");
+        $get->bindValue(':id', $id);
+        if ($get->execute()) {
+            $datas = $get->fetchAll();
+            foreach ($datas as $data) {
+                if (password_verify($password, $data['password'])) {
+                    $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET password = :password WHERE id = :id");
+                    $update->bindValue(':password', $user->getPassword());
+                    $update->bindValue(':id', $id);
+                    $alert = [];
+                    if ($update->execute()) {
+                        $alert[] = '<div class="alert-error">Le mot de passe a été mis à jour !</div>';
+                    } else {
+                        $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
+                    }
+
+                }
+                else {
+                    $alert[] = '<div class="alert-error">Le mot de passe ne correspond pas, aucun changement n\'a été effectué !</div>';
+                }
+                $_SESSION['alert'] = $alert;
+                header('LOCATION: ?c=profil&id=' . $id);
+            }
+        }
+    }
+
 }

@@ -79,21 +79,26 @@ class UserController extends AbstractController
             }
         }
         if ($this->getPost('changePassword')) {
-            $password = ($_POST['password']);
+            $password = htmlentities($_POST['password']);
+            $newPassword = htmlentities($_POST['newPassword']);
             $passwordRepeat = trim(strip_tags($_POST['password-repeat']));
+            $id = htmlentities($_SESSION['user']['id']);
             $alert = [];
 
             if (empty($password)) {
                 $alert[] = '<div class="alert-error">Un des champs est vide</div>';
             }
+            if (empty($newPassword)) {
+                $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+            }
             if (empty($passwordRepeat)) {
                 $alert[] = '<div class="alert-error">Un des champs est vide</div>';
             }
-            if (strlen($password) <= 5 || strlen($password) >= 255) {
+            if (strlen($newPassword) <= 5 || strlen($newPassword) >= 255) {
                 $alert[] = '<div class="alert-error">Le mot de passe doit contenir entre 5 et 255 caractères !</div>';
             }
 
-            if ($password !== $passwordRepeat) {
+            if ($newPassword !== $passwordRepeat) {
                 $alert[] = '<div class="alert-error">Les mots de passe ne correspondent pas !</div>';
             }
             if (count($alert) > 0) {
@@ -103,8 +108,9 @@ class UserController extends AbstractController
             else {
                 $user = new User();
                 $user
-                    ->setPassword(password_hash($password, PASSWORD_DEFAULT))
+                    ->setPassword(password_hash($newPassword, PASSWORD_DEFAULT))
                 ;
+                UserManager::passwordUpdate($user, $id, $password);
             }
         }
     }
