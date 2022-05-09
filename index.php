@@ -4,13 +4,7 @@ use App\Controller\ErrorController\ErrorController;
 
 session_start();
 require __DIR__ . '/require.php';
-if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
-    $errors = $_SESSION['alert'];
-    unset($_SESSION['alert']);
-    foreach ($errors as $error) { ?>
-        <div class="alert alert-error"><?= $error ?></div> <?php
-    }
-}
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -77,7 +71,13 @@ if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
     </div>
 </div>
 <?php
-
+if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
+    $errors = $_SESSION['alert'];
+    unset($_SESSION['alert']);
+    foreach ($errors as $error) { ?>
+        <div class="alert alert-error"><?= $error ?></div> <?php
+    }
+}
 
 $page = isset($_GET['c']) ? Routeur::secureUrl($_GET['c']) : 'home';
 $action = isset($_GET['a']) ? Routeur::secureUrl($_GET['a']) : 'index';

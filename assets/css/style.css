@@ -260,3 +260,45 @@ input[name="comment"] {
 button:hover {
     cursor: pointer;
 }
+
+.alert-error {
+    background-color: #c95252;
+
+}
+.alert-succes {
+    background-color: #c95252;
+}
+
+.alert {
+    width: 80%;
+    text-align: center;
+    border-radius: 5px;
+    animation-name: alert;
+    animation-duration: 2s;
+}
+
+@keyframes alert {
+    0% {
+        margin-top: 5px;
+       transform: rotate(1deg);
+    }
+    10% {
+        margin-top: 10px;
+        transform:  rotate(-1deg);
+    }
+    50% {
+        transform: rotate(1deg);
+    }
+    60% {
+        transform: rotate(-1deg);
+    }
+    70% {
+        transform: rotate(1deg);
+    }
+    80% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(1deg);
+    }
+}

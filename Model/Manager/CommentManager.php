@@ -62,12 +62,12 @@ class CommentManager
                                 :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
                         <?php
                         if (isset($_SESSION['user'])) {
-                            if ($_SESSION['user'] === $data['user_fk']) {
+                            if ($_SESSION['user']['id'] === $data['user_fk']) {
                                 ?>
                                 <form method="post" action="?c=delete" style="display: inline">
                                     <input type="text" name="idComment" value="<?= $data['id'] ?>"
                                            style="display: none">
-                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer">
+                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer" style="cursor: pointer">
                                 </form>
                                 <?php
                             }

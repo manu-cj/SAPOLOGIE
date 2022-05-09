@@ -150,6 +150,13 @@ if (faUser) {
     })
 }
 
+let alert = document.querySelector('.alert');
+if (alert) {
+    setTimeout(()=>{
+        alert.remove();
+    }, 5000)
+}
+
 
 
 
