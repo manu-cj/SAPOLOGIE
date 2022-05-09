@@ -8,10 +8,19 @@ class User_roleManager
         $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user_role WHERE user_fk = :user_fk");
         $get->bindValue(':user_fk', $_SESSION['user']['id']);
         if ($get->execute()) {
+
             $datas = $get->fetchAll();
             foreach ($datas as $data) {
-                $_SESSION['role'] = $data['role_fk'];
-                echo $_SESSION['role'];
+                $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_role WHERE id = :id");
+                $get->bindValue(':id', $data['role_fk']);
+                if ($get->execute()) {
+                    $datas2 = $get->fetchAll();
+                    foreach ($datas2 as $data2) {
+                        $_SESSION['role'] = $data2;
+                    }
+                }
+
+                echo $_SESSION['role']['role'];
             }
         }
     }

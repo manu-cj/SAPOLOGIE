@@ -8,7 +8,7 @@ class SearchController extends AbstractController
     {
         $this->render('public/search');
         if (isset($_POST['search'])) {
-            header("Location:?c=search&result=".$_POST['user']."");
+            header("Location:?c=search&result=".$_POST['searchBar']."");
         }
         if (isset($_GET['result'])) {
             if ($_GET['result'] !== '') {

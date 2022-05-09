@@ -17,4 +17,8 @@ abstract class AbstractController
     public static function getSession($sessionName) {
         return isset($_SESSION[$sessionName]);
     }
+
+    public static function getRole($nameRole) {
+        return $_SESSION['role']['role'] === $nameRole;
+    }
 }

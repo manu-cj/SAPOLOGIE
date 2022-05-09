@@ -58,12 +58,12 @@ if (previous) {
 }
 if (showUserData) {
     showUserData.addEventListener("click", () => {
-        hideElement(showUserData, hideUserData,userData);
+        hideElement(showUserData, hideUserData, userData);
     })
 }
 if (hideUserData) {
     hideUserData.addEventListener("click", () => {
-        showElement(showUserData, hideUserData,userData);
+        showElement(showUserData, hideUserData, userData);
     })
 }
 let changeUsernameButton = document.querySelector('.changeUsernameButton');
@@ -87,16 +87,31 @@ if (changePasswordButton, changeMailButton, changeUsernameButton) {
         formUsername.style.display = 'initial';
         formMail.style.display = 'none';
         formPassword.style.display = 'none';
+        if (formDeleteAccount, deleteCheck, deleteAccount) {
+            formDeleteAccount.style.display = 'none';
+            deleteCheck.style.display = 'none';
+            deleteAccount.style.display = 'none';
+        }
     })
     changeMailButton.addEventListener("click", () => {
         formMail.style.display = 'initial';
         formUsername.style.display = 'none';
         formPassword.style.display = 'none';
+        if (formDeleteAccount, deleteCheck, deleteAccount) {
+            formDeleteAccount.style.display = 'none';
+            deleteCheck.style.display = 'none';
+            deleteAccount.style.display = 'none';
+        }
     })
     changePasswordButton.addEventListener("click", () => {
         formPassword.style.display = 'initial';
         formMail.style.display = 'none';
         formUsername.style.display = 'none';
+        if (formDeleteAccount, deleteCheck, deleteAccount) {
+            formDeleteAccount.style.display = 'none';
+            deleteCheck.style.display = 'none';
+            deleteAccount.style.display = 'none';
+        }
     })
 }
 if (deleteAccount) {
@@ -106,15 +121,37 @@ if (deleteAccount) {
     })
 }
 if (deleteCheck) {
-    no.addEventListener("click", ()=> {
+    no.addEventListener("click", () => {
         deleteAccount.style.display = 'initial';
         deleteCheck.style.display = 'none';
     })
-    yes.addEventListener("click", ()=> {
+    yes.addEventListener("click", () => {
         formDeleteAccount.style.display = 'initial';
         deleteCheck.style.display = 'none';
     })
 }
+
+let faUser = document.querySelector('.fa-user-alt');
+
+if (faUser) {
+    let clic = 1;
+    faUser.addEventListener("click", () => {
+        document.querySelector('#profil').style.display = 'block';
+    })
+    document.querySelector('#profil').addEventListener("mouseover", () => {
+        console.log('hello world');
+        document.querySelector('#profil').style.display = 'block';
+    })
+
+    document.querySelector('#profil').addEventListener("mouseout", () => {
+        setTimeout(()=> {
+            document.querySelector('#profil').style.display = 'none';
+        }, 2500)
+    })
+}
+
+
+
 
 
 

@@ -7,8 +7,10 @@ class HomeController extends AbstractController
     {
         $this->render('public/home');
         Character_imageManager::getCharacterPictureForHome();
-        if (isset($_SESSION['user'])) {
+
+        if (isset($_GET['getRole'])) {
             User_roleManager::getUserRole();
+            header('Location: ?c=home');
         }
         if (!isset($_SESSION['role'])) {
             if (isset($_SESSION['user'])) {

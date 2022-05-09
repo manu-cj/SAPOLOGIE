@@ -33,27 +33,34 @@ class CharacterManager
         $select->bindValue(':user_fk', $idUser);
         if ($select->execute()) {
             $datas = $select->fetchAll();
-            foreach ($datas as $data) {
-                ?>
-                <br>
-
-                <form method="post" action="?c=delete" style="display: inline">
-                    <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
-                    <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
-                </form>
-                <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
-                    <div class="character <?= $data['classe'] ?>">
-                        <h1
-                                class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
-
-                        <h3 class="classe"><?= $data['classe'] ?></h3>
-                        <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
-
-                    </div>
-                </a>
-
+            ?>
+            <div class="all-character">
                 <?php
-            }
+                foreach ($datas as $data) {
+                    ?>
+                    <br>
+                    <div class="character <?= $data['classe'] ?>">
+                        <form method="post" action="?c=delete" style="display: inline">
+                            <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
+                            <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
+                        </form>
+                        <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
+
+                            <h1
+                                    class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
+
+                            <h3 class="classe"><?= $data['classe'] ?></h3>
+                            <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
+
+
+                        </a>
+                    </div>
+
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
 
         }
     }
@@ -66,8 +73,6 @@ class CharacterManager
 
         if ($select->execute()) {
             ?>
-
-
             <?php
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
@@ -180,13 +185,13 @@ class CharacterManager
                 <?php
                 foreach ($datas as $data) {
                     ?>
-                    <a href="?c=character&id=<?= $data['id'] ?>">
-                        <div class="character <?= $data['classe'] ?>">
+                    <div class="character <?= $data['classe'] ?>">
+                        <a href="?c=character&id=<?= $data['id'] ?>">
                             <h1 class="name"><?= $data['character_name'] ?></h1>
                             <h3 class="classe"><?= $data['classe'] ?></h3>
                             <h3 class="server"><?= $data['server_name'] ?></h3>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                     <?php
                 }
                 ?>
@@ -207,18 +212,21 @@ class CharacterManager
             <div class="all-classe">
 
                 <?php
-                foreach ($datas as $data) {
-                    ?>
-                    <a href="?c=character&id=<?= $data['id'] ?>">
-                        <div class="character <?= $data['classe'] ?>">
-                            <h1 class="name"><?= $data['character_name'] ?></h1>
-                            <h3 class="classe"><?= $data['classe'] ?></h3>
-                            <h3 class="server"><?= $data['server_name'] ?></h3>
-                        </div>
-                    </a>
-                    <?php
-                }
+                foreach ($datas
+
+                as $data) {
                 ?>
+                <div class="character <?= $data['classe'] ?>">
+                        <h1 class="name"><?= $data['character_name'] ?></h1>
+                        <h3 class="classe"><?= $data['classe'] ?></h3>
+                        <h3 class="server"><?= $data['server_name'] ?></h3>
+                    </div>
+                    </a>
+
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
             <?php
         }

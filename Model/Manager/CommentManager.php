@@ -44,9 +44,11 @@ class CommentManager
 
 
         if ($select->execute()) {
+
             $datas = $select->fetchAll();
             ?>
             <div class="allDataComment">
+
             <?php
             foreach ($datas as $data) {
                 $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
@@ -75,7 +77,7 @@ class CommentManager
                         <div class="comment"><?= $data['content'] ?></div>
                         <br>
                     </div>
-                    </div>
+
                     <?php
                 }
                 $id = $data['character_image_fk'];
@@ -88,6 +90,12 @@ class CommentManager
                     echo '<a href="?c=picture&id=' . $id . '" style="display: none">Voir plus de commentaires ⬇</a>';
                 }
             }
+            ?>
+            </div>
+            <br>
+
+<?php
+
 
         }
     }
