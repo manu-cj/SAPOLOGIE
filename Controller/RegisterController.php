@@ -9,9 +9,9 @@ class RegisterController extends AbstractController
         $this->render('register/register');
         if ($this->getPost('send')) {
 
-            $username = trim(htmlentities($_POST['username']));
+            $username = strtolower(trim(htmlentities($_POST['username'])));
             $mail = trim(htmlentities(($_POST['mail'])));
-            $password = ($_POST['password']);
+            $password = htmlentities($_POST['password']);
             $passwordRepeat = trim(strip_tags($_POST['password-repeat']));
             $alert = [];
             if (empty($username)) {

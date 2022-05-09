@@ -31,7 +31,7 @@ class UserController extends AbstractController
 
     public function updateProfil() {
         if ($this->getPost('changeUsername')) {
-            $username = trim(htmlentities($_POST['username']));
+            $username = strtolower(trim(htmlentities($_POST['username'])));
             $id = htmlentities($_SESSION['user']['id']);
             $alert = [];
             if (empty($username)) {
@@ -50,6 +50,7 @@ class UserController extends AbstractController
                     ->setUsername($username)
                     ;
                 UserManager::getUsernameExist($username);
+                UserManager::usernameUpdate($user, $id);
             }
         }
         if ($this->getPost('changeMail')){
@@ -74,6 +75,7 @@ class UserController extends AbstractController
                     ->setMail($mail)
                     ;
                 UserManager::getMailExist($mail);
+                UserManager::mailUpdate($user, $id);
             }
         }
         if ($this->getPost('changePassword')) {

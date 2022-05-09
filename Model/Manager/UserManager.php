@@ -32,7 +32,9 @@ class UserManager extends User
             $alert[] = '<div class="alert-error">Une erreur c\est produite lors de l\'inscription !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=register');
+
+                $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                header('Location: ' . $referer);
             }
         }
     }
@@ -57,7 +59,8 @@ class UserManager extends User
                     $alert[] = '<div class="alert-error">Adresse e-mail ou mot de passe invalide !</div>';
                     if (count($alert) > 0) {
                         $_SESSION['alert'] = $alert;
-                        header('LOCATION: ?c=login');
+                        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                        header('Location: ' . $referer);
                     }
                 }
             }
@@ -82,7 +85,8 @@ class UserManager extends User
                     $alert[] = '<div class="alert-error">L\'adresse e-mail est déjà utilisé !</div>';
                     if (count($alert) > 0) {
                         $_SESSION['alert'] = $alert;
-                        header('LOCATION: ?c=register');
+                        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                        header('Location: ' . $referer);
                     }
                 }
             }
@@ -122,7 +126,7 @@ class UserManager extends User
                 foreach ($datas as $data) {
                     ?>
                         <div class="userData" style="display: none">
-                    <h3 class="usernameData" style="display: inline">Nom d'utilisateur :<?= $data['username'] ?></h3>
+                    <h3 class="usernameData" style="display: inline">Nom d'utilisateur : <?=ucfirst($data['username']) ?></h3>
                             <button class="changeUsernameButton">📝</button>
                             <br>
                             <form action="?c=profil&a=update-profil" method="post" id="formUsername" style="display: none">
@@ -136,14 +140,14 @@ class UserManager extends User
                                     </tr>
                                 </table>
                             </form>
-                    <h3 class="mailData" style="display: inline">Adresse e-mail :<?= $data['mail'] ?></h3>
+                    <h3 class="mailData" style="display: inline">Adresse e-mail : ****<?= substr($data['mail'], -11)?></h3>
                             <button class="changeMailButton">📝</button>
                             <br>
                             <form action="?c=profil&a=update-profil" method="post" id="formMail" style="display: none">
                                 <table>
                                     <tr>
                                         <td><label for="mail">Adresse e-mail :</label></td>
-                                        <td><input type="email" name="mail" id="mail" value="<?=$data['mail']?>" required></td>
+                                        <td><input type="email" name="mail" id="mail" required></td>
                                     </tr>
                                     <tr>
                                         <td><input type="submit" name="changeMail" value="Confirmer" required></td>
@@ -173,6 +177,40 @@ class UserManager extends User
                 }
                 ?>
             <?php
+        }
+    }
+
+    public static function usernameUpdate(User $user, $id) {
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET username = :username WHERE id = :id");
+        $update->bindValue(':username', $user->getUsername());
+        $update->bindValue(':id', $id);
+        $alert = [];
+        if ($update->execute()){
+            $alert[] = '<div class="alert-error">Le nom d\'utilisateur a été mis à jour !</div>';
+            $_SESSION['alert'] = $alert;
+            header('LOCATION: ?c=profil&id='.$id);
+        }
+        else {
+            $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
+            $_SESSION['alert'] = $alert;
+            header('LOCATION: ?c=profil&id='.$id);
+        }
+    }
+
+    public static function mailUpdate(User $user, $id) {
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET mail = :mail WHERE id = :id");
+        $update->bindValue(':mail', $user->getMail());
+        $update->bindValue(':id', $id);
+        $alert = [];
+        if ($update->execute()){
+            $alert[] = '<div class="alert-error">L\'adresse mail a été mis à jour !</div>';
+            $_SESSION['alert'] = $alert;
+            header('LOCATION: ?c=profil&id='.$id);
+        }
+        else {
+            $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
+            $_SESSION['alert'] = $alert;
+            header('LOCATION: ?c=profil&id='.$id);
         }
     }
 }

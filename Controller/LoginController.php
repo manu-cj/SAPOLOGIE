@@ -8,7 +8,7 @@ class LoginController extends AbstractController
         $this->render('log/login');
         if ($this->getPost('send')) {
             $mail = trim(strip_tags(($_POST['mail'])));
-            $password = ($_POST['password']);
+            $password = htmlentities($_POST['password']);
             UserManager::ConnectUser($mail, $password);
         }
     }
