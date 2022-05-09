@@ -20,15 +20,14 @@ class UserManager extends User
         $insert->bindValue(':mail', $user->getMail());
         $insert->bindValue(':password', $user->getPassword());
         $insert->bindValue(':date', $date);
+        $alert = [];
         if ($insert->execute()) {
-            $alert = [];
             $alert[] = '<div class="alert-succes">Inscription réussi !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
             }
         } else {
-            $alert = [];
             $alert[] = '<div class="alert-error">Une erreur c\est produite lors de l\'inscription !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
@@ -178,6 +177,25 @@ class UserManager extends User
                             </tr>
                         </table>
                     </form>
+                    <br>
+                    <button id="deleteAccount">Supprimé le compte</button>
+                    <br>
+                    <div id="deleteCheck" style="display: none">
+                        <h2><b>Voulez-vous vraiment supprimer votre compte ?</b></h2>
+                        <button id="yes">Oui</button>
+                        <button id="no">Non</button>
+                    </div>
+                    <br>
+                    <form id="formDeleteAccount" method="post" action="?c=profil&a=delete-profil" style="display: none">
+                        <h2>Supprimer le compte :</h2>
+                        <tr>
+                            <td><label for="password">Veuillez entrer votre mot de passe :</label></td>
+                            <td><input type="password" name="password" id="password" required></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="deleteAccount" value="Supprimer le compte" required></td>
+                        </tr>
+                    </form>
                 </div>
 
                 <?php
@@ -239,8 +257,7 @@ class UserManager extends User
                         $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
                     }
 
-                }
-                else {
+                } else {
                     $alert[] = '<div class="alert-error">Le mot de passe ne correspond pas, aucun changement n\'a été effectué !</div>';
                 }
                 $_SESSION['alert'] = $alert;
@@ -249,4 +266,34 @@ class UserManager extends User
         }
     }
 
+    public static function deleteAccount($password, $id)
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE id = :id");
+        $get->bindValue(':id', $id);
+        if ($get->execute()) {
+            $alert = [];
+            $datas = $get->fetchAll();
+            foreach ($datas as $data) {
+                if (password_verify($password, $data['password'])) {
+                    $delete = Connect::getPDO()->prepare("DELETE FROM aiu12_user WHERE id = :id");
+                    $delete->bindValue(":id", $id);
+                    if ($delete->execute()) {
+                        $delete = Connect::getPDO()->prepare("DELETE FROM aiu12_character WHERE user_fk = :user_fk");
+                        $delete->bindValue(":user_fk", $id);
+                        $delete->execute();
+                        User_roleManager::deleteRole($id);
+                        $alert[] = '<div class="alert-error">Votre compte a été supprimé, nous espérons vous revoir un jour !</div>';
+                        $_SESSION['alert'] = $alert;
+                        header('LOCATION: ?c=logout');
+                    }
+                }
+                else {
+                    $alert[] = '<div class="alert-error">Le mot de passe est incorrecte !</div>';
+                    $_SESSION['alert'] = $alert;
+                    header('LOCATION: ?c=profil&id=' . $id);
+                }
+
+            }
+        }
+    }
 }

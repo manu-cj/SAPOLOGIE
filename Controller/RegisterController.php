@@ -55,6 +55,7 @@ class RegisterController extends AbstractController
                 UserManager::getMailExist($mail);
                 UserManager::getUsernameExist($username);
                 UserManager::addUser($user);
+                UserManager::ConnectUser($username, $password);
             }
         }
     }

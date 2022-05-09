@@ -76,6 +76,12 @@ let formUsername = document.querySelector('#formUsername');
 let formMail = document.querySelector('#formMail');
 let formPassword = document.querySelector('#formPassword');
 
+let deleteAccount = document.querySelector('#deleteAccount');
+let deleteCheck = document.querySelector('#deleteCheck');
+let formDeleteAccount = document.querySelector('#formDeleteAccount');
+let yes = document.querySelector('#yes');
+let no = document.querySelector('#no');
+
 if (changePasswordButton, changeMailButton, changeUsernameButton) {
     changeUsernameButton.addEventListener("click", () => {
         formUsername.style.display = 'initial';
@@ -91,6 +97,22 @@ if (changePasswordButton, changeMailButton, changeUsernameButton) {
         formPassword.style.display = 'initial';
         formMail.style.display = 'none';
         formUsername.style.display = 'none';
+    })
+}
+if (deleteAccount) {
+    deleteAccount.addEventListener("click", () => {
+        deleteCheck.style.display = 'initial';
+        deleteAccount.style.display = 'none';
+    })
+}
+if (deleteCheck) {
+    no.addEventListener("click", ()=> {
+        deleteAccount.style.display = 'initial';
+        deleteCheck.style.display = 'none';
+    })
+    yes.addEventListener("click", ()=> {
+        formDeleteAccount.style.display = 'initial';
+        deleteCheck.style.display = 'none';
     })
 }
 

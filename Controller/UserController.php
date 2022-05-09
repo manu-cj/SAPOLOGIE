@@ -16,12 +16,11 @@ class UserController extends AbstractController
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');
             }
-        }
-        else {
+        } else {
             $idUser = htmlentities($_GET['id']);
             CharacterManager::getCharacter($idUser);
-            if (isset($_SESSION['user'])){
-                if ($_GET['id'] === $_SESSION['user']['id']){
+            if (isset($_SESSION['user'])) {
+                if ($_GET['id'] === $_SESSION['user']['id']) {
                     $id = $_GET['id'];
                     UserManager::getDataUser($id);
                 }
@@ -29,7 +28,8 @@ class UserController extends AbstractController
         }
     }
 
-    public function updateProfil() {
+    public function updateProfil()
+    {
         if ($this->getPost('changeUsername')) {
             $username = strtolower(trim(htmlentities($_POST['username'])));
             $id = htmlentities($_SESSION['user']['id']);
@@ -42,18 +42,16 @@ class UserController extends AbstractController
             }
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=profil&id='.$id);
-            }
-            else {
+                header('LOCATION: ?c=profil&id=' . $id);
+            } else {
                 $user = new User();
                 $user
-                    ->setUsername($username)
-                    ;
+                    ->setUsername($username);
                 UserManager::getUsernameExist($username);
                 UserManager::usernameUpdate($user, $id);
             }
         }
-        if ($this->getPost('changeMail')){
+        if ($this->getPost('changeMail')) {
             $id = htmlentities($_SESSION['user']['id']);
             $mail = trim(htmlentities(($_POST['mail'])));
             $alert = [];
@@ -67,13 +65,11 @@ class UserController extends AbstractController
             }
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=profil&id='.$id);
-            }
-            else {
+                header('LOCATION: ?c=profil&id=' . $id);
+            } else {
                 $user = new User();
                 $user
-                    ->setMail($mail)
-                    ;
+                    ->setMail($mail);
                 UserManager::getMailExist($mail);
                 UserManager::mailUpdate($user, $id);
             }
@@ -103,13 +99,11 @@ class UserController extends AbstractController
             }
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=profil&id='.$id);
-            }
-            else {
+                header('LOCATION: ?c=profil&id=' . $id);
+            } else {
                 $user = new User();
                 $user
-                    ->setPassword(password_hash($newPassword, PASSWORD_DEFAULT))
-                ;
+                    ->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
                 UserManager::passwordUpdate($user, $id, $password);
             }
         }
@@ -150,24 +144,36 @@ class UserController extends AbstractController
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil&a=add-character');
-            }
-
-            else {
+            } else {
                 $character = new Character();
 
                 $character
                     ->setUserFk($userFk)
                     ->setCharacterName(ucfirst($name))
                     ->setClasse($classe)
-                    ->setServer($server)
-                ;
+                    ->setServer($server);
 
                 CharacterManager::addCharacter($character);
             }
-
-
         }
     }
+
+    public function deleteAccount()
+    {
+        if (isset($_SESSION['user'])) {
+            if ($this->getPost('deleteAccount')) {
+                $password = htmlentities($_POST['password']);
+                $id = $_SESSION['user']['id'];
+                UserManager::deleteAccount($password, $id);
+            }
+        }
+        else {
+            $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+            header('Location: ' . $referer);
+        }
+    }
+
+
 
 
 

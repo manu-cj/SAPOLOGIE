@@ -24,6 +24,9 @@ class Routeur
             case 'update-character':
                 $control->updateCharacter();
                 break;
+            case 'delete-profil':
+                $control->deleteAccount();
+                break;
         }
     }
 
