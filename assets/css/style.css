@@ -8,17 +8,31 @@
 
 body {
     width: 100%;
-    background-color: darkslategray;
+    background-color: #203134;
+    background-image:
+            radial-gradient(at 47% 33%, hsl(286.45, 25%, 74%) 0, transparent 59%),
+            radial-gradient(at 82% 65%, hsl(296.00, 8%, 35%) 0, transparent 55%);
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
+    position: relative;
+    margin-top: 150px;
+    z-index:2;
 }
 
 body a {
     text-decoration-line: none;
     color: beige;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index:1;
 }
 
 .menu {
@@ -32,6 +46,9 @@ body a {
     align-content: center;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background-color: rgba(0, 139, 129, 0.85);
 }
 
 #logo {
@@ -46,6 +63,30 @@ body a {
     margin-top: 2%;
     width: 33%;
     height: 100%;
+}
+.homeProfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+.home {
+    height: 100%;
+}
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home a{
+    height: 100%;
+    padding: 35px;
+    border-right: 1px #038f5b solid;
+    margin-left: 10px;
+}
+
+.home:hover {
+    background-color: #0d7549;
 }
 
 input[name="searchBar"] {
@@ -62,15 +103,21 @@ input[name="searchBar"] {
 .profil {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    padding: 35px;
+}
+.profil:hover {
+    background-color: #0d7549;
 }
 
 #profil {
+    width: 10%;
     display: none;
     float: right;
     background-color: #1fb06f;
     margin-right: 1%;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 #profil:hover {
@@ -81,7 +128,9 @@ input[name="searchBar"] {
     list-style-type: none;
     padding: 3%;
     text-align: center;
-    border: 0.5px solid #00c0c0;
+    border: 1px solid #00c0c0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 #profil li:hover {
@@ -96,26 +145,26 @@ input[name="searchBar"] {
     justify-content: end;
 }
 
-.menu a {
-
+.fa-home {
+    font-size: 2em;
 }
-
 .pictureCharacter {
     width: 75%;
-    border: beige 2px groove;
-    background-color: #009186;
+    border: 1px solid rgba(255, 255, 255, 0.125);
     border-bottom: none;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background-color: rgba(0, 139, 129, 0.34);
 }
 
 .pictureCharacter img {
     border-radius: 15px;
-    width: 90%;
 }
 
 .pictureCharacter a {
@@ -132,13 +181,15 @@ input[name="searchBar"] {
     width: 75%;
     border: beige 2px groove;
     background-color: #009186;
-    border-top: none;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: start;
     padding-left: 25%;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background-color: rgba(0, 139, 129, 0.18);
 }
 
 
@@ -315,7 +366,7 @@ button:hover {
 }
 
 .alert-succes {
-    background-color: #c95252;
+    background-color: #00a843;
 }
 
 .alert {
@@ -324,6 +375,17 @@ button:hover {
     border-radius: 5px;
     animation-name: alert;
     animation-duration: 2s;
+}
+
+p .fas {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+p .fas:hover {
+    animation-name: update;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes alert {
@@ -349,5 +411,14 @@ button:hover {
     }
     100% {
         transform: rotate(1deg);
+    }
+}
+@keyframes update {
+    0% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

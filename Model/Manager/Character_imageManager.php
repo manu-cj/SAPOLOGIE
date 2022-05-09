@@ -51,7 +51,7 @@ class Character_imageManager
                                         <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
                                         <input type="submit" name="updateDescription" value="▶">
                                     </form>
-                                    <button style="display: inline" id="update">📝</button>
+                                    <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
 
                                     <form method="post" action="?c=delete" style="display: inline">
                                         <input type="text" name="filename" value="<?= $data['image'] ?>"
@@ -85,6 +85,9 @@ class Character_imageManager
                         </div>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
+                        ?>
+                        <br>
+                        <?php
                     }
                 }
             }
@@ -153,7 +156,9 @@ class Character_imageManager
 
                         <?php
                         CommentManager::getLastComment($data['id'], 1);
-
+                        ?>
+                        <br>
+                        <?php
 
                     }
                 }
@@ -221,6 +226,9 @@ class Character_imageManager
                         </div>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
+                        ?>
+                        <br>
+                        <?php
                     }
                 }
             }

@@ -18,58 +18,56 @@ require __DIR__ . '/require.php';
     <title>W.O.S</title>
 </head>
 <body>
-<div class="menu">
-
-    <div id="logo"><a href="?c=home">W.O.S</a></div>
-    <div id="searchBar">
-        <form action="?c=search" method="post">
-            <input type="text" value="" name="searchBar" placeholder="recherche"/>
-            <input type="submit" name="search" value="🔎"/>
-        </form>
-    </div>
-    <div class="home">
-        <a href="?c=home">Accueil</a>
-        <a href="?c=contact">Contact</a>
-
-        <?php
-        if (!AbstractController::getSession('user')) {
-            ?>
-            <a href="?c=login">Se connecter</a>
-            <a href="?c=register">S'inscrire</a>
+<header>
+    <div class="menu">
+        <div id="logo"><a href="?c=home">W.O.S</a></div>
+        <div id="searchBar">
+            <form action="?c=search" method="post">
+                <input type="text" value="" name="searchBar" placeholder="recherche"/>
+                <input type="submit" name="search" value="🔎"/>
+            </form>
+        </div>
+        <div class="homeProfil">
+            <div class="home">
+                <a href="?c=home" title="Accueil"><i class="fas fa-home"></i></a>
+            </div>
             <?php
+            if (!AbstractController::getSession('user')) {
+                ?>
+                <a href="?c=login">Se connecter</a>
+                <a href="?c=register">S'inscrire</a>
+                <?php
+            }
+            ?>
+            <?php
+            if (AbstractController::getSession('user')) {
+            ?>
+            <div class="profil">
+                <ul><i class="fas fa-user-alt" title="menu"></i></ul>
+            </div>
+        </div>
+        <?php
         }
         ?>
     </div>
-
-    <?php
-    if (AbstractController::getSession('user')) {
-        ?>
-        <div class="profil">
-            <ul><i class="fas fa-user-alt"></i></ul>
-
-        </div>
-
-        <?php
-    }
-    ?>
-</div>
-<div class="profilMenu">
-    <div id="profil">
-        <nav>
-            <ul>
-                <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
-                <?php
-                if (AbstractController::getRole('admin')) {
-                    ?>
-                    <li><a href="?c=espace-admin">Espace-Admin</a></li>
+    <div class="profilMenu">
+        <div id="profil">
+            <nav>
+                <ul>
+                    <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                     <?php
-                }
-                ?>
-                <li><a href="?c=logout">Se déconnecter</a></li>
-            </ul>
-        </nav>
+                    if (AbstractController::getRole('admin')) {
+                        ?>
+                        <li><a href="?c=espace-admin">Espace-Admin</a></li>
+                        <?php
+                    }
+                    ?>
+                    <li><a href="?c=logout">Se déconnecter</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
+</header>
 <?php
 if (isset($_SESSION['alert']) && count($_SESSION['alert']) > 0) {
     $errors = $_SESSION['alert'];
@@ -118,7 +116,7 @@ switch ($page) {
 }
 ?>
 <div class="footer">
-
+    <div class="footerMenu"><a href="?c=contact" title="Contact">Contact</a></div>
 </div>
 
 <script src="https://kit.fontawesome.com/d8438e7f2f.js" crossorigin="anonymous"></script>
