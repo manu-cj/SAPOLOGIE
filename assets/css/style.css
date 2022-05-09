@@ -33,6 +33,7 @@ body a {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 #logo {
     width: 33%;
     height: 100%;
@@ -40,17 +41,20 @@ body a {
     font-family: 'Comfortaa', cursive;
     font-family: 'Dancing Script', cursive;
 }
+
 #searchBar {
     margin-top: 2%;
     width: 33%;
     height: 100%;
 }
+
 input[name="searchBar"] {
-    width: 350px;
+    width: 300px;
+    float: left;
 }
 
 .fa-user-alt {
-   font-size: 2em;
+    font-size: 2em;
     cursor: pointer;
     height: 100%;
 }
@@ -68,9 +72,11 @@ input[name="searchBar"] {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
 #profil:hover {
     display: block;
 }
+
 #profil li {
     list-style-type: none;
     padding: 3%;
@@ -105,6 +111,11 @@ input[name="searchBar"] {
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
+}
+
+.pictureCharacter img {
+    border-radius: 15px;
+    width: 90%;
 }
 
 .pictureCharacter a {
@@ -145,9 +156,9 @@ input[name="comment"] {
 
 .commentContent {
     width: 60%;
-    background-color: turquoise;
+    background-color: #27afa3;
     border: 2px black solid;
-    padding: 10px;;
+    padding: 3px;;
     border-radius: 15px;
     margin: 5px;
 
@@ -170,6 +181,7 @@ input[name="comment"] {
     border-radius: 10px;
     margin: 20px;
 }
+
 #addCharacter:hover {
     background-color: #0d7549;
 }
@@ -184,7 +196,7 @@ input[name="comment"] {
     text-align: center;
 }
 
-.all-classe  {
+.all-classe {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -197,53 +209,89 @@ input[name="comment"] {
 .character:hover {
     border: 7px white solid;
 }
+
 .Moine {
     background-color: #1fb06f;
     color: white;
 }
+
 .Voleur {
     background-color: #c0b001;
     color: white;
 }
+
 .Pretre {
     background-color: #d5d1d1;
     color: white;
 }
+
 .Guerrier {
     background-color: #8a643c;
     color: white;
 }
+
 .Chasseur-de-demon {
     background-color: #9d00c0;
     color: white;
 }
+
 .Demoniste {
     background-color: #7400e1;
     color: white;
 }
+
 .Chasseur {
     background-color: #24b01f;
     color: white;
 }
+
 .Paladin {
     background-color: #d35fbc;
     color: white;
 }
+
 .Chaman {
     background-color: #0043c0;
     color: white;
 }
+
 .Mage {
     background-color: #00c0c0;
     color: white;
 }
+
 .Chevalier-de-la-mort {
     background-color: #c00000;
     color: white;
 }
+
 .Druide {
     background-color: #f37c00;
     color: white;
+
+}
+
+.classe {
+
+}
+#classe {
+    border: 2px solid #d5d1d1;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1em;
+}
+
+#classe:hover {
+    border: 3px solid #d5d1d1;
+}
+
+.classes {
+    width: 80%;
+    height: 60px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .userData {
@@ -265,6 +313,7 @@ button:hover {
     background-color: #c95252;
 
 }
+
 .alert-succes {
     background-color: #c95252;
 }
@@ -280,11 +329,11 @@ button:hover {
 @keyframes alert {
     0% {
         margin-top: 5px;
-       transform: rotate(1deg);
+        transform: rotate(1deg);
     }
     10% {
         margin-top: 10px;
-        transform:  rotate(-1deg);
+        transform: rotate(-1deg);
     }
     50% {
         transform: rotate(1deg);

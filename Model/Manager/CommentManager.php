@@ -83,11 +83,8 @@ class CommentManager
                 $id = $data['character_image_fk'];
             }
             if (!isset($_GET['picture'])) {
-                if ($select->rowCount() == 5) {
+                if ($select->rowCount() == 1) {
                     echo '<a href="?c=picture&id=' . $id . '">Voir plus de commentaires ⬇</a><br><br>';
-                }
-                if ($select->rowCount() >= 6) {
-                    echo '<a href="?c=picture&id=' . $id . '" style="display: none">Voir plus de commentaires ⬇</a>';
                 }
             }
             ?>

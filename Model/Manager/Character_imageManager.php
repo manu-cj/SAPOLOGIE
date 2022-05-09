@@ -152,7 +152,7 @@ class Character_imageManager
                         </div>
 
                         <?php
-                        CommentManager::getLastComment($data['id'], 5);
+                        CommentManager::getLastComment($data['id'], 1);
 
 
                     }
