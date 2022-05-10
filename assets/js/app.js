@@ -179,6 +179,20 @@ if (header) {
     })
 }
 
+let deleteChoice = document.querySelector('input[name=deleteChoice]');
+if (deleteChoice) {
+    deleteChoice.addEventListener("click", ()=>{
+       document.querySelector('input[name=deletePicture]').style.display = 'inline';
+        document.querySelector('input[name=notDeletePicture]').style.display = 'inline';
+        deleteChoice.style.display = 'none';
+        document.querySelector('input[name=notDeletePicture]').addEventListener('click', ()=> {
+            document.querySelector('input[name=deletePicture]').style.display = 'none';
+            document.querySelector('input[name=notDeletePicture]').style.display = 'none';
+            deleteChoice.style.display = 'inline';
+        })
+    })
+}
+
 
 
 

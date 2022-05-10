@@ -24,12 +24,16 @@ class Character_imageManager
                         <div class="pictureCharacter">
                             <div id="button">
                                 <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
+                                <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
+                                       style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
                                 <form method="post" action="?c=delete" style="display: inline">
                                     <input type="text" name="filename" value="<?= $data['image'] ?>"
                                            style="display: none">
-                                    <input type="submit" name="deletePicture" value="❌" title="Supprimer"
-                                           style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)"">
+                                    <input type="submit" name="deletePicture" value="Oui" title="Supprimer"
+                                           style="display: none;">
                                 </form>
+                                <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"
+                                       style="display: none;">
                             </div>
                             <a href="?c=profil&id=<?= $data2['id'] ?> "style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
