@@ -178,7 +178,7 @@ if (header) {
         document.querySelector('input[name=searchBar]').style.width = '30px';
     })
 }
-
+let ask = document.querySelector(".ask");
 let deleteChoice = document.querySelector('input[name=deleteChoice]');
 let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment]');
 if (deleteChoice) {
@@ -186,6 +186,7 @@ if (deleteChoice) {
        document.querySelector('input[name=deletePicture]').style.display = 'inline';
         document.querySelector('input[name=notDeletePicture]').style.display = 'inline';
         deleteChoice.style.display = 'none';
+        ask.style.display = "inline";
         document.querySelector('input[name=notDeletePicture]').addEventListener('click', ()=> {
             document.querySelector('input[name=deletePicture]').style.display = 'none';
             document.querySelector('input[name=notDeletePicture]').style.display = 'none';
@@ -198,6 +199,7 @@ if (deleteChoiceComment) {
         document.querySelector('input[name=deleteComment]').style.display = 'inline';
         document.querySelector('input[name=notDeleteComment]').style.display = 'inline';
         deleteChoiceComment.style.display = 'none';
+        ask.style.display = "inline";
         document.querySelector('input[name=notDeleteComment]').addEventListener("click", ()=> {
             document.querySelector('input[name=deleteComment]').style.display = 'none';
             document.querySelector('input[name=notDeleteComment]').style.display = 'none';

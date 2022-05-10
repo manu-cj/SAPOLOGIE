@@ -69,6 +69,7 @@ class CommentManager
                                 <form method="post" action="?c=delete" style="display: inline; width: 100%">
                                     <input type="text" name="idComment" value="<?= $data['id'] ?>"
                                            style="display: none">
+                                    <p class="Ask" style="display: none">Voulez vous vraiment supprimer ce commentaire ?</p>
                                     <input type="submit" name="deleteComment" value="Oui" title="Supprimer" style="cursor: pointer; display: none">
                                 </form>
                                 <input type="submit" name="notDeleteComment" value="Non" title="Supprimer"
