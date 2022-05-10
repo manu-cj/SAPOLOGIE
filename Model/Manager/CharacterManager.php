@@ -45,23 +45,28 @@ class CharacterManager
                             <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
                         </form>
                         <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
-
                             <h1
                                     class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
-
                             <h3 class="classe"><?= $data['classe'] ?></h3>
                             <h3 class="classe">Serveur : <?= $data['server_name'] ?></h3>
-
-
                         </a>
                     </div>
 
                     <?php
+
                 }
+
                 ?>
             </div>
-            <?php
 
+            <?php
+            if (isset($_SESSION['user'])) {
+                if ($_GET['id'] === $_SESSION['user']['id']) {
+                    ?>
+                    <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter un personnage</a>
+                    <?php
+                }
+            }
         }
     }
 
@@ -110,8 +115,8 @@ class CharacterManager
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
-                    <button style="display: inline" id="updateCharacter">📝</button>
-                    <button id="previous" style="display: none"> ⇦</button>
+                    <p style="display: inline" id="updateCharacter"><i class="fas fa-cog" title="Modifier le personnage"></i></p>
+                    <p id="previous" style="display: none"> ⇦</p>
                     <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post"
                           id="formUpdateCharacter" style="display: none">
                         <table>

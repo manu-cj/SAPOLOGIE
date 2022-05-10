@@ -27,8 +27,8 @@ function hideElement(show, show2, hide2) {
 
 if (updateDescription) {
     updateDescription.addEventListener("click", () => {
-
         showElement(classUpdateDescription, classDescription, updateDescription);
+        document.querySelector('input[name=deletePicture]').display = 'none';
     });
 }
 if (sendPicture) {
@@ -131,7 +131,7 @@ if (deleteCheck) {
     })
 }
 
-let faUser = document.querySelector('.fa-user-alt');
+let faUser = document.querySelector('.profil');
 
 if (faUser) {
     let clic = 1;
@@ -160,6 +160,24 @@ if (alert) {
 let profil = document.querySelector('.profil');
 if (profil) {
     document.querySelector('.profilMenu').style.width = '100%';
+}
+
+let  header = document.querySelector('header');
+
+if (header) {
+    header.addEventListener('mouseover', ()=> {
+        document.querySelector('.menu').style.height = '100px';
+        document.querySelector('input[name=searchBar]').style.animationName = 'searchBar';
+        document.querySelector('input[name=searchBar]').style.animationDuration = '2s';
+        document.querySelector('input[name=searchBar]').style.width = '300px';
+
+
+    })
+    header.addEventListener('mouseout', ()=> {
+        document.querySelector('.menu').style.height = '50px';
+        document.querySelector('input[name=searchBar]').style.animationName = '';
+        document.querySelector('input[name=searchBar]').style.width = '30px';
+    })
 }
 
 

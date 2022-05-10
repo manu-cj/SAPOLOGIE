@@ -64,10 +64,10 @@ class CommentManager
                         if (isset($_SESSION['user'])) {
                             if ($_SESSION['user']['id'] === $data['user_fk']) {
                                 ?>
-                                <form method="post" action="?c=delete" style="display: inline">
+                                <form method="post" action="?c=delete" style="display: inline; width: 100%">
                                     <input type="text" name="idComment" value="<?= $data['id'] ?>"
                                            style="display: none">
-                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer" style="cursor: pointer">
+                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer" style="cursor: pointer; border: none; background-color: rgba(0, 139, 129, 0)">
                                 </form>
                                 <?php
                             }

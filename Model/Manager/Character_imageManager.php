@@ -22,13 +22,20 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
+                            <div id="button">
+                                <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
+                                <form method="post" action="?c=delete" style="display: inline">
+                                    <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                           style="display: none">
+                                    <input type="submit" name="deletePicture" value="❌" title="Supprimer"
+                                           style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)"">
+                                </form>
+                            </div>
                             <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 if ($_SESSION['user']['id'] === $data['user_fk']) {
-
-
                                     ?>
                                     <form method="post" action="?c=picture&id=<?= $id ?>&a=update-picture-description"
                                           style="display: none" class="updateDescription">
@@ -51,13 +58,7 @@ class Character_imageManager
                                         <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
                                         <input type="submit" name="updateDescription" value="▶">
                                     </form>
-                                    <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
 
-                                    <form method="post" action="?c=delete" style="display: inline">
-                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
-                                               style="display: none">
-                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
-                                    </form>
                                     <?php
                                 }
                             }
@@ -76,7 +77,7 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶">
+                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: #d3ffff">
                                     </form>
                                 </div>
                                 <?php
@@ -112,7 +113,7 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
+                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <br>
                             <br>
@@ -123,7 +124,7 @@ class Character_imageManager
                                     <form method="post" action="?c=delete">
                                         <input type="text" name="filename" value="<?= $data['image'] ?>"
                                                style="display: none">
-                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer" style=" border: none; background-color: rgba(0, 139, 129, 0)">
                                     </form>
                                     <?php
                                 }
@@ -145,7 +146,7 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶">
+                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
                                     </form>
                                 </div>
                                 <br>
@@ -217,7 +218,7 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶">
+                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
                                     </form>
                                 </div>
                                 <?php
