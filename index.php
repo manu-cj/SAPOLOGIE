@@ -34,8 +34,8 @@ require __DIR__ . '/require.php';
             <?php
             if (!AbstractController::getSession('user')) {
                 ?>
-                <a href="?c=login">Se connecter</a>
-                <a href="?c=register">S'inscrire</a>
+                <a href="?c=login" id="login">Se connecter</a>
+                <a href="?c=register" id="register">S'inscrire</a>
                 <?php
             }
             ?>
@@ -115,9 +115,9 @@ switch ($page) {
         ErrorController::error404($page);
 }
 ?>
-<div class="footer">
+<footer>
     <div class="footerMenu"><a href="?c=contact" title="Contact">Contact</a></div>
-</div>
+</footer>
 
 <script src="https://kit.fontawesome.com/d8438e7f2f.js" crossorigin="anonymous"></script>
 <script src="assets/js/app.js"></script>

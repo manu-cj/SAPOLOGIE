@@ -157,6 +157,11 @@ if (alert) {
     }, 5000)
 }
 
+let profil = document.querySelector('.profil');
+if (profil) {
+    document.querySelector('.profilMenu').style.width = '100%';
+}
+
 
 
 
