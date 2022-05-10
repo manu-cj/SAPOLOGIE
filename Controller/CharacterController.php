@@ -24,7 +24,7 @@ class CharacterController extends AbstractController
 
             $alert = [];
             if (empty($picture)) {
-                $alert[] = '<div class="alert-error">Aucun fichier sélectionner</div>';
+                $alert[] = '<div class="alert-error">Veuillez sélectionner un fichier au format "jpeg" ou "png" !</div>';
             }
             if (empty($description)) {
                 $description = '';

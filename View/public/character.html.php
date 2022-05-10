@@ -21,6 +21,8 @@
 
 
 
+
+
 function getRandomName(string $regularName)
 {
     $infos = pathinfo($regularName);
@@ -35,7 +37,7 @@ function getRandomName(string $regularName)
 
 if (isset($_FILES["characterImage"])) {
     $alert = [];
-    $allowedMimeTypes = ['text/plain', 'image/jpeg', 'image/png'];
+    $allowedMimeTypes = ['image/jpeg', 'image/png'];
     if (in_array($_FILES["characterImage"]['type'], $allowedMimeTypes)) {
         if ($_FILES["characterImage"]['error'] === 0) {
             $tmp_name = $_FILES["characterImage"]["tmp_name"];
@@ -46,15 +48,19 @@ if (isset($_FILES["characterImage"])) {
             }
             move_uploaded_file($tmp_name, 'uploads/' . $name);
 
-            echo '<p class="alert-succes" style="font-size: 1em; width: 100%">upload réussi !</p><br>';
+             $alert = '<p class="alert-succes" style="font-size: 1em; width: 100%">upload réussi !</p><br>';
             $_SESSION['picture'] = $name;
 
         } else {
-            echo '<p class="alert-error" style="font-size: 1em; width: 100%">Une erreur s\'est produite lors de l\'upload du fichier!</p>';
+            $alert[] ='<p class="alert-error" style="font-size: 1em; width: 100%">Une erreur s\'est produite lors de l\'upload du fichier!</p>';
         }
     } else {
-        echo '<br><p class="alert-error" style="font-size: 1em; width: 100%">le type du fichier n\'est pas autorisé !</p>';
+        $alert[] = '<br><p class="alert-error" style="font-size: 1em; width: 100%">le type du fichier n\'est pas autorisé !</p>';
 
+    }
+    if (count($alert) > 0) {
+        $_SESSION['alert'] = $alert;
+        header('LOCATION: ?c=character&id='.$_GET['id']);
     }
 }
 

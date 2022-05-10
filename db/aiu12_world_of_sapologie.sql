@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3307
--- Généré le : ven. 06 mai 2022 à 14:37
+-- Généré le : mar. 10 mai 2022 à 14:06
 -- Version du serveur :  10.4.13-MariaDB
 -- Version de PHP : 7.4.9
 
@@ -30,22 +30,29 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `aiu12_character`;
 CREATE TABLE IF NOT EXISTS `aiu12_character` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_fk` varchar(255) NOT NULL,
+  `user_fk` int(11) NOT NULL,
   `character_name` varchar(255) NOT NULL,
   `classe` varchar(45) NOT NULL,
   `server_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `aiu12_character`
 --
 
 INSERT INTO `aiu12_character` (`id`, `user_fk`, `character_name`, `classe`, `server_name`) VALUES
-(2, '2', 'Bachelor', 'Moine', 'Varimathras'),
-(3, '2', 'Bydie', 'Voleur', 'Varimathras'),
-(4, '2', 'Bye', 'Pretre', 'Varimathras'),
-(8, '9', 'Zaeaeaea', 'Guerrier', 'EUElune');
+(2, 2, 'Bachelor', 'Moine', 'Varimathras'),
+(3, 2, 'Bydie', 'Voleur', 'Varimathras'),
+(4, 2, 'Bye', 'Pretre', 'Varimathras'),
+(10, 2, 'Bydie', 'Guerrier', 'Varimathras'),
+(11, 2, 'Bydie', 'Paladin', 'Varimathras'),
+(12, 2, 'Bydie', 'Mage', 'Varimathras'),
+(13, 2, 'Bydie', 'Druide', 'Varimathras'),
+(14, 2, 'Bydie', 'Chaman', 'Varimathras'),
+(15, 2, 'Bydie', 'Demoniste', 'Varimathras'),
+(16, 2, 'Bydie', 'Chevalier-de-la-mort', 'Varimathras'),
+(17, 2, 'Bydie', 'Chasseur', 'Varimathras');
 
 -- --------------------------------------------------------
 
@@ -63,14 +70,14 @@ CREATE TABLE IF NOT EXISTS `aiu12_character_image` (
   `description` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `image_character_fk` (`character_fk`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `aiu12_character_image`
 --
 
 INSERT INTO `aiu12_character_image` (`id`, `image`, `character_fk`, `user_fk`, `view_fk`, `description`) VALUES
-(1, '57c17a1ee2a38583ce13b81ed22fb3.PNG', 3, 2, 2, 'Biddy le sapologue chevronn&eacute;'),
+(1, '57c17a1ee2a38583ce13b81ed22fb3.PNG', 3, 2, 2, ' Biddy le sapologue chevronn&eacute; !\r\n\r\n\r\n\r\n\r\n'),
 (2, '60377fff574c2dcc0655f9a77fa801.PNG', 2, 2, 2, 'Le Bachelor !'),
 (3, '7eff27ca0d7c77a521f7259fa5838a.PNG', 3, 2, 2, 'Je suis le grand Bachelor<br />\r\n<br />\r\n<br />\r\nEt je suis un sapologue chevronn&eacute;<br />\r\n<br />\r\n<br />\r\n<br />\r\nJ\'aime la D A'),
 (4, '0a913c607f000a95bc03bf49bbb687.PNG', 3, 2, 2, ''),
@@ -92,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `aiu12_comment` (
   `character_image_fk` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `image_comment_fk` (`character_image_fk`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `aiu12_comment`
@@ -115,8 +122,8 @@ INSERT INTO `aiu12_comment` (`id`, `user_fk`, `content`, `date`, `character_imag
 (20, 2, '&agrave; quand le prochain pirate des caraibe ?', '2022-05-03 13:41:43', 5),
 (21, 2, 'Un bel homme ', '2022-05-03 13:42:36', 5),
 (22, 2, 'Un vrai sapologue chevron&eacute;', '2022-05-05 08:04:53', 2),
-(27, 2, 'salut', '2022-05-06 09:48:59', 2),
-(28, 2, 'C\'est une superbe id&eacute;e d\'article', '2022-05-06 10:26:15', 2);
+(29, 9, 'Biddy est un v&eacute;ritable sapologue', '2022-05-09 09:17:19', 1),
+(36, 2, 'Y a que bye qui baille !', '2022-05-10 10:52:09', 7);
 
 -- --------------------------------------------------------
 
@@ -188,15 +195,15 @@ CREATE TABLE IF NOT EXISTS `aiu12_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mail_UNIQUE` (`mail`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `aiu12_user`
 --
 
 INSERT INTO `aiu12_user` (`id`, `username`, `mail`, `password`, `date`) VALUES
-(2, 'admin', 'admin@admin.org', '$2y$10$Nvve5ixpZoMZw9KsXXlBCezoQcQyusx3KZxYRiEa5x3eOK0wZEWk2', '2022-04-29 12:37:50'),
-(9, 'Bydie', 'admin@admin.com', '$2y$10$8p/Xx6AL4ny7JfuPUZafYuLStZEacNFb0jxf1HiRR/w2UJCChUYea', '2022-05-06 11:35:09');
+(2, 'admin', 'admin@admin.org', '$2y$10$iwJhpoIvhyCivmezy/qik.O1iqaS/W6.xzenvtJpLdJwZBjP02/Yq', '2022-05-09 08:00:10'),
+(12, 'bydie', 'admin@admin.com', '$2y$10$rdrCuuGtPa74vMTnLs2BW.IZVwGpPnoIE.7kF0.0omLvAtfpWt6aK', '2022-05-09 10:03:37');
 
 -- --------------------------------------------------------
 
@@ -210,7 +217,15 @@ CREATE TABLE IF NOT EXISTS `aiu12_user_role` (
   `user_fk` int(11) NOT NULL,
   `role_fk` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `aiu12_user_role`
+--
+
+INSERT INTO `aiu12_user_role` (`id`, `user_fk`, `role_fk`) VALUES
+(1, 2, 3),
+(4, 12, 1);
 
 -- --------------------------------------------------------
 

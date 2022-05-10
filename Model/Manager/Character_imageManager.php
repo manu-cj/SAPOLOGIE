@@ -58,7 +58,6 @@ class Character_imageManager
                                         <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
                                         <input type="submit" name="updateDescription" value="▶">
                                     </form>
-
                                     <?php
                                 }
                             }

@@ -181,7 +181,6 @@ class CharacterManager
                             <br>
                             <input type="number" name="characterId" value="<?= $characterId ?>" style="display: none">
                             <input type="submit" name="upload">
-
                         </form>
                         </div>
                         <br>
@@ -205,10 +204,12 @@ class CharacterManager
 
         if ($insert->execute()) {
             $alert = [];
+            $id = $character_image->getCharacterFk();
+            $_SESSION['picture'] = '';
             $alert[] = '<div class="alert-succes">Votre personnage a été ajouté</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id=' . $character_image->getCharacterFk());
+                header('LOCATION: ?c=character&id=' . $id);
             }
         }
     }
