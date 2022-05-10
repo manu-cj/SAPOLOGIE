@@ -31,7 +31,7 @@ class Character_imageManager
                                            style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)"">
                                 </form>
                             </div>
-                            <a href="?c=profil&id=<?= $data2['id'] ?>"><h3><?= $data2['username'] ?></h3></a>
+                            <a href="?c=profil&id=<?= $data2['id'] ?> "style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <?php
                             if (isset($_SESSION['user'])) {
@@ -113,7 +113,7 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
+                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><h3><?=ucfirst($data2['username']) ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <br>
                             <br>
@@ -186,7 +186,7 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <h3 style="display: none"><?= $data2['username'] ?></h3>
+                            <h3 style="display: none"><?=ucfirst($data2['username']) ?></h3>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <br>
                             <br>

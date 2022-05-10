@@ -63,7 +63,8 @@ class CharacterManager
             if (isset($_SESSION['user'])) {
                 if ($_GET['id'] === $_SESSION['user']['id']) {
                     ?>
-                    <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter un personnage</a>
+                    <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter un
+                        personnage</a>
                     <?php
                 }
             }
@@ -115,7 +116,9 @@ class CharacterManager
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
-                    <p style="display: inline" id="updateCharacter"><i class="fas fa-cog" title="Modifier le personnage"></i></p>
+                    <div style="width: 80%">
+                    <p style="display: inline" id="updateCharacter"><i class="fas fa-cog"
+                                                                       title="Modifier le personnage"></i></p>
                     <p id="previous" style="display: none"> ⇦</p>
                     <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post"
                           id="formUpdateCharacter" style="display: none">
@@ -144,6 +147,7 @@ class CharacterManager
                     <h3 class="classe"><?= $data['classe'] ?></h3>
                     <h3 class="server"><?= $data['server_name'] ?></h3>
                 </div>
+
                 <?php
                 if (isset($_SESSION['user'])) {
                     if ($data['user_fk'] === $_SESSION['user']['id']) {
@@ -179,6 +183,7 @@ class CharacterManager
                             <input type="submit" name="upload">
 
                         </form>
+                        </div>
                         <br>
                         <?php
                     }
@@ -252,9 +257,9 @@ class CharacterManager
                 <?php
                 foreach ($datas
 
-                as $data) {
-                ?>
-                <div class="character <?= $data['classe'] ?>">
+                         as $data) {
+                    ?>
+                    <div class="character <?= $data['classe'] ?>">
                         <h1 class="name"><?= $data['character_name'] ?></h1>
                         <h3 class="classe"><?= $data['classe'] ?></h3>
                         <h3 class="server"><?= $data['server_name'] ?></h3>
@@ -262,9 +267,9 @@ class CharacterManager
                     </a>
 
                     <?php
-                    }
-                    ?>
-                </div>
+                }
+                ?>
+            </div>
             </div>
             <?php
         }

@@ -485,11 +485,12 @@ button:hover {
 
 .alert-error {
     background-color: #c95252;
-
+    border-radius: 10px;
 }
 
 .alert-succes {
     background-color: #00a843;
+    border-radius: 10px;
 }
 
 .alert {
