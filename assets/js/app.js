@@ -180,6 +180,7 @@ if (header) {
 }
 
 let deleteChoice = document.querySelector('input[name=deleteChoice]');
+let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment]');
 if (deleteChoice) {
     deleteChoice.addEventListener("click", ()=>{
        document.querySelector('input[name=deletePicture]').style.display = 'inline';
@@ -190,6 +191,19 @@ if (deleteChoice) {
             document.querySelector('input[name=notDeletePicture]').style.display = 'none';
             deleteChoice.style.display = 'inline';
         })
+    })
+}
+if (deleteChoiceComment) {
+    deleteChoiceComment.addEventListener("click", ()=> {
+        document.querySelector('input[name=deleteComment]').style.display = 'inline';
+        document.querySelector('input[name=notDeleteComment]').style.display = 'inline';
+        deleteChoiceComment.style.display = 'none';
+        document.querySelector('input[name=notDeleteComment]').addEventListener("click", ()=> {
+            document.querySelector('input[name=deleteComment]').style.display = 'none';
+            document.querySelector('input[name=notDeleteComment]').style.display = 'none';
+            deleteChoiceComment.style.display = 'inline';
+        })
+
     })
 }
 
