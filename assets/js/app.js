@@ -139,7 +139,6 @@ if (faUser) {
         document.querySelector('#profil').style.display = 'block';
     })
     document.querySelector('#profil').addEventListener("mouseover", () => {
-        console.log('hello world');
         document.querySelector('#profil').style.display = 'block';
     })
 
@@ -169,7 +168,7 @@ if (header) {
         document.querySelector('.menu').style.height = '100px';
         document.querySelector('input[name=searchBar]').style.animationName = 'searchBar';
         document.querySelector('input[name=searchBar]').style.animationDuration = '2s';
-        document.querySelector('input[name=searchBar]').style.width = '300px';
+        document.querySelector('input[name=searchBar]').style.width = '150px';
 
 
     })
