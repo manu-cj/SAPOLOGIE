@@ -20,7 +20,7 @@ class SearchController extends AbstractController
                 CharacterManager::getAllCharacter();
             }
             else {
-                echo '<p class="alert error">Vous n\'avez pas rempli le champs recherche !</p>';
+                echo '<div class="alert error">Vous n\'avez pas rempli le champs recherche !</div>';
             }
         }
     }

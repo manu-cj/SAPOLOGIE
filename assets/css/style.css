@@ -17,7 +17,7 @@ body {
     background-size: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     color: white;
     position: relative;
@@ -32,6 +32,7 @@ body a {
 
 header {
     width: 100%;
+    height: 100px;
     position: fixed;
     top: 0;
     z-index:1;
@@ -54,7 +55,7 @@ footer a {
 
 .menu {
     width: 100%;
-    height: 100px;
+    height: 50px;
     background-color: #1fb06f;
     display: flex;
     flex-direction: row;
@@ -116,7 +117,7 @@ footer a {
 }
 
 input[name="searchBar"] {
-    width: 300px;
+    width: 30px;
     float: left;
 }
 
@@ -270,6 +271,9 @@ input[name="comment"] {
     border-radius: 15px;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }
 
 .all-classe {
@@ -286,65 +290,145 @@ input[name="comment"] {
     border: 7px white solid;
 }
 
+.character a, h1, h3{
+    color: rgba(255, 255, 255, 0.99);
+    background-color: rgba(112, 115, 115, 0.35);
+
+
+}
+
 .Moine {
-    background-color: #1fb06f;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(0, 204, 116);
+    border-radius: 15px;
+    background-image: url(../media/monk.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Voleur {
-    background-color: #c0b001;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(238, 255, 0);
+    border-radius: 15px;
+    background-image: url(../media/rogue.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Pretre {
-    background-color: #d5d1d1;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(245, 223, 223);
+    border-radius: 15px;
+    background-image: url(../media/priest.png);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Guerrier {
-    background-color: #8a643c;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(124, 107, 69);
+    border-radius: 15px;
+    background-image: url(../media/warrior.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Chasseur-de-demon {
-    background-color: #9d00c0;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(199, 0, 255);
+    border-radius: 15px;
+    background-image: url(../media/dh.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Demoniste {
-    background-color: #7400e1;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(156, 8, 255);
+    border-radius: 15px;
+    background-image: url(../media/warlock.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
+
 
 .Chasseur {
-    background-color: #24b01f;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(11, 159, 0);
+    border-radius: 15px;
+    background-image: url(../media/hunter.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
+
 .Paladin {
-    background-color: #d35fbc;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(250, 113, 255);
+    border-radius: 15px;
+    background-image: url(../media/paladin.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Chaman {
-    background-color: #0043c0;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(0, 2, 248);
+    border-radius: 15px;
+    background-image: url(../media/shaman.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Mage {
-    background-color: #00c0c0;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(0, 2, 248);
+    border-radius: 15px;
+    background-image: url(../media/mage.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Chevalier-de-la-mort {
-    background-color: #c00000;
-    color: white;
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(0, 2, 248);
+    border-radius: 15px;
+    background-image: url(../media/dk.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .Druide {
-    background-color: #f37c00;
-    color: white;
-
+    width: 25%;
+    height: 350px;
+    border: solid 5px rgb(0, 2, 248);
+    border-radius: 15px;
+    background-image: url(../media/druid.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 90%;
 }
 
 .classe {
@@ -368,6 +452,8 @@ input[name="comment"] {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: start;
+    align-content: start;
 }
 
 .userData {
@@ -413,6 +499,11 @@ p .fas:hover {
     animation-iteration-count: infinite;
 }
 
+input[type='submit'] {
+    background-color: rgba(49, 49, 49, 0);
+    border: none;
+}
+
 @keyframes alert {
     0% {
         margin-top: 5px;
@@ -445,5 +536,15 @@ p .fas:hover {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes searchBar {
+    0% {
+        width: 30px;
+    }
+
+    100% {
+        width: 300px;
     }
 }
