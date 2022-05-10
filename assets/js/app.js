@@ -173,7 +173,7 @@ if (header) {
 
     })
     header.addEventListener('mouseout', ()=> {
-        document.querySelector('.menu').style.height = '50px';
+        document.querySelector('.menu').style.height = '65px';
         document.querySelector('input[name=searchBar]').style.animationName = '';
         document.querySelector('input[name=searchBar]').style.width = '30px';
     })

@@ -10,9 +10,8 @@ body {
     width: 100%;
     min-height: 800px;
     background-color: #203134;
-    background-image:
-            radial-gradient(at 47% 33%, hsl(286.45, 25%, 74%) 0, transparent 59%),
-            radial-gradient(at 82% 65%, hsl(296.00, 8%, 35%) 0, transparent 55%);
+    background-image: radial-gradient(at 47% 33%, hsl(286.45, 25%, 74%) 0, transparent 59%),
+    radial-gradient(at 82% 65%, hsl(296.00, 8%, 35%) 0, transparent 55%);
     background-repeat: no-repeat;
     background-size: auto;
     display: flex;
@@ -22,7 +21,7 @@ body {
     color: white;
     position: relative;
     margin-top: 150px;
-    z-index:2;
+    z-index: 2;
 }
 
 body a {
@@ -35,18 +34,19 @@ header {
     height: 100px;
     position: fixed;
     top: 0;
-    z-index:1;
+    z-index: 1;
 }
 
 footer {
-    position:absolute;
-    bottom:0;
+    position: absolute;
+    bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     height: 50px;
     margin-top: 50px;
 }
+
 footer a {
     float: right;
     margin-top: 50px;
@@ -55,8 +55,7 @@ footer a {
 
 .menu {
     width: 100%;
-    height: 50px;
-    background-color: #1fb06f;
+    height: 65px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -67,6 +66,10 @@ footer a {
     backdrop-filter: blur(15px) saturate(150%);
     -webkit-backdrop-filter: blur(15px) saturate(150%);
     background-color: rgba(0, 139, 129, 0.85);
+}
+
+.menu a:hover {
+    color: #d5bbbb;
 }
 
 #logo {
@@ -82,17 +85,21 @@ footer a {
     width: 33%;
     height: 100%;
 }
-.homeProfil{
+
+.homeProfil {
     display: flex;
     flex-direction: row;
     justify-content: right;
     float: right;
 }
+
 .home {
     height: 40px;
     width: 40px;
 }
+
 .home {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,7 +108,7 @@ footer a {
     border: 1px mediumspringgreen solid;
 }
 
-.home a{
+.home a {
     height: 100%;
     padding: 8px;
     margin-top: 3px;
@@ -135,6 +142,7 @@ input[name="searchBar"] {
 }
 
 .profil {
+    margin-top: 20px;
     margin-left: 15px;
     display: flex;
     flex-direction: column;
@@ -146,6 +154,7 @@ input[name="searchBar"] {
     background-color: #15bd92;
     border: 1px mediumspringgreen solid;
 }
+
 .profil:hover {
     background-color: #1fb06f;
     border: 3px mediumspringgreen solid;
@@ -188,6 +197,7 @@ input[name="searchBar"] {
 .fa-home {
     font-size: 2em;
 }
+
 .pictureCharacter {
     width: 65%;
     border: 1px solid rgba(255, 255, 255, 0.125);
@@ -304,7 +314,7 @@ input[name="comment"] {
     border: 7px white solid;
 }
 
-.character a, h1, h3{
+.character a, h1, h3 {
     color: rgba(255, 255, 255, 0.99);
     background-color: rgba(112, 115, 115, 0.35);
     font-size: 1em;
@@ -447,6 +457,7 @@ input[name="comment"] {
 .classe {
 
 }
+
 #classe {
     border: 2px solid #d5d1d1;
     border-radius: 15px;
@@ -520,6 +531,7 @@ input[type='submit'] {
     padding: 5px;
     border-radius: 10px;
 }
+
 input[name='upload'] {
     background-color: rgb(0, 192, 192);
     border: 1px solid #ffffff;
@@ -527,10 +539,12 @@ input[name='upload'] {
     border-radius: 10px;
     cursor: pointer;
 }
+
 input[name='upload']:hover {
     background-color: rgb(3, 255, 255);
     border: 1px solid #ffffff;
 }
+
 input[name='update'] {
     background-color: rgb(0, 192, 192);
     border: 1px solid #ffffff;
@@ -552,13 +566,72 @@ input[name='update'] {
     margin-top: 30px;
     margin-bottom: 40px;
 }
+
 #hidden {
     cursor: pointer;
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
 #previous {
     cursor: pointer;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: solid 2px rgba(255, 255, 255, 0.47);
+    border-radius: 20px;
+    width: 40%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background-color: rgba(143, 255, 252, 0.17);
+    margin-top: 100px;
+}
+#loginForm input {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#loginForm input[type=submit] {
+    margin-left: 100%;
+    margin-top: 30px;
+}
+#loginForm input[type=submit]:hover {
+    background-color: #89f5f2;
+}
+
+#registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: solid 2px rgba(255, 255, 255, 0.47);
+    border-radius: 20px;
+    width: 40%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background-color: rgba(143, 255, 252, 0.17);
+    margin-top: 100px;
+}
+
+#registerForm input {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+#registerForm input[type=submit] {
+    margin-left: 100%;
+    margin-top: 30px;
+}
+#registerForm input[type=submit]:hover {
+    background-color: #89f5f2;
 }
 
 @keyframes alert {
@@ -586,6 +659,7 @@ input[name='update'] {
         transform: rotate(1deg);
     }
 }
+
 @keyframes update {
     0% {
         transform: rotate(180deg);
@@ -607,7 +681,7 @@ input[name='update'] {
 }
 
 
-@media screen and (min-width: 320px) and (max-width: 700px){
+@media screen and (min-width: 320px) and (max-width: 700px) {
     body {
         width: 100%;
         min-height: 800px;
@@ -624,6 +698,7 @@ input[name='update'] {
         height: 50px;
         margin-top: 50px;
     }
+
     footer a {
         margin-top: 50px;
         margin-right: 50px;
@@ -636,22 +711,24 @@ input[name='update'] {
     }
 
     #logo {
-      display: none;
+        display: none;
     }
 
     #searchBar {
         margin-top: 2%;
         width: 70%;
     }
+
     .home {
         height: 40px;
         width: 40px;
     }
+
     .home {
         border: 1px mediumspringgreen solid;
     }
 
-    .home a{
+    .home a {
         width: 100%;
         height: 100%;
         padding: 8px;
@@ -702,6 +779,7 @@ input[name='update'] {
     .fa-home {
         font-size: 2em;
     }
+
     .pictureCharacter {
         width: 90%;
         border: 1px solid rgba(255, 255, 255, 0.125);
@@ -768,6 +846,7 @@ input[name='update'] {
     .character:hover {
         border: 7px white solid;
     }
+
     .character a, h1, h3 {
         font-size: 0.8em;
     }
@@ -845,6 +924,7 @@ input[name='update'] {
         height: 200px;
         border: solid 5px rgb(0, 2, 248);
     }
+
     #classe {
         width: 80%;
     }
@@ -879,14 +959,17 @@ input[name='update'] {
         padding: 5px;
         border-radius: 10px;
     }
+
     input[name='upload'] {
         border: 1px solid #ffffff;
         padding: 10px;
         border-radius: 10px;
     }
+
     input[name='upload']:hover {
         border: 1px solid #ffffff;
     }
+
     input[name='update'] {
         border: 1px solid #ffffff;
         padding: 10px;
@@ -897,6 +980,7 @@ input[name='update'] {
         margin-top: 30px;
         margin-bottom: 40px;
     }
+
     #hidden {
         margin-top: 30px;
         margin-bottom: 30px;

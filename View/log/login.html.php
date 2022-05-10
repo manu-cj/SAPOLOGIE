@@ -3,7 +3,7 @@ if ( AbstractController::getSession('user')) {
     header('LOCATION: ?c=home');
 }
 ?>
-<form method="post" action="?c=login" id="login">
+<form method="post" action="?c=login" id="loginForm">
     <table>
         <tr>
             <td><label for="mail">Adresse e-mail :</label></td>
