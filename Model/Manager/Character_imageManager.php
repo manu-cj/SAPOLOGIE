@@ -26,11 +26,11 @@ class Character_imageManager
                                 <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
                                 <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
                                        style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
-                                <p class="Ask" style="display: inline">Voulez vous vraiment supprimer cette publication ?</p>
+
                                 <form method="post" action="?c=delete" style="display: none" id="deletePicture">
                                     <input type="text" name="filename" value="<?= $data['image'] ?>"
                                            style="display: none">
-
+                                    <label for="deletePicture">Voulez vous vraiment supprimer cette publication ?</label>
                                     <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
                                 </form>
                                 <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"

@@ -173,7 +173,7 @@ if (header) {
             document.querySelector('.menu').style.height = '70px';
     })
 }
-let ask = document.querySelector(".ask");
+
 let deleteChoice = document.querySelector('input[name=deleteChoice]');
 let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment]');
 if (deleteChoice) {
