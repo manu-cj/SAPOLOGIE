@@ -183,7 +183,6 @@ if (deleteChoice) {
         deleteChoice.style.display = 'none';
         if (document.querySelector('input[name=notDeletePicture]')) {
             document.querySelector('input[name=notDeletePicture]').addEventListener('click', () => {
-                console.log('hello');
                 document.querySelector('#deletePicture').style.display = 'none';
                 document.querySelector('input[name=notDeletePicture]').style.display = 'none';
                 deleteChoice.style.display = 'inline';

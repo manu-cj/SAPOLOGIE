@@ -26,14 +26,15 @@ class Character_imageManager
                                 <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
                                 <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
                                        style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
+                                <p class="Ask" style="display: inline">Voulez vous vraiment supprimer cette publication ?</p>
                                 <form method="post" action="?c=delete" style="display: none" id="deletePicture">
                                     <input type="text" name="filename" value="<?= $data['image'] ?>"
                                            style="display: none">
-                                    <p class="Ask" style="display: inline; font-size: 0.7em">Voulez vous vraiment supprimer cette publication ?</p>
+
                                     <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
                                 </form>
                                 <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"
-                                       style="display: none;">
+                                       style="display: none; height: 30px">
                             </div>
                             <a href="?c=profil&id=<?= $data2['id'] ?> "style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
