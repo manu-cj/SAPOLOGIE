@@ -26,12 +26,11 @@ class Character_imageManager
                                 <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
                                 <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
                                        style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
-                                <form method="post" action="?c=delete" style="display: inline">
+                                <form method="post" action="?c=delete" style="display: none" id="deletePicture">
                                     <input type="text" name="filename" value="<?= $data['image'] ?>"
                                            style="display: none">
-                                    <p class="Ask" style="display: none">Voulez vous vraiment supprimer cette publication ?</p>
-                                    <input type="submit" name="deletePicture" value="Oui" title="Supprimer"
-                                           style="display: none;">
+                                    <p class="Ask" style="display: inline; font-size: 0.7em">Voulez vous vraiment supprimer cette publication ?</p>
+                                    <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
                                 </form>
                                 <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"
                                        style="display: none;">
@@ -269,6 +268,5 @@ class Character_imageManager
                 header('LOCATION: ?c=picture&id=' . $id);
             }
         }
-
     }
 }

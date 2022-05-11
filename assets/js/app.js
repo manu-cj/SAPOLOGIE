@@ -166,16 +166,11 @@ let  header = document.querySelector('header');
 if (header) {
     header.addEventListener('mouseover', ()=> {
         document.querySelector('.menu').style.height = '100px';
-        document.querySelector('input[name=searchBar]').style.animationName = 'searchBar';
-        document.querySelector('input[name=searchBar]').style.animationDuration = '2s';
-        document.querySelector('input[name=searchBar]').style.animationFillMode = "forwards";
-        document.querySelector('input[name=searchBar]').classList.remove("search");
-        document.querySelector('input[name=searchBar]').classList.add('searchBar');
+
 
     })
-    header.addEventListener('mouseout', ()=> {
-        document.querySelector('.menu').style.height = '70px';
-        document.querySelector('input[name=searchBar]').style.animationName = 'searchBarEnd';
+    header.addEventListener('mouseleave', ()=> {
+            document.querySelector('.menu').style.height = '70px';
     })
 }
 let ask = document.querySelector(".ask");
@@ -183,18 +178,19 @@ let deleteChoice = document.querySelector('input[name=deleteChoice]');
 let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment]');
 if (deleteChoice) {
     deleteChoice.addEventListener("click", ()=>{
-       document.querySelector('input[name=deletePicture]').style.display = 'inline';
+       document.querySelector('#deletePicture').style.display = 'initial';
         document.querySelector('input[name=notDeletePicture]').style.display = 'inline';
         deleteChoice.style.display = 'none';
-        ask.style.display = "inline";
-        document.querySelector('input[name=notDeletePicture]').addEventListener('click', ()=> {
-            document.querySelector('input[name=deletePicture]').style.display = 'none';
-            document.querySelector('input[name=notDeletePicture]').style.display = 'none';
-            deleteChoice.style.display = 'inline';
-        })
+        if (document.querySelector('input[name=notDeletePicture]')) {
+            document.querySelector('input[name=notDeletePicture]').addEventListener('click', () => {
+                console.log('hello');
+                document.querySelector('#deletePicture').style.display = 'none';
+                document.querySelector('input[name=notDeletePicture]').style.display = 'none';
+                deleteChoice.style.display = 'inline';
+            })
+        }
     })
 }
-
 
 if (deleteChoiceComment) {
         deleteChoiceComment.addEventListener("click", () => {

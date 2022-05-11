@@ -23,7 +23,7 @@ require __DIR__ . '/require.php';
         <div id="logo"><a href="?c=home">W.O.S</a></div>
         <div id="searchBar">
             <form action="?c=search" method="post">
-                <input type="text" value="" name="searchBar" class="search" placeholder="recherche"/>
+                <input type="text" value="" name="searchBar" class="searchBar" placeholder="recherche"/>
                 <input type="submit" name="search" value="🔎"/>
             </form>
         </div>

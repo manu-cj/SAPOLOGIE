@@ -43,7 +43,6 @@ footer {
     left: 0;
     right: 0;
     width: 100%;
-    height: 50px;
     margin-top: 50px;
 }
 
@@ -130,16 +129,16 @@ footer a {
 }
 
 .searchBar {
-    width: 150px;
+    width: 70px;
     float: left;
     height: 25px;
+    transition: width 0.4s ease-in-out;
+}
+.searchBar:focus {
+    display: inline;
+    width: 200px;
 }
 
-.search {
-    display: none;
-    float: left;
-    height: 25px;
-}
 
 .fa-user-alt {
     font-size: 2em;
@@ -462,8 +461,8 @@ input[name="comment"] {
     opacity: 90%;
 }
 
-.classe {
-
+#add-character {
+    margin-bottom: 100px;
 }
 
 #classe {
@@ -694,26 +693,6 @@ input[type=text]:focus {
     }
 }
 
-@keyframes searchBar {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 150px;
-    }
-}
-@keyframes searchBarEnd {
-    0% {
-        width: 95px;
-    }
-
-    100% {
-        width: 0;
-        opacity: 0;
-    }
-}
-
 
 @media screen and (min-width: 320px) and (max-width: 700px) {
     body {
@@ -769,7 +748,7 @@ input[type=text]:focus {
         height: 100%;
         padding: 8px;
         margin-top: 3px;
-        margin-left: 10px;
+        margin-left: 1px;
     }
 
     .home:hover {
@@ -794,32 +773,14 @@ input[type=text]:focus {
         padding: 1px;
     }
     .searchBar {
-        width: 95px;
-    }
-    .search {
-        width: 95px;
+        width: 65px;
+        float: left;
         height: 25px;
+        transition: width 0.4s ease-in-out;
+    }
+    .searchBar:focus {
         display: inline;
-    }
-
-    @keyframes searchBar {
-        0% {
-            width: 95px;
-        }
-
-        100% {
-            width: 95px;
-        }
-    }
-    @keyframes searchBarEnd {
-        0% {
-            width: 95px;
-        }
-
-        100% {
-            width: 95px;
-            opacity: 1;
-        }
+        width: 95px;
     }
 
     .fa-user-alt {
@@ -828,6 +789,7 @@ input[type=text]:focus {
     }
 
     .profil {
+        margin-top: 0;
         margin-left: 15px;
         height: 40px;
         width: 40px;
