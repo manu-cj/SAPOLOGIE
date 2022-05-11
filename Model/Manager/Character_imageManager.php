@@ -30,7 +30,7 @@ class Character_imageManager
                                 <form method="post" action="?c=delete" style="display: none" id="deletePicture">
                                     <input type="text" name="filename" value="<?= $data['image'] ?>"
                                            style="display: none">
-                                    <label for="deletePicture">Voulez vous vraiment supprimer cette publication ?</label>
+                                    <label for="deletePicture">Voulez vous supprimer cette publication ?</label>
                                     <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
                                 </form>
                                 <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"

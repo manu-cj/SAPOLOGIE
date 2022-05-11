@@ -29,6 +29,7 @@ if (updateDescription) {
     updateDescription.addEventListener("click", () => {
         showElement(classUpdateDescription, classDescription, updateDescription);
         document.querySelector('input[name=deletePicture]').display = 'none';
+        deleteChoice.style.display = 'none';
     });
 }
 if (sendPicture) {
@@ -179,13 +180,18 @@ let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment
 if (deleteChoice) {
     deleteChoice.addEventListener("click", ()=>{
        document.querySelector('#deletePicture').style.display = 'initial';
-        document.querySelector('input[name=notDeletePicture]').style.display = 'inline';
+        document.querySelector('#deletePicture').style.width = '100%';
+        document.querySelector('input[name=notDeletePicture]').style.display = 'block';
         deleteChoice.style.display = 'none';
+        classUpdateDescription.style.display = 'none';
+        updateDescription.style.display = 'none';
+
         if (document.querySelector('input[name=notDeletePicture]')) {
             document.querySelector('input[name=notDeletePicture]').addEventListener('click', () => {
                 document.querySelector('#deletePicture').style.display = 'none';
                 document.querySelector('input[name=notDeletePicture]').style.display = 'none';
                 deleteChoice.style.display = 'inline';
+                updateDescription.style.display = 'inline';
             })
         }
     })
