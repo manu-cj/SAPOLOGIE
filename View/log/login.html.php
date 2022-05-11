@@ -1,20 +1,16 @@
 <?php
-if ( AbstractController::getSession('user')) {
+if (AbstractController::getSession('user')) {
     header('LOCATION: ?c=home');
 }
 ?>
 <form method="post" action="?c=login" id="loginForm">
-    <table>
-        <tr>
-            <td><label for="mail">Adresse e-mail :</label></td>
-            <td><input type="email" name="mail" id="mail" required></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password :</label></td>
-            <td><input type="password" name="password" id="password" required></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="send"></td>
-        </tr>
-    </table>
+    <label for="mail">Adresse e-mail :</label>
+    <br>
+    <input type="email" name="mail" id="mail" required>
+    <br>
+    <label for="password">Password :</label>
+    <br>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <input type="submit" name="send">
 </form>

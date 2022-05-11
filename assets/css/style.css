@@ -724,7 +724,7 @@ input[name='update'] {
 
     .menu {
         width: 100%;
-        height: 50px;
+        height: 70px;
         justify-content: space-between;
     }
 
@@ -781,13 +781,14 @@ input[name='update'] {
         width: 95px;
     }
     .search {
-        width: 0;
+        width: 95px;
         height: 25px;
+        display: inline;
     }
 
     @keyframes searchBar {
         0% {
-            width: 0;
+            width: 95px;
         }
 
         100% {
@@ -800,8 +801,8 @@ input[name='update'] {
         }
 
         100% {
-            width: 0;
-            opacity: 0;
+            width: 95px;
+            opacity: 1;
         }
     }
 
@@ -1036,6 +1037,40 @@ input[name='update'] {
     #hidden {
         margin-top: 30px;
         margin-bottom: 30px;
+    }
+
+    #loginForm {
+        border-radius: 20px;
+        width: 90%;
+        padding: 50px 15px 50px 15px;
+    }
+    #loginForm input {
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    #loginForm input[type=submit] {
+        margin-left: 0;
+        margin-top: 30px;
+    }
+    #loginForm input[type=submit]:hover {
+        background-color: #89f5f2;
+    }
+
+    #registerForm {
+        border-radius: 20px;
+        width: 90%;
+        padding: 50px 50px 50px 50px
+    }
+
+    #registerForm input {
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+
+    #registerForm input[type=submit] {
+        margin-left: 0;
+        margin-top: 30px;
     }
 
 }

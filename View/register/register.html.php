@@ -2,25 +2,21 @@
 
 ?>
 <form action="?c=register" method="post" id="registerForm">
-    <table>
-        <tr>
-            <td><label for="username">Nom d'utilisateur :</label></td>
-            <td><input type="text" name="username" id="username" required></td>
-        </tr>
-        <tr>
-            <td><label for="mail">Adresse e-mail :</label></td>
-            <td><input type="email" name="mail" id="mail" required></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password :</label></td>
-            <td><input type="password" name="password" id="password" required></td>
-        </tr>
-        <tr>
-            <td><label for="password-repeat">Password-repeat :</label></td>
-            <td><input type="password" name="password-repeat" id="password-repeat" required></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="send" id="password" required></td>
-        </tr>
-    </table>
+    <label for="username">Nom d'utilisateur :</label>
+    <br>
+    <input type="text" name="username" id="username" required>
+    <br>
+    <label for="mail">Adresse e-mail :</label>
+    <br>
+    <input type="email" name="mail" id="mail" required>
+    <br>
+    <label for="password">Password :</label>
+    <br>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <label for="password-repeat">Password-repeat :</label>
+    <br>
+    <input type="password" name="password-repeat" id="password-repeat" required>
+    <br>
+    <input type="submit" name="send" id="password" required>
 </form>
