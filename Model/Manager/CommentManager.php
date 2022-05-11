@@ -58,22 +58,18 @@ class CommentManager
                 foreach ($datas2 as $data2) {
                     ?>
                     <div class="commentContent">
-                        <div class="CommentAuthor" style="display: inline"><b><?= $data2['username'] ?>
-                                :</b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
+                        <div class="CommentAuthor" style="display: inline"> <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><b><?= $data2['username'] ?>
+                                </b></a></b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
                         <?php
                         if (isset($_SESSION['user'])) {
                             if ($_SESSION['user']['id'] === $data['user_fk']) {
                                 ?>
-                                <input type="submit" name="deleteChoiceComment" value="❌" title="Supprimer"
-                                       style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
                                 <form method="post" action="?c=delete" style="display: inline; width: 100%">
                                     <input type="text" name="idComment" value="<?= $data['id'] ?>"
                                            style="display: none">
                                     <p class="Ask" style="display: none">Voulez vous vraiment supprimer ce commentaire ?</p>
-                                    <input type="submit" name="deleteComment" value="Oui" title="Supprimer" style="cursor: pointer; display: none">
+                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer" style="cursor: pointer">
                                 </form>
-                                <input type="submit" name="notDeleteComment" value="Non" title="Supprimer"
-                                       style="display: none;">
                                 <?php
                             }
                         }

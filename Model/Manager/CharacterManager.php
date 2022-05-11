@@ -40,10 +40,7 @@ class CharacterManager
                     ?>
                     <br>
                     <div class="character <?= $data['classe'] ?>">
-                        <form method="post" action="?c=delete" style="display: inline">
-                            <input type="text" name="idCharacter" value="<?= $data['id'] ?>" style="display: none">
-                            <input type="submit" name="deleteCharacter" value="🗑️" title="Supprimer">
-                        </form>
+
                         <a href="?c=character&id=<?= $data['id'] ?>" style="display: inline">
                             <h1
                                     class="character-name" style="display: inline"><?= $data['character_name'] ?></h1>
@@ -139,6 +136,23 @@ class CharacterManager
                         </table>
                         <input type="submit" name="update" value=" ↻" title="actualiser">
                     </form>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        if ($_SESSION['user']['id'] === $data['user_fk']) {
+                            $_SESSION['id'] = $data['id']
+                            ?>
+                            <input type="submit" name="deleteChoiceCharacter" value="❌" title="Supprimer"
+                                   style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
+                            <form method="post" action="?c=delete" class="deleteCharacter" style="display: none">
+
+                                <p class="Ask">Voulez vous vraiment supprimer ce personnage ?</p>
+                                <input type="submit" name="deleteCharacter" value="Oui" title="Supprimer">
+                            </form>
+                            <input type="submit" name="notDeleteCharacter" value="Non" title="Ne pas supprimer" style="display: none">
+                            <?php
+                        }
+                    }
+                    ?>
                     <?php
                 }
                 ?>
@@ -283,14 +297,15 @@ class CharacterManager
 
         if ($delete->execute()) {
             $alert = [];
+            $_SESSION['id'] = '';
             $alert[] = '<div class="alert-succes">Le personnage a été supprimé !</div>';
             if (count($alert) > 0) {
-                $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=home');
+                $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                header('Location: ' . $referer);
             }
         } else {
             $alert = [];
-            $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
+            $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=home');

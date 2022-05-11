@@ -603,10 +603,18 @@ input[name='update'] {
 #loginForm input {
     margin-top: 10px;
     border-radius: 10px;
+    height: 30px;
+}
+#loginForm input::selection {
+    border: #00c0c0;
+}
+#loginForm input:focus {
+    border: 5px ridge mediumspringgreen;
+    border-radius: 10px;
+    outline      : none;
 }
 
 #loginForm input[type=submit] {
-    margin-left: 100%;
     margin-top: 30px;
 }
 #loginForm input[type=submit]:hover {
@@ -632,14 +640,22 @@ input[name='update'] {
 #registerForm input {
     margin-top: 10px;
     border-radius: 10px;
+    height: 30px;
 }
 
 #registerForm input[type=submit] {
-    margin-left: 100%;
     margin-top: 30px;
 }
 #registerForm input[type=submit]:hover {
     background-color: #89f5f2;
+}
+#registerForm input::selection {
+    border: #00c0c0;
+}
+input[type=text]:focus {
+    border: 5px ridge mediumspringgreen;
+    border-radius: 10px;
+    outline      : none;
 }
 
 @keyframes alert {
@@ -1050,7 +1066,6 @@ input[name='update'] {
     }
 
     #loginForm input[type=submit] {
-        margin-left: 0;
         margin-top: 30px;
     }
     #loginForm input[type=submit]:hover {
@@ -1069,7 +1084,6 @@ input[name='update'] {
     }
 
     #registerForm input[type=submit] {
-        margin-left: 0;
         margin-top: 30px;
     }
 

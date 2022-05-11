@@ -194,18 +194,34 @@ if (deleteChoice) {
         })
     })
 }
-if (deleteChoiceComment) {
-    deleteChoiceComment.addEventListener("click", ()=> {
-        document.querySelector('input[name=deleteComment]').style.display = 'inline';
-        document.querySelector('input[name=notDeleteComment]').style.display = 'inline';
-        deleteChoiceComment.style.display = 'none';
-        ask.style.display = "inline";
-        document.querySelector('input[name=notDeleteComment]').addEventListener("click", ()=> {
-            document.querySelector('input[name=deleteComment]').style.display = 'none';
-            document.querySelector('input[name=notDeleteComment]').style.display = 'none';
-            deleteChoiceComment.style.display = 'inline';
-        })
 
+
+if (deleteChoiceComment) {
+        deleteChoiceComment.addEventListener("click", () => {
+            document.querySelector('input[name=deleteComment]').style.display = 'inline';
+            document.querySelector('input[name=notDeleteComment]').style.display = 'inline';
+            deleteChoiceComment.style.display = 'none';
+            ask.style.display = "inline";
+            if (document.querySelector('input[name=notDeleteComment]'))
+                document.querySelector('input[name=notDeleteComment]').addEventListener("click", () => {
+                    document.querySelector('input[name=deleteComment]').style.display = 'none';
+                    document.querySelector('input[name=notDeleteComment]').style.display = 'none';
+                    deleteChoiceComment.style.display = 'inline';
+                })
+        })
+}
+
+let deleteChoiceCharacter = document.querySelector('input[name=deleteChoiceCharacter]');
+if (deleteChoiceCharacter) {
+    deleteChoiceCharacter.addEventListener("click", ()=> {
+        document.querySelector('.deleteCharacter').style.display = 'inline';
+        document.querySelector('input[name=notDeleteCharacter]').style.display = 'inline';
+        deleteChoiceCharacter.style.display = 'none';
+        document.querySelector('input[name=notDeleteCharacter]').addEventListener("click", ()=> {
+            document.querySelector('.deleteCharacter').style.display = 'none';
+            document.querySelector('input[name=notDeleteCharacter]').style.display = 'none';
+            deleteChoiceCharacter.style.display = 'inline';
+        })
     })
 }
 
