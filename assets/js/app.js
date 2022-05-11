@@ -168,14 +168,14 @@ if (header) {
         document.querySelector('.menu').style.height = '100px';
         document.querySelector('input[name=searchBar]').style.animationName = 'searchBar';
         document.querySelector('input[name=searchBar]').style.animationDuration = '2s';
-        document.querySelector('input[name=searchBar]').style.width = '150px';
-
+        document.querySelector('input[name=searchBar]').style.animationFillMode = "forwards";
+        document.querySelector('input[name=searchBar]').classList.remove("search");
+        document.querySelector('input[name=searchBar]').classList.add('searchBar');
 
     })
     header.addEventListener('mouseout', ()=> {
         document.querySelector('.menu').style.height = '65px';
-        document.querySelector('input[name=searchBar]').style.animationName = '';
-        document.querySelector('input[name=searchBar]').style.width = '30px';
+        document.querySelector('input[name=searchBar]').style.animationName = 'searchBarEnd';
     })
 }
 let ask = document.querySelector(".ask");

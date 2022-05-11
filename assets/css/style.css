@@ -129,8 +129,14 @@ footer a {
     padding: 35px;
 }
 
-input[name="searchBar"] {
-    width: 30px;
+.searchBar {
+    width: 150px;
+    float: left;
+    height: 25px;
+}
+
+.search {
+    display: none;
     float: left;
     height: 25px;
 }
@@ -215,6 +221,8 @@ input[name="searchBar"] {
 
 .pictureCharacter img {
     border-radius: 15px;
+   max-width: 1200px;
+    max-height: 700px;
 }
 
 .pictureCharacter a {
@@ -672,11 +680,21 @@ input[name='update'] {
 
 @keyframes searchBar {
     0% {
-        width: 30px;
+        width: 0;
     }
 
     100% {
         width: 150px;
+    }
+}
+@keyframes searchBarEnd {
+    0% {
+        width: 95px;
+    }
+
+    100% {
+        width: 0;
+        opacity: 0;
     }
 }
 
@@ -720,6 +738,8 @@ input[name='update'] {
     }
 
     .home {
+        margin-top: 0;
+        margin-right: 5px;
         height: 40px;
         width: 40px;
     }
@@ -740,17 +760,49 @@ input[name='update'] {
         border: 3px mediumspringgreen solid;
     }
 
+    .homeProfil {
+        display: flex;
+        flex-direction: row;
+        margin-top: 15px;
+    }
+
     #login {
-        padding: 35px;
+        display: inline;
+        padding: 1px;
+        text-align: center;
+        margin-right: 5px;
     }
 
     #register {
-        padding: 35px;
+        display: inline;
+        padding: 1px;
+    }
+    .searchBar {
+        width: 95px;
+    }
+    .search {
+        width: 0;
+        height: 25px;
     }
 
-    input[name="searchBar"] {
-        width: 30px;
-        height: 25px;
+    @keyframes searchBar {
+        0% {
+            width: 0;
+        }
+
+        100% {
+            width: 95px;
+        }
+    }
+    @keyframes searchBarEnd {
+        0% {
+            width: 95px;
+        }
+
+        100% {
+            width: 0;
+            opacity: 0;
+        }
     }
 
     .fa-user-alt {

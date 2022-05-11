@@ -69,7 +69,7 @@ class Character_imageManager
                             ?>
                             <br>
                             <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
-                                 style="max-width: 1200px; max-height: 900px">
+                                 >
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -136,8 +136,7 @@ class Character_imageManager
                             ?>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
-                                                                            alt="<?= $data['image'] ?>"
-                                                                            style="max-width: 500px; max-height: 750px; display: inline"></a>
+                                                                            alt="<?= $data['image'] ?>"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -210,7 +209,7 @@ class Character_imageManager
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
-                                                                            style="max-width: 400px; max-height: 500px"></a>
+                                                                            ></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>

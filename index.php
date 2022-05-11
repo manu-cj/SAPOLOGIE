@@ -23,22 +23,24 @@ require __DIR__ . '/require.php';
         <div id="logo"><a href="?c=home">W.O.S</a></div>
         <div id="searchBar">
             <form action="?c=search" method="post">
-                <input type="text" value="" name="searchBar" placeholder="recherche"/>
+                <input type="text" value="" name="searchBar" class="search" placeholder="recherche"/>
                 <input type="submit" name="search" value="🔎"/>
             </form>
         </div>
         <div class="homeProfil">
-            <div class="home">
-                <a href="?c=home" title="Accueil"><i class="fas fa-home"></i></a>
-            </div>
             <?php
             if (!AbstractController::getSession('user')) {
                 ?>
-                <a href="?c=login" id="login">Se connecter</a>
                 <a href="?c=register" id="register">S'inscrire</a>
+                <br>
+                <a href="?c=login" id="login">Se connecter</a>
                 <?php
             }
             ?>
+            <div class="home">
+                <a href="?c=home" title="Accueil"><i class="fas fa-home"></i></a>
+            </div>
+
             <?php
             if (AbstractController::getSession('user')) {
             ?>
@@ -46,23 +48,29 @@ require __DIR__ . '/require.php';
                 <ul><i class="fas fa-user-alt" title="menu"></i></ul>
             </div>
         </div>
-        <?php
-        }
-        ?>
     </div>
+    <?php
+    }
+    if (AbstractController::getSession('user')) {
+    ?>
     <div class="profilMenu">
         <div id="profil">
             <nav>
                 <ul>
                     <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                     <?php
+
                     if (AbstractController::getRole('admin')) {
                         ?>
                         <li><a href="?c=espace-admin">Espace-Admin</a></li>
                         <?php
                     }
+
                     ?>
                     <li><a href="?c=logout">Se déconnecter</a></li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </nav>
         </div>
