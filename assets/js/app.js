@@ -30,6 +30,13 @@ if (updateDescription) {
         showElement(classUpdateDescription, classDescription, updateDescription);
         document.querySelector('input[name=deletePicture]').display = 'none';
         deleteChoice.style.display = 'none';
+        previous.style.display = 'inline';
+        previous.addEventListener('click', ()=> {
+            hideElement(classUpdateDescription, classDescription, updateDescription);
+            document.querySelector('input[name=deletePicture]').display = 'inline';
+            deleteChoice.style.display = 'inline';
+            previous.style.display = 'none';
+        })
     });
 }
 if (sendPicture) {

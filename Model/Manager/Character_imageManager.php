@@ -22,54 +22,70 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <div id="button">
-                                <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
-                                <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
-                                       style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user']['id'] === $data['user_fk']) {
+                                    ?>
+                                    <div id="button">
+                                        <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
+                                        <input type="submit" name="deleteChoice" value="❌" title="Supprimer"
+                                               style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
 
-                                <form method="post" action="?c=delete" style="display: none" id="deletePicture">
-                                    <input type="text" name="filename" value="<?= $data['image'] ?>"
-                                           style="display: none">
-                                    <label for="deletePicture">Voulez vous supprimer cette publication ?</label>
-                                    <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
-                                </form>
-                                <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"
-                                       style="display: none; height: 30px">
-                            </div>
-                            <a href="?c=profil&id=<?= $data2['id'] ?> "style="width: 100%"><h3><?= $data2['username'] ?></h3></a>
+                                        <form method="post" action="?c=delete" style="display: none" id="deletePicture">
+                                            <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                                   style="display: none">
+                                            <label for="deletePicture">Voulez vous supprimer cette publication ?</label>
+                                            <input type="submit" name="deletePicture" value="Oui" title="Supprimer">
+                                        </form>
+                                        <input type="submit" name="notDeletePicture" value="Non" title="Supprimer"
+                                               style="display: none; height: 30px">
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <a href="?c=profil&id=<?= $data2['id'] ?> " style="width: 100%">
+                                <h3><?= $data2['username'] ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 if ($_SESSION['user']['id'] === $data['user_fk']) {
                                     ?>
-                                    <form method="post" action="?c=picture&id=<?= $id ?>&a=update-picture-description"
-                                          style="display: none" class="updateDescription">
-                                        <select name="visibility">
-                                            <optgroup label="Public">
-                                                <option name="public" value="2"> Ajouter la publication dans le fil
-                                                    d'actualité
-                                                </option>
-                                            </optgroup>
-                                            <optgroup label="Profil">
-                                                <option name="profil" value="3"> Ne pas ajouter la publication dans le
-                                                    fil
-                                                    d'actualité
-                                                </option>
-                                            </optgroup>
-                                        </select>
+                                    <div class="formDerscription">
+                                        <button id="previous" style="display: none; width: 8%" title="Précédent">⇦</button>
                                         <br>
-                                        <textarea name="description" cols="45"
-                                                  rows="10"><?= $data['description'] ?></textarea>
-                                        <input type="number" name="id" value="<?= $data['id'] ?>" style="display: none">
-                                        <input type="submit" name="updateDescription" value="▶">
-                                    </form>
+                                        <form method="post"
+                                              action="?c=picture&id=<?= $id ?>&a=update-picture-description"
+                                              style="display: none" class="updateDescription">
+                                            <select name="visibility">
+                                                <optgroup label="Public">
+                                                    <option name="public" value="2"> Ajouter la publication dans le fil
+                                                        d'actualité
+                                                    </option>
+                                                </optgroup>
+                                                <optgroup label="Profil">
+                                                    <option name="profil" value="3"> Ne pas ajouter la publication dans
+                                                        le
+                                                        fil
+                                                        d'actualité
+                                                    </option>
+                                                </optgroup>
+                                            </select>
+                                            <br>
+                                            <textarea name="description" cols="45"
+                                                      rows="10"><?= $data['description'] ?></textarea>
+                                            <input type="number" name="id" value="<?= $data['id'] ?>"
+                                                   style="display: none">
+                                            <input type="submit" name="updateDescription" value="▶">
+                                        </form>
+                                    </div>
                                     <?php
                                 }
                             }
                             ?>
                             <br>
                             <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
-                                 >
+                            >
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -81,7 +97,8 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: #d3ffff">
+                                        <input type="submit" name="send" value="▶"
+                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: #d3ffff">
                                     </form>
                                 </div>
                                 <?php
@@ -117,7 +134,8 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><h3><?=ucfirst($data2['username']) ?></h3></a>
+                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%">
+                                <h3><?= ucfirst($data2['username']) ?></h3></a>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <br>
                             <br>
@@ -128,7 +146,8 @@ class Character_imageManager
                                     <form method="post" action="?c=delete">
                                         <input type="text" name="filename" value="<?= $data['image'] ?>"
                                                style="display: none">
-                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer" style=" border: none; background-color: rgba(0, 139, 129, 0)">
+                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer"
+                                               style=" border: none; background-color: rgba(0, 139, 129, 0)">
                                     </form>
                                     <?php
                                 }
@@ -149,7 +168,8 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                        <input type="submit" name="send" value="▶"
+                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
                                     </form>
                                 </div>
                                 <br>
@@ -189,7 +209,7 @@ class Character_imageManager
                     foreach ($files as $filename) {
                         ?>
                         <div class="pictureCharacter">
-                            <h3 style="display: none"><?=ucfirst($data2['username']) ?></h3>
+                            <h3 style="display: none"><?= ucfirst($data2['username']) ?></h3>
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <br>
                             <br>
@@ -209,7 +229,7 @@ class Character_imageManager
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
                                                                             alt="<?= $data['image'] ?>"
-                                                                            ></a>
+                                ></a>
                             <?php
                             if (isset($_SESSION['user'])) {
                                 ?>
@@ -221,7 +241,8 @@ class Character_imageManager
                                                style="display: none">
                                         <input type="text" name="comment" placeholder="Ecrire un commentaire"
                                                style="display: inline">
-                                        <input type="submit" name="send" value="▶" style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                        <input type="submit" name="send" value="▶"
+                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
                                     </form>
                                 </div>
                                 <?php

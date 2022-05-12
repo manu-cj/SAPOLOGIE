@@ -230,6 +230,18 @@ footer a {
     font-size: x-large;
 }
 
+.formDerscription {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.formDerscription form textarea, select{
+    width: 100%;
+}
+
+
 .description {
     width: 100%;
     font-size: 1.2em;
@@ -322,9 +334,13 @@ input[name="comment"] {
     border: 7px white solid;
 }
 
+.character a {
+    height: 100%;
+}
+
 .character a, h1, h3 {
     color: rgba(255, 255, 255, 0.99);
-    background-color: rgba(112, 115, 115, 0.35);
+    background-color: rgba(112, 115, 115, 0.20);
     font-size: 1em;
 }
 
