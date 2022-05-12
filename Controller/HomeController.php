@@ -8,7 +8,7 @@ class HomeController extends AbstractController
         $this->render('public/home');
         Mail_validateManager::getMailValidate();
         Character_imageManager::getCharacterPictureForHome();
-
+        User_roleManager::getUserRole();
 
         if (isset($_GET['getRole'])) {
             User_roleManager::getUserRole();

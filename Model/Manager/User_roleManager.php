@@ -16,11 +16,11 @@ class User_roleManager
                 if ($get->execute()) {
                     $datas2 = $get->fetchAll();
                     foreach ($datas2 as $data2) {
-                        $_SESSION['role'] = $data2;
+                        $_SESSION['role'] = $data2['role'];
                     }
                 }
 
-                echo $_SESSION['role']['role'];
+                echo $_SESSION['role'];
             }
         }
     }

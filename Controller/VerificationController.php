@@ -6,13 +6,17 @@ class VerificationController extends AbstractController {
     {
         $this->render('public/verification');
         if ($this->getPost('verifMail')) {
-
+            Mail_validateManager::updateCode();
+            $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+            header('Location: ' . $referer);
         }
         if (!isset($_GET['username'])) {
-            header('LOCATION: ?c=home');
+            $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+            header('Location: ' . $referer);
         }
         if (!isset($_GET['code'])) {
-            header('LOCATION: ?c=home');
+            $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+            header('Location: ' . $referer);
         }
         else {
             Mail_validateManager::VerifMailLink();

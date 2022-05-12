@@ -113,7 +113,7 @@ class CharacterManager
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
-
+                    <a href="https://worldofwarcraft.com/fr-fr/character/<?=$data['server_name']?>/<?=$data['character_name']?>"target="_blank" style="display: inline"><i class="fas fa-external-link-alt"></i></a>
                     <p style="display: inline" id="updateCharacter"><i class="fas fa-cog"
                                                                        title="Modifier le personnage"></i></p>
                     <p id="previous" style="display: none"> ⇦</p>
@@ -157,6 +157,7 @@ class CharacterManager
                     <?php
                 }
                 ?>
+
                 <div class="character <?= $data['classe'] ?>">
                     <h1 class="name"><?= $data['character_name'] ?></h1>
                     <h3 class="classe"><?= $data['classe'] ?></h3>

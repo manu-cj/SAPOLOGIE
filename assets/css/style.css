@@ -677,6 +677,10 @@ input[type=text]:focus {
     outline      : none;
 }
 
+.fa-external-link-alt{
+
+}
+
 @keyframes alert {
     0% {
         margin-top: 5px;

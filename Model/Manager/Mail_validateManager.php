@@ -70,4 +70,20 @@ class Mail_validateManager
             $_SESSION['mailValidate'] = $datas;
         }
     }
+
+    public static function updateCode() {
+        $update =Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET code = :code");
+
+        $comb = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array();
+        $combLen = strlen($comb) - 1;
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $combLen);
+            $pass[] = $comb[$n];
+        }
+        $pass = implode($pass);
+
+        $update->bindValue(':code', $pass);
+        $update->execute();
+    }
 }

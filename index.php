@@ -60,7 +60,7 @@ require __DIR__ . '/require.php';
                     <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                     <?php
 
-                    if (AbstractController::getRole('admin')) {
+                    if ($_SESSION['role'] === 'admin') {
                         ?>
                         <li><a href="?c=espace-admin">Espace-Admin</a></li>
                         <?php
