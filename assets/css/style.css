@@ -422,7 +422,6 @@ input[name="comment"] {
     opacity: 90%;
 }
 
-
 .Paladin {
     width: 20%;
     height: 350px;
@@ -509,6 +508,10 @@ input[name="comment"] {
     border: 4px solid white;
     margin-top: 20px;
     padding: 5%;
+}
+
+.showUserData {
+    margin-bottom: 100px;
 }
 
 .showUserData:hover, .hideUserData:hover {

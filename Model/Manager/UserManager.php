@@ -144,6 +144,7 @@ class UserManager extends User
                     </form>
                     <h3 class="mailData" style="display: inline">Adresse e-mail :
                         ****<?= substr($data['mail'], -11) ?></h3>
+
                     <button class="changeMailButton">📝</button>
                     <br>
                     <form action="?c=profil&a=update-profil" method="post" id="formMail" style="display: none">
@@ -197,10 +198,23 @@ class UserManager extends User
                             <td><input type="submit" name="deleteAccount" value="Supprimer le compte" required></td>
                         </tr>
                     </form>
+                    <?php
+                    $validate = $_SESSION['mailValidate']['validate'];
+                    if ($validate === '0') {
+                        ?>
+                        <form method="post" action="?c=verification">
+                            <input type="submit" name="verifMail" value="Vérifier l'adresse mail"
+                                   title="vérifier l'adresse mail">
+                        </form>
+                        <?php
+                    }
+                    ?>
                 </div>
 
                 <?php
+
             }
+
             ?>
             <?php
         }
@@ -287,8 +301,7 @@ class UserManager extends User
                         $_SESSION['alert'] = $alert;
                         header('LOCATION: ?c=logout');
                     }
-                }
-                else {
+                } else {
                     $alert[] = '<div class="alert-error">Le mot de passe est incorrecte !</div>';
                     $_SESSION['alert'] = $alert;
                     header('LOCATION: ?c=profil&id=' . $id);
@@ -297,12 +310,13 @@ class UserManager extends User
         }
     }
 
-    public static function getAllUser() {
+    public static function getAllUser()
+    {
         $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_user");
 
         if ($select->execute()) {
             ?>
-          <div class="userList">
+            <div class="userList">
                 <h3>Liste des utilisateurs</h3>
                 <?php
                 $datas = $select->fetchAll();
@@ -323,12 +337,12 @@ class UserManager extends User
                         </tbody>
                     </table>
                     <div class="userInteraction">
-                    <form action="?c=espace-admin" method="post" style="display: inline">
-                        <input type="text" name="username" value="<?= $data['username'] ?>" style="display: none">
-                        <input type="text" name="mail" value="<?= $data['mail'] ?>" style="display: none">
-                        <input type="submit" name="addModo" class="submit" value="👑" alt="Ajouter modo"
-                               title="Ajouter modo">
-                    </form>
+                        <form action="?c=espace-admin" method="post" style="display: inline">
+                            <input type="text" name="username" value="<?= $data['username'] ?>" style="display: none">
+                            <input type="text" name="mail" value="<?= $data['mail'] ?>" style="display: none">
+                            <input type="submit" name="addModo" class="submit" value="👑" alt="Ajouter modo"
+                                   title="Ajouter modo">
+                        </form>
                     </div>
                     <?php
                 }

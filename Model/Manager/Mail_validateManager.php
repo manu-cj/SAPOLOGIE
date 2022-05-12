@@ -58,4 +58,16 @@ class Mail_validateManager
             }
         }
     }
+
+    public static function getMailValidate()
+    {
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE user_fk = :user_fk");
+
+        $get->bindValue(':user_fk', $_SESSION['user']['username']);
+
+        if ($get->execute()) {
+            $datas = $get->fetch();
+            $_SESSION['mailValidate'] = $datas;
+        }
+    }
 }
