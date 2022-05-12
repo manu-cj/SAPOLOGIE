@@ -22,7 +22,7 @@ class UserManager extends User
         $insert->bindValue(':date', $date);
         $alert = [];
         if ($insert->execute()) {
-            UserManager::ConnectUser($user->getMail(), $user->getPassword());
+            Mail_validateManager::addMailValidate($user->getUsername());
             $alert[] = '<div class="alert-succes">Inscription réussi !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
