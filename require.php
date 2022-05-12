@@ -34,5 +34,6 @@ require __DIR__.'/Controller/SearchController.php';
 require __DIR__. '/Controller/PictureController.php';
 require __DIR__. '/Controller/DeleteController.php';
 require __DIR__. '/Controller/AdminController.php';
+require __DIR__. '/Controller/VerificationController.php';
 
 require __DIR__. '/Routeur/Routeur.php';

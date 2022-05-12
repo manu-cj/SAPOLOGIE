@@ -119,6 +119,9 @@ switch ($page) {
     case 'espace-admin':
         Routeur::route('AdminController', $action);
         break;
+    case 'verification':
+        Routeur::route('VerificationController', $action);
+        break;
     default:
         ErrorController::error404($page);
 }
