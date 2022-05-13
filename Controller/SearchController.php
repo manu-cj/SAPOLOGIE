@@ -15,13 +15,15 @@ class SearchController extends AbstractController
             if ($_GET['result'] !== '') {
                 $result = htmlentities($_GET['result']);
                 CharacterManager::getNameCharacter($result);
+                CharacterManager::getClasseCharacter($result);
+            }
+            else {
+                echo '<br><div class="alert error">Vous n\'avez pas rempli le champs recherche !</div>';
             }
             if ($_GET['result'] === 'all-character'){
                 CharacterManager::getAllCharacter();
             }
-            else {
-                echo '<div class="alert error">Vous n\'avez pas rempli le champs recherche !</div>';
-            }
+
         }
     }
 }

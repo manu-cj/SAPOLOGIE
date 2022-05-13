@@ -302,7 +302,6 @@ class CharacterManager
             $datas = $select->fetchAll();
             ?>
             <div class="all-character">
-
                 <?php
                 foreach ($datas as $data) {
                     ?>
@@ -318,8 +317,9 @@ class CharacterManager
                 ?>
             </div>
             <?php
-            CharacterManager::getClasseCharacter($name);
-
+            if ($select->rowCount() === 0) {
+                echo 'aucune personnage ne porte ce nom';
+            }
         }
     }
 
@@ -332,7 +332,6 @@ class CharacterManager
             $datas = $select->fetchAll();
             ?>
             <div class="all-classe">
-
                 <?php
                 foreach ($datas
 
@@ -354,7 +353,7 @@ class CharacterManager
             </div>
             <?php
             if ($select->rowCount() === 0) {
-                echo 'aucun resultat';
+                echo 'aucune classe ne porte ce nom';
             }
         }
     }
