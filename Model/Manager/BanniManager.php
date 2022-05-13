@@ -131,4 +131,19 @@ class BanniManager
             }
         }
     }
+
+    public static function getBannMail() {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_bannis WHERE mail = :mail");
+        $select->bindValue(":mail", $_SESSION['user']['mail']);
+
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+
+            foreach ($datas as $data) {
+                if ($data['banni'] === '1') {
+                    $_SESSION['banni'] = $data['banni'];
+                }
+            }
+        }
+    }
 }
