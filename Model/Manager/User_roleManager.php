@@ -20,7 +20,6 @@ class User_roleManager
                     }
                 }
 
-                echo $_SESSION['role'];
             }
         }
     }
