@@ -62,14 +62,14 @@ class CharacterManager
                     $validate = $_SESSION['mailValidate'];
                     if ($validate === '1') {
                         ?>
-                    <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter un
-                        personnage</a>
-                    <?php
-                    }
-                    else {
+                        <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter
+                            un
+                            personnage</a>
+                        <?php
+                    } else {
                         ?>
                         <h4>Veuillez vérifier l'adresse mail de votre compte pour créer un personnage !</h4>
-                            <?php
+                        <?php
                     }
                 }
             }
@@ -121,7 +121,18 @@ class CharacterManager
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
                     ?>
-                    <a href="https://worldofwarcraft.com/fr-fr/character/<?=$data['server_name']?>/<?=$data['character_name']?>"target="_blank" style="display: inline"><i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://worldofwarcraft.com/fr-fr/character/<?= $data['server_name'] ?>/<?= $data['character_name'] ?>"
+                       target="_blank" style="display: inline"><i class="fas fa-external-link-alt"></i></a>
+                       <?php
+                     $validate = $_SESSION['mailValidate'];
+                        if ($validate === '0') {
+                            ?>
+                            <h4>Veuillez vérifier votre adresse mail pour modifier votre personnage !</h4>
+                            <?php
+
+                        }
+                    if ($validate === '1') {
+                        ?>
                     <p style="display: inline" id="updateCharacter"><i class="fas fa-cog"
                                                                        title="Modifier le personnage"></i></p>
                     <p id="previous" style="display: none"> ⇦</p>
@@ -145,8 +156,9 @@ class CharacterManager
                         <input type="submit" name="update" value=" ↻" title="actualiser">
                     </form>
                     <?php
+                    }
                     if (isset($_SESSION['user'])) {
-                        if ($_SESSION['user']['id'] === $data['user_fk']  or $_SESSION['role'] === 'admin') {
+                        if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
                             $_SESSION['id'] = $data['id']
                             ?>
                             <input type="submit" name="deleteChoiceCharacter" value="❌" title="Supprimer"
@@ -175,42 +187,51 @@ class CharacterManager
                 <?php
                 if (isset($_SESSION['user'])) {
                     if ($data['user_fk'] === $_SESSION['user']['id']) {
-                        ?>
-                        <div style="margin-bottom: 150px">
-                            <h1 id="sendPicture">Ajouter une image ⬇</h1>
-                            <h1 id="hidden" style="display: none">Cacher ⬆ </h1>
-                            <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
-                                  enctype="multipart/form-data" id="addPicture" style="display: none">
-                                <input type="file" name="characterImage">
-                                <br>
-                                <br>
-                                <label for="description">Description :</label>
-                                <br>
-                                <textarea name="description" cols="45" rows="10"></textarea>
-                                <br>
-                                <label for="visibility">Visibilité :</label>
-                                <br>
-                                <br>
-                                <select name="visibility">
-                                    <optgroup label="Public">
-                                        <option name="public" value="2"> Ajouter la publication dans le fil d'actualité
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Profil">
-                                        <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
-                                            d'actualité
-                                        </option>
-                                    </optgroup>
-                                </select>
-                                <br>
-                                <br>
-                                <input type="number" name="characterId" value="<?= $characterId ?>"
-                                       style="display: none">
-                                <input type="submit" name="upload">
-                            </form>
-                        </div>
-                        <br>
-                        <?php
+                        $validate = $_SESSION['mailValidate'];
+                        if ($validate === '0') {
+                            ?>
+                            <h4>Veuillez vérifier votre adresse mail pour ajouter une image de votre personnage !</h4>
+                            <?php
+                        }
+                            if ($validate === '1') {
+                            ?>
+                            <div style="margin-bottom: 150px">
+                                <h1 id="sendPicture">Ajouter une image ⬇</h1>
+                                <h1 id="hidden" style="display: none">Cacher ⬆ </h1>
+                                <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
+                                      enctype="multipart/form-data" id="addPicture" style="display: none">
+                                    <input type="file" name="characterImage">
+                                    <br>
+                                    <br>
+                                    <label for="description">Description :</label>
+                                    <br>
+                                    <textarea name="description" cols="45" rows="10"></textarea>
+                                    <br>
+                                    <label for="visibility">Visibilité :</label>
+                                    <br>
+                                    <br>
+                                    <select name="visibility">
+                                        <optgroup label="Public">
+                                            <option name="public" value="2"> Ajouter la publication dans le fil
+                                                d'actualité
+                                            </option>
+                                        </optgroup>
+                                        <optgroup label="Profil">
+                                            <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
+                                                d'actualité
+                                            </option>
+                                        </optgroup>
+                                    </select>
+                                    <br>
+                                    <br>
+                                    <input type="number" name="characterId" value="<?= $characterId ?>"
+                                           style="display: none">
+                                    <input type="submit" name="upload">
+                                </form>
+                            </div>
+                            <br>
+                            <?php
+                        }
                     }
                 }
             }

@@ -188,6 +188,7 @@ class UserManager extends User
                         <button id="no">Non</button>
                     </div>
                     <br>
+                    <br>
                     <form id="formDeleteAccount" method="post" action="?c=profil&a=delete-profil" style="display: none">
                         <h2>Supprimer le compte :</h2>
                         <tr>
@@ -198,11 +199,13 @@ class UserManager extends User
                             <td><input type="submit" name="deleteAccount" value="Supprimer le compte" required></td>
                         </tr>
                     </form>
+                    <br>
+                    <br>
                     <?php
                     $validate = $_SESSION['mailValidate'];
                     if ($validate === '0') {
                         ?>
-                        <form method="post" action="?c=verification">
+                        <form method="post" action="?c=verification" style="text-align: center">
                             <input type="submit" name="verifMail" value="Vérifier l'adresse mail"
                                    title="vérifier l'adresse mail">
                         </form>

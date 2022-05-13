@@ -52,7 +52,8 @@ class Character_imageManager
                                 if ($_SESSION['user']['id'] === $data['user_fk']) {
                                     ?>
                                     <div class="formDerscription">
-                                        <button id="previous" style="display: none; width: 8%" title="Précédent">⇦</button>
+                                        <button id="previous" style="display: none; width: 8%" title="Précédent">⇦
+                                        </button>
                                         <br>
                                         <form method="post"
                                               action="?c=picture&id=<?= $id ?>&a=update-picture-description"
@@ -88,23 +89,38 @@ class Character_imageManager
                             >
                             <?php
                             if (isset($_SESSION['user'])) {
-                                ?>
-                                <div id="comment">
-                                    <form method="post" action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                        <input type="number" name="userFk" value="<?= $_SESSION['user']['id'] ?>"
-                                               style="display: none">
-                                        <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
-                                               style="display: none">
-                                        <input type="text" name="comment" placeholder="Ecrire un commentaire"
-                                               style="display: inline">
-                                        <input type="submit" name="send" value="▶"
-                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: #d3ffff">
-                                    </form>
-                                </div>
-                                <?php
+                                if (isset($_SESSION['mailValidate'])) {
+                                    $validate = $_SESSION['mailValidate'];
+                                    if ($validate === '1') {
+
+                                        ?>
+                                        <div id="comment">
+                                            <form method="post"
+                                                  action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                <input type="number" name="userFk"
+                                                       value="<?= $_SESSION['user']['id'] ?>" style="display: none">
+                                                <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
+                                                       style="display: none">
+                                                <input type="text" name="comment" placeholder="Ecrire un commentaire"
+                                                       style="display: inline">
+                                                <input type="submit" name="send" value="▶"
+                                                       style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                            </form>
+                                        </div>
+                                        <br>
+                                        <?php
+                                    }
+                                } if ($validate === '0') {
+                                    ?>
+                                    <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un commentaire</h4>
+                                    <?php
+                                }
                             }
-                            ?>
-                        </div>
+                            else{
+                                ?>
+                                <h4>Veuillez vous connecter pour écrire un commentaire</h4>
+                                    <?php
+                            }?> </div>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
                         ?>
@@ -158,31 +174,43 @@ class Character_imageManager
                                                                             alt="<?= $data['image'] ?>"></a>
                             <?php
                             if (isset($_SESSION['user'])) {
-                                ?>
-                                <div id="comment">
-                                    <form method="post"
-                                          action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                        <input type="number" name="userFk"
-                                               value="<?= $_SESSION['user']['id'] ?>" style="display: none">
-                                        <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
-                                               style="display: none">
-                                        <input type="text" name="comment" placeholder="Ecrire un commentaire"
-                                               style="display: inline">
-                                        <input type="submit" name="send" value="▶"
-                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
-                                    </form>
-                                </div>
-                                <br>
-                                <?php
-                            }
-                            ?>
-                        </div>
+                                if (isset($_SESSION['mailValidate'])) {
+                                    $validate = $_SESSION['mailValidate'];
+                                    if ($validate === '1') {
 
+                                        ?>
+                                        <div id="comment">
+                                            <form method="post"
+                                                  action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                <input type="number" name="userFk"
+                                                       value="<?= $_SESSION['user']['id'] ?>" style="display: none">
+                                                <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
+                                                       style="display: none">
+                                                <input type="text" name="comment" placeholder="Ecrire un commentaire"
+                                                       style="display: inline">
+                                                <input type="submit" name="send" value="▶"
+                                                       style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                            </form>
+                                        </div>
+                                        <br>
+                                        <?php
+                                    }
+                                } if ($validate === '0') {
+                                    ?>
+                                    <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un commentaire</h4>
+                                    <?php
+                                }
+                            } else{
+                                ?>
+                                <h4>Veuillez vous connecter pour écrire un commentaire</h4>
+                                <?php
+                            }?> </div>
                         <?php
                         CommentManager::getLastComment($data['id'], 1);
                         ?>
                         <br>
                         <?php
+
 
                     }
                 }
@@ -232,23 +260,37 @@ class Character_imageManager
                                 ></a>
                             <?php
                             if (isset($_SESSION['user'])) {
+                                if (isset($_SESSION['mailValidate'])) {
+                                    $validate = $_SESSION['mailValidate'];
+                                    if ($validate === '1') {
+
+                                        ?>
+                                        <div id="comment">
+                                            <form method="post"
+                                                  action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                <input type="number" name="userFk"
+                                                       value="<?= $_SESSION['user']['id'] ?>" style="display: none">
+                                                <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
+                                                       style="display: none">
+                                                <input type="text" name="comment" placeholder="Ecrire un commentaire"
+                                                       style="display: inline">
+                                                <input type="submit" name="send" value="▶"
+                                                       style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                            </form>
+                                        </div>
+                                        <br>
+                                        <?php
+                                    }
+                                } if ($validate === '0') {
+                                    ?>
+                                    <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un commentaire</h4>
+                                    <?php
+                                }
+                            } else{
                                 ?>
-                                <div id="comment">
-                                    <form method="post" action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                        <input type="number" name="userFk" value="<?= $_SESSION['user']['id'] ?>"
-                                               style="display: none">
-                                        <input type="number" name="characterImageFk" value="<?= $data['id'] ?>"
-                                               style="display: none">
-                                        <input type="text" name="comment" placeholder="Ecrire un commentaire"
-                                               style="display: inline">
-                                        <input type="submit" name="send" value="▶"
-                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
-                                    </form>
-                                </div>
+                                <h4>Veuillez vous connecter pour écrire un commentaire</h4>
                                 <?php
-                            }
-                            ?>
-                        </div>
+                            }?> </div>
                         <?php
                         CommentManager::getLastComment($data['id'], $limit);
                         ?>

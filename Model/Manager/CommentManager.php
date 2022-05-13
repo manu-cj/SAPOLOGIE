@@ -48,7 +48,6 @@ class CommentManager
             $datas = $select->fetchAll();
             ?>
             <div class="allDataComment">
-
             <?php
             foreach ($datas as $data) {
                 $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
@@ -84,10 +83,10 @@ class CommentManager
                 $id = $data['character_image_fk'];
             }
             if (!isset($_GET['picture'])) {
-                if ($select->rowCount() >= 1) {
+                if ($select->rowCount() === 1) {
                     echo '<a href="?c=picture&id=' . $id . '">Voir plus de commentaires ⬇</a><br><br>';
                 }
-                if ($select->rowCount() === 0) {
+                if ($select->rowCount() === 0 or $select->rowCount() > 2) {
                     echo '<a href="?c=picture&id=' . $id . '" style="display: none">Voir plus de commentaires ⬇</a><br><br>';
                 }
             }
