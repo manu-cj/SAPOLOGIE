@@ -62,7 +62,7 @@ class CommentManager
                                 </b></a></b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
                         <?php
                         if (isset($_SESSION['user'])) {
-                            if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'user') {
+                            if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
                                 ?>
                                 <form method="post" action="?c=delete" style="display: inline; width: 100%">
                                     <input type="text" name="idComment" value="<?= $data['id'] ?>"

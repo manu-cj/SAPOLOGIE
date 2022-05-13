@@ -59,10 +59,18 @@ class CharacterManager
             <?php
             if (isset($_SESSION['user'])) {
                 if ($_GET['id'] === $_SESSION['user']['id']) {
-                    ?>
+                    $validate = $_SESSION['mailValidate'];
+                    if ($validate === '1') {
+                        ?>
                     <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter un
                         personnage</a>
                     <?php
+                    }
+                    else {
+                        ?>
+                        <h4>Veuillez vérifier l'adresse mail de votre compte pour créer un personnage !</h4>
+                            <?php
+                    }
                 }
             }
         }
@@ -138,7 +146,7 @@ class CharacterManager
                     </form>
                     <?php
                     if (isset($_SESSION['user'])) {
-                        if ($_SESSION['user']['id'] === $data['user_fk']) {
+                        if ($_SESSION['user']['id'] === $data['user_fk']  or $_SESSION['role'] === 'admin') {
                             $_SESSION['id'] = $data['id']
                             ?>
                             <input type="submit" name="deleteChoiceCharacter" value="❌" title="Supprimer"

@@ -9,6 +9,9 @@ class UserController extends AbstractController
     public function index()
     {
         $this->render('user/profil');
+        if (isset($_SESSION['user'])) {
+            Mail_validateManager::getMailValidate();
+        }
 
         if (empty($_GET['id'])) {
             $alert[] = '<div class="alert-error">Imposible de se rendre sur la page</div>';

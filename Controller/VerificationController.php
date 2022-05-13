@@ -6,7 +6,8 @@ class VerificationController extends AbstractController {
     {
         $this->render('public/verification');
         if ($this->getPost('verifMail')) {
-            Mail_validateManager::updateCode();
+            $userFk =$_SESSION['user']['username'];
+            Mail_validateManager::updateCode($userFk);
             $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
             header('Location: ' . $referer);
         }

@@ -1,4 +1,10 @@
-
+<?php
+$validate = $_SESSION['mailValidate'];
+if ($validate === '0') {
+    $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+    header('Location: ' . $referer);
+}
+?>
 <form action="?c=profil&a=add-character&id=<?=$_SESSION['user']['id']?>" method="post" id="add-character">
     <table>
         <tr>
@@ -34,4 +40,6 @@
     </table>
     <input type="submit" name="add" value="Ajouter">
 </form>
+
+
 

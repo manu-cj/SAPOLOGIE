@@ -66,13 +66,16 @@ class Mail_validateManager
         $get->bindValue(':user_fk', $_SESSION['user']['username']);
 
         if ($get->execute()) {
-            $datas = $get->fetch();
-            $_SESSION['mailValidate'] = $datas;
+            $datas = $get->fetchAll();
+            foreach ($datas as $data) {
+                $_SESSION['mailValidate'] = $data['validate'];
+            }
         }
     }
 
-    public static function updateCode() {
-        $update =Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET code = :code");
+    public static function updateCode($userFk) {
+        $update =Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET code = :code WHERE user_fk = :user_fk");
+        $update->bindValue(':user_fk', $userFk);
 
         $comb = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array();

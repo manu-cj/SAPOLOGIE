@@ -199,7 +199,7 @@ class UserManager extends User
                         </tr>
                     </form>
                     <?php
-                    $validate = $_SESSION['mailValidate']['validate'];
+                    $validate = $_SESSION['mailValidate'];
                     if ($validate === '0') {
                         ?>
                         <form method="post" action="?c=verification">
