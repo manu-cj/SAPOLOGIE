@@ -175,8 +175,7 @@ class Character_imageManager
                             <?php
                             if (isset($_SESSION['user'])) {
                                 if (isset($_SESSION['mailValidate'])) {
-                                    $validate = $_SESSION['mailValidate'];
-                                    if ($validate === '1') {
+                                    if ($_SESSION['mailValidate'] === '1') {
 
                                         ?>
                                         <div id="comment">
@@ -195,7 +194,7 @@ class Character_imageManager
                                         <br>
                                         <?php
                                     }
-                                } if ($validate === '0') {
+                                } if ($_SESSION['mailValidate'] === '0') {
                                     ?>
                                     <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un commentaire</h4>
                                     <?php

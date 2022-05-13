@@ -10,9 +10,7 @@ class HomeController extends AbstractController
 
         Character_imageManager::getCharacterPictureForHome();
         if  (isset($_SESSION['user'])) {
-            if (isset($_SESSION['mailValidate'])) {
                 Mail_validateManager::getMailValidate();
-            }
             User_roleManager::getUserRole();
         }
 
