@@ -134,7 +134,8 @@ class CharacterManager
                 if (isset($_SESSION['user'])) {
                     ?>
                     <a href="https://worldofwarcraft.com/fr-fr/character/<?= $data['server_name'] ?>/<?= $data['character_name'] ?>"
-                       target="_blank" style="display: inline"><i class="fas fa-external-link-alt"></i></a>
+                       target="_blank" style="display: inline" title="Armurerie" alt="Armurerie"><i
+                                class="fas fa-external-link-alt"></i></a>
                     <?php
                     $validate = $_SESSION['mailValidate'];
                     if ($validate === '0') {
@@ -338,9 +339,11 @@ class CharacterManager
                          as $data) {
                     ?>
                     <div class="character <?= $data['classe'] ?>">
-                        <h1 class="name"><?= $data['character_name'] ?></h1>
-                        <h3 class="classe"><?= $data['classe'] ?></h3>
-                        <h3 class="server"><?= $data['server_name'] ?></h3>
+                        <a href="?c=character&id=<?= $data['id'] ?>">
+                            <h1 class="name"><?= $data['character_name'] ?></h1>
+                            <h3 class="classe"><?= $data['classe'] ?></h3>
+                            <h3 class="server"><?= $data['server_name'] ?></h3>
+                        </a>
                     </div>
                     </a>
 
