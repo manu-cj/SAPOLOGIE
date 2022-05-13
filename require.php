@@ -20,6 +20,7 @@ require __DIR__. '/Model/Manager/RoleManager.php';
 require __DIR__. '/Model/Manager/User_roleManager.php';
 require __DIR__. '/Model/Manager/UserManager.php';
 require __DIR__. '/Model/Manager/View_publicationManager.php';
+require __DIR__. '/Model/Manager/BanniManager.php';
 
 
 require __DIR__ . '/Controller/AbstractController.php';

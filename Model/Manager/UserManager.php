@@ -50,6 +50,7 @@ class UserManager extends User
             foreach ($datas as $data) {
                 if (password_verify($password, $data['password'])) {
                     $_SESSION['user'] = $data;
+                    $_SESSION['banni'] = '0';
                     $alert[] = '<div class="alert-error">Vous êtes connecté, Bonjour ' . $data['username'] . ' !</div>';
                     if (count($alert) > 0) {
                         $_SESSION['alert'] = $alert;
@@ -315,12 +316,12 @@ class UserManager extends User
 
     public static function getAllUser()
     {
-        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_user");
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_user ORDER BY username ASC");
 
         if ($select->execute()) {
             ?>
             <div class="userList">
-                <h3>Liste des utilisateurs</h3>
+                <h2>Liste des utilisateurs</h2>
                 <?php
                 $datas = $select->fetchAll();
                 foreach ($datas as $data) {
@@ -334,7 +335,7 @@ class UserManager extends User
 
                         </tr>
                         <tr>
-                            <td><?= $data['username'] ?></td>
+                            <td><?=ucfirst($data['username']) ?></td>
                             <td><?= date('d-m-y ', strtotime($data['date'])) ?></td>
 
                         </tbody>
@@ -343,8 +344,9 @@ class UserManager extends User
                         <form action="?c=espace-admin" method="post" style="display: inline">
                             <input type="text" name="username" value="<?= $data['username'] ?>" style="display: none">
                             <input type="text" name="mail" value="<?= $data['mail'] ?>" style="display: none">
-                            <input type="submit" name="addModo" class="submit" value="👑" alt="Ajouter modo"
-                                   title="Ajouter modo">
+                            <input type="text" name="userFk" value="<?= $data['id'] ?>" style="display: none">
+                            <input type="submit" name="bannUser" class="submit" value="Bannir <?= $data['username'] ?>" alt="Bannir"
+                                   title="Bannir">
                         </form>
                     </div>
                     <?php
@@ -352,6 +354,9 @@ class UserManager extends User
                 ?>
             </div>
             <?php
+            if ($select->rowCount() === 0) {
+                echo 'aucun utilisateur';
+            }
         }
     }
 

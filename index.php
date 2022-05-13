@@ -5,6 +5,7 @@ use App\Controller\ErrorController\ErrorController;
 session_start();
 require __DIR__ . '/require.php';
 
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -127,7 +128,7 @@ switch ($page) {
 }
 ?>
 <footer>
-    <div class="footerMenu"><a href="?c=contact" title="Contact">Contact</a></div>
+    <div class="footerMenu"><a href="?c=contact" title="Contact">Contact <?=$_SESSION['banni']?></a></div>
 </footer>
 
 <script src="https://kit.fontawesome.com/d8438e7f2f.js" crossorigin="anonymous"></script>

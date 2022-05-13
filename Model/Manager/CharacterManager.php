@@ -61,17 +61,27 @@ class CharacterManager
                 if ($_GET['id'] === $_SESSION['user']['id']) {
                     $validate = $_SESSION['mailValidate'];
                     if ($validate === '1') {
-                        ?>
-                        <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter
-                            un
-                            personnage</a>
-                        <?php
+                        if ($_SESSION['banni'] === '0') {
+                            ?>
+                            <a href="?c=profil&a=add-character&id=<?= $_SESSION['user']['id'] ?>" id="addCharacter">Ajouter
+                                un
+                                personnage</a>
+                            <?php
+                        } else {
+                            ?>
+                            <h4>Vous avez été banni par un Admin vous ne pouvez pas créer de personnage !</h4>
+                            <?php
+                        }
                     } else {
                         ?>
                         <h4>Veuillez vérifier l'adresse mail de votre compte pour créer un personnage !</h4>
                         <?php
+
                     }
                 }
+            }
+            if ($select->rowCount() === 0) {
+                echo '<br>aucun personnage';
             }
         }
     }
@@ -104,7 +114,9 @@ class CharacterManager
                 ?>
             </div>
             <?php
-
+            if ($select->rowCount() === 0) {
+                echo 'aucun resultat';
+            }
         }
     }
 
@@ -123,58 +135,68 @@ class CharacterManager
                     ?>
                     <a href="https://worldofwarcraft.com/fr-fr/character/<?= $data['server_name'] ?>/<?= $data['character_name'] ?>"
                        target="_blank" style="display: inline"><i class="fas fa-external-link-alt"></i></a>
-                       <?php
-                     $validate = $_SESSION['mailValidate'];
-                        if ($validate === '0') {
-                            ?>
-                            <h4>Veuillez vérifier votre adresse mail pour modifier votre personnage !</h4>
-                            <?php
-
-                        }
-                    if ($validate === '1') {
+                    <?php
+                    $validate = $_SESSION['mailValidate'];
+                    if ($validate === '0') {
                         ?>
-                    <p style="display: inline" id="updateCharacter"><i class="fas fa-cog"
-                                                                       title="Modifier le personnage"></i></p>
-                    <p id="previous" style="display: none"> ⇦</p>
-                    <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post"
-                          id="formUpdateCharacter" style="display: none">
-                        <table>
-                            <tr>
-                                <td><label for="name">Nom du personnage :</label></td>
-                                <td><input type="text" name="name" id="name" value="<?= $data['character_name'] ?>"
-                                           required></td>
-                            </tr>
+                        <h4>Veuillez vérifier votre adresse mail pour modifier votre personnage !</h4>
+                        <?php
 
-                            <tr>
-                                <td><label for="serveur">Nom du serveur :</label></td>
-                                <td><input type="text" name="serveur" id="serveur" value="<?= $data['server_name'] ?>"
-                                           required></td>
-                            </tr>
-                            <input type="text" name="id" value="<?= $data['id'] ?>" style="display: none">
-
-                        </table>
-                        <input type="submit" name="update" value=" ↻" title="actualiser">
-                    </form>
-                    <?php
                     }
-                    if (isset($_SESSION['user'])) {
-                        if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
-                            $_SESSION['id'] = $data['id']
-                            ?>
-                            <input type="submit" name="deleteChoiceCharacter" value="❌" title="Supprimer"
-                                   style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
-                            <form method="post" action="?c=delete" class="deleteCharacter" style="display: none">
+                    if ($_SESSION['banni'] === '1') {
+                        ?>
+                        <h4>Vous avez été banni par un Admin vous ne pouvez pas modifier votre personnage !</h4>
+                        <?php
+                    }
 
-                                <p class="Ask">Voulez vous vraiment supprimer ce personnage ?</p>
-                                <input type="submit" name="deleteCharacter" value="Oui" title="Supprimer">
+                    if ($validate === '1') {
+                        if ($_SESSION['banni'] === '0') {
+                            ?>
+                            <p style="display: inline" id="updateCharacter"><i class="fas fa-cog"
+                                                                               title="Modifier le personnage"></i></p>
+                            <p id="previous" style="display: none"> ⇦</p>
+                            <form action="?c=character&a=update-character&id=<?= $data['id'] ?>" method="post"
+                                  id="formUpdateCharacter" style="display: none">
+                                <table>
+                                    <tr>
+                                        <td><label for="name">Nom du personnage :</label></td>
+                                        <td><input type="text" name="name" id="name"
+                                                   value="<?= $data['character_name'] ?>"
+                                                   required></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label for="serveur">Nom du serveur :</label></td>
+                                        <td><input type="text" name="serveur" id="serveur"
+                                                   value="<?= $data['server_name'] ?>"
+                                                   required></td>
+                                    </tr>
+                                    <input type="text" name="id" value="<?= $data['id'] ?>" style="display: none">
+
+                                </table>
+                                <input type="submit" name="update" value=" ↻" title="actualiser">
                             </form>
-                            <input type="submit" name="notDeleteCharacter" value="Non" title="Ne pas supprimer"
-                                   style="display: none">
                             <?php
                         }
+                        if (isset($_SESSION['user'])) {
+                            if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
+                                $_SESSION['id'] = $data['id']
+                                ?>
+                                <input type="submit" name="deleteChoiceCharacter" value="❌" title="Supprimer"
+                                       style="display: inline; border: none; background-color: rgba(0, 139, 129, 0)">
+                                <form method="post" action="?c=delete" class="deleteCharacter" style="display: none">
+
+                                    <p class="Ask">Voulez vous vraiment supprimer ce personnage ?</p>
+                                    <input type="submit" name="deleteCharacter" value="Oui" title="Supprimer">
+                                </form>
+                                <input type="submit" name="notDeleteCharacter" value="Non" title="Ne pas supprimer"
+                                       style="display: none">
+                                <?php
+                            }
+                        }
+                        ?>
+                        <?php
                     }
-                    ?>
-                    <?php
                 }
                 ?>
 
@@ -190,47 +212,55 @@ class CharacterManager
                         $validate = $_SESSION['mailValidate'];
                         if ($validate === '0') {
                             ?>
-                            <h4>Veuillez vérifier votre adresse mail pour ajouter une image de votre personnage !</h4>
+                            <h4>Veuillez vérifier votre adresse mail pour ajouter d'images de votre personnage !</h4>
                             <?php
                         }
-                            if ($validate === '1') {
+                        if ($_SESSION['banni'] === '1') {
                             ?>
-                            <div style="margin-bottom: 150px">
-                                <h1 id="sendPicture">Ajouter une image ⬇</h1>
-                                <h1 id="hidden" style="display: none">Cacher ⬆ </h1>
-                                <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
-                                      enctype="multipart/form-data" id="addPicture" style="display: none">
-                                    <input type="file" name="characterImage">
-                                    <br>
-                                    <br>
-                                    <label for="description">Description :</label>
-                                    <br>
-                                    <textarea name="description" cols="45" rows="10"></textarea>
-                                    <br>
-                                    <label for="visibility">Visibilité :</label>
-                                    <br>
-                                    <br>
-                                    <select name="visibility">
-                                        <optgroup label="Public">
-                                            <option name="public" value="2"> Ajouter la publication dans le fil
-                                                d'actualité
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label="Profil">
-                                            <option name="profil" value="3"> Ne pas ajouter la publication dans le fil
-                                                d'actualité
-                                            </option>
-                                        </optgroup>
-                                    </select>
-                                    <br>
-                                    <br>
-                                    <input type="number" name="characterId" value="<?= $characterId ?>"
-                                           style="display: none">
-                                    <input type="submit" name="upload">
-                                </form>
-                            </div>
-                            <br>
+                            <h4>Vous avez été banni vous ne pouvez pas ajouter d'images de votre personnage !</h4>
                             <?php
+                        }
+                        if ($validate === '1') {
+                            if ($_SESSION['banni'] === '0') {
+                                ?>
+                                <div style="margin-bottom: 150px">
+                                    <h1 id="sendPicture">Ajouter une image ⬇</h1>
+                                    <h1 id="hidden" style="display: none">Cacher ⬆ </h1>
+                                    <form method="post" action="?c=character&a=add-picture&id=<?= $characterId ?>"
+                                          enctype="multipart/form-data" id="addPicture" style="display: none">
+                                        <input type="file" name="characterImage">
+                                        <br>
+                                        <br>
+                                        <label for="description">Description :</label>
+                                        <br>
+                                        <textarea name="description" cols="45" rows="10"></textarea>
+                                        <br>
+                                        <label for="visibility">Visibilité :</label>
+                                        <br>
+                                        <br>
+                                        <select name="visibility">
+                                            <optgroup label="Public">
+                                                <option name="public" value="2"> Ajouter la publication dans le fil
+                                                    d'actualité
+                                                </option>
+                                            </optgroup>
+                                            <optgroup label="Profil">
+                                                <option name="profil" value="3"> Ne pas ajouter la publication dans le
+                                                    fil
+                                                    d'actualité
+                                                </option>
+                                            </optgroup>
+                                        </select>
+                                        <br>
+                                        <br>
+                                        <input type="number" name="characterId" value="<?= $characterId ?>"
+                                               style="display: none">
+                                        <input type="submit" name="upload">
+                                    </form>
+                                </div>
+                                <br>
+                                <?php
+                            }
                         }
                     }
                 }
@@ -320,6 +350,9 @@ class CharacterManager
             </div>
             </div>
             <?php
+            if ($select->rowCount() === 0) {
+                echo 'aucun resultat';
+            }
         }
     }
 
