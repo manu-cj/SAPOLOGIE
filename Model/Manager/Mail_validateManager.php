@@ -4,30 +4,28 @@
 class Mail_validateManager
 {
 
-    public static function addMailValidate($userFk)
+    public static function addMailValidate($mail)
     {
-        $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_mail_validate (validate, user_fk, code) VALUES (:validate, :user_fk, :code)");
+        $insert = Connect::getPDO()->prepare("INSERT INTO aiu12_mail_validate (validate, mail, code) VALUES (:validate, :mail, :code)");
 
-        $comb = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array();
-        $combLen = strlen($comb) - 1;
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $combLen);
-            $pass[] = $comb[$n];
-        }
-        $pass = implode($pass);
+        $pass = (new DateTime())->format('YmdHis') . uniqid();
+
 
         $insert->bindValue(':validate', 0);
-        $insert->bindValue(':user_fk', $userFk);
+        $insert->bindValue(':mail', $mail);
         $insert->bindValue(':code', $pass);
 
-        $insert->execute();
+        if ($insert->execute()) {
+            AbstractController::sendMail('$mail', 'Activer votre compte', 'Bienvenue sur notre Site,
+Pour activer votre compte, veuillez cliquer sur le lien ci dessous world-of-sapologie.com/?c=verification&mail='.$mail .'&code='.$pass, 'FROM: blog@world-of-sapologie.com');
+        }
+
     }
 
     public static function VerifMailLink()
     {
-        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE user_fk = :user_fk");
-        $select->bindValue(':user_fk', $_GET['username']);
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE mail = :mail");
+        $select->bindValue(':mail', $_GET['mail']);
         $alert = [];
         if ($select->execute()) {
             $datas = $select->fetchAll();
@@ -61,9 +59,9 @@ class Mail_validateManager
 
     public static function getMailValidate()
     {
-        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE user_fk = :user_fk");
+        $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE mail = :mail");
 
-        $get->bindValue(':user_fk', $_SESSION['user']['username']);
+        $get->bindValue(':mail', $_SESSION['user']['mail']);
 
         if ($get->execute()) {
             $datas = $get->fetchAll();
@@ -73,20 +71,56 @@ class Mail_validateManager
         }
     }
 
-    public static function updateCode($userFk) {
-        $update =Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET code = :code WHERE user_fk = :user_fk");
-        $update->bindValue(':user_fk', $userFk);
+    public static function updateCode($mail) {
+        $update =Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET code = :code WHERE mail = :mail");
+        $update->bindValue(':mail', $mail);
 
-        $comb = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array();
-        $combLen = strlen($comb) - 1;
-        for ($i = 0; $i < 8; $i++) {
-            $n = rand(0, $combLen);
-            $pass[] = $comb[$n];
-        }
-        $pass = implode($pass);
+        $pass = (new DateTime())->format('YmdHis') . uniqid();
 
         $update->bindValue(':code', $pass);
-        $update->execute();
+       if ($update->execute()) {
+           AbstractController::sendMail('$mail', 'Activer votre compte', 'Pour activer votre compte, veuillez cliquer sur le lien ci dessous world-of-sapologie.com/?c=verification&mail='.$mail .'&code='.$pass, 'FROM: blog@world-of-sapologie.com');
+       }
+    }
+
+    public static function ForgotPassword($mail, $forgotPassword) {
+        $insert = Connect::getPDO()->prepare("UPDATE aiu12_mail_validate SET forgot_password = :forgot_password WHERE mail = :mail");
+        $insert->bindValue('mail', $mail);
+        $insert->bindValue(':forgot_password', $forgotPassword);
+        if ($insert->execute()) {
+            mail('$mail', 'Activer votre compte', 'Bienvenue sur notre Site,
+Pour activer votre compte, veuillez cliquer sur le lien ci dessous world-of-sapologie.com/?c=verification&mail='.$mail .'&code='.$forgotPassword, 'FROM: blog@world-of-sapologie.com');
+            $alert = [];
+            $alert[] = '<div class="alert-succes">Un mail de vérification vous a été envoyé</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                header('Location: ' . $referer);
+            }
+        }
+    }
+
+    public static function verifCodeForgotPassword($mail, $code) {
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_mail_validate WHERE mail = :mail");
+        $select->bindValue(':mail', $mail);
+
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if ($code === $data['forgot_password']) {
+                    $_SESSION['mail'] = $mail;
+                    header('LOCATION: ?c=reset-password');
+                }
+                else {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">Ce lien n\'est pas valide</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                        header('Location: ' . $referer);
+                    }
+                }
+            }
+        }
     }
 }

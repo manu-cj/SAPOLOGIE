@@ -22,7 +22,7 @@ class UserManager extends User
         $insert->bindValue(':date', $date);
         $alert = [];
         if ($insert->execute()) {
-            Mail_validateManager::addMailValidate($user->getUsername());
+            Mail_validateManager::addMailValidate($user->getMail());
             $alert[] = '<div class="alert-succes">Inscription réussi !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
@@ -285,6 +285,35 @@ class UserManager extends User
         }
     }
 
+    public static function passwordUpdateWithMail(User $user, $mail)
+    {
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET password = :password WHERE mail = :mail");
+        $update->bindValue(':password', $user->getPassword());
+        $update->bindValue(':mail', $mail);
+        $alert = [];
+        if ($update->execute()) {
+            $_SESSION['mail'] = '';
+            unset($_SESSION['mail']);
+            $alert[] = '<div class="alert-succes">Le mot de passe a été mis à jour !</div>';
+                $_SESSION['alert'] = $alert;
+                header('Location: ?c=login');
+
+        } else {
+            $alert[] = '<div class="alert-error">Une erreur est survenue !</div>';
+            if (count($alert) > 0) {
+                $_SESSION['alert'] = $alert;
+                $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+                header('Location: ' . $referer);
+            }
+        }
+
+        if (count($alert) > 0) {
+            $_SESSION['alert'] = $alert;
+            header('Location: ?c=login');
+        }
+    }
+
+
     public static function deleteAccount($password, $id)
     {
         $get = Connect::getPDO()->prepare("SELECT * FROM aiu12_user WHERE id = :id");
@@ -335,7 +364,7 @@ class UserManager extends User
 
                         </tr>
                         <tr>
-                            <td><?=ucfirst($data['username']) ?></td>
+                            <td><?= ucfirst($data['username']) ?></td>
                             <td><?= date('d-m-y ', strtotime($data['date'])) ?></td>
 
                         </tbody>
@@ -345,7 +374,8 @@ class UserManager extends User
                             <input type="text" name="username" value="<?= $data['username'] ?>" style="display: none">
                             <input type="text" name="mail" value="<?= $data['mail'] ?>" style="display: none">
                             <input type="text" name="userFk" value="<?= $data['id'] ?>" style="display: none">
-                            <input type="submit" name="bannUser" class="submit" value="Bannir <?= $data['username'] ?>" alt="Bannir"
+                            <input type="submit" name="bannUser" class="submit" value="Bannir <?= $data['username'] ?>"
+                                   alt="Bannir"
                                    title="Bannir">
                         </form>
                     </div>

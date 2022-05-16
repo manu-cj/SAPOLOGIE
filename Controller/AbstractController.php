@@ -21,4 +21,8 @@ abstract class AbstractController
     public static function getRole($nameRole) {
         return $_SESSION['role']['role'] === $nameRole;
     }
+
+    public static function sendMail($destinataire, $sujet, $message, $entete) {
+        return mail($destinataire, $sujet, $message, $entete);
+    }
 }

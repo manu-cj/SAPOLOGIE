@@ -123,6 +123,12 @@ switch ($page) {
     case 'verification':
         Routeur::route('VerificationController', $action);
         break;
+    case 'forgot-password':
+        Routeur::route('ForgotPasswordController', $action);
+        break;
+    case 'reset-password':
+        Routeur::route('ResetPasswordController', $action);
+        break;
     default:
         ErrorController::error404($page);
 }
