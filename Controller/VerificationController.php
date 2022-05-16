@@ -11,7 +11,7 @@ class VerificationController extends AbstractController {
             $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
             header('Location: ' . $referer);
         }
-        if (!isset($_GET['username'])) {
+        if (!isset($_GET['mail'])) {
             $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
             header('Location: ' . $referer);
         }
