@@ -17,6 +17,9 @@ class User_roleManager
                     $datas2 = $get->fetchAll();
                     foreach ($datas2 as $data2) {
                         $_SESSION['role'] = $data2['role'];
+
+                            header('Location: ?c=home');
+
                     }
                 }
 

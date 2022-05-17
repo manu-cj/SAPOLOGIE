@@ -61,7 +61,7 @@ require __DIR__ . '/require.php';
                     <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                     <?php
 
-                    if (isset($_SESSION['role']['admin'])) {
+                    if ($_SESSION['role'] === 'admin') {
                         ?>
                         <li><a href="?c=espace-admin">Espace-Admin</a></li>
                         <?php
@@ -134,7 +134,7 @@ switch ($page) {
 }
 ?>
 <footer>
-    <div class="footerMenu"><a href="?c=contact" title="Contact">Contact <?=$_SESSION['banni']?></a></div>
+    <div class="footerMenu"><a href="?c=contact" title="Contact">Contact</a></div>
 </footer>
 
 <script src="https://kit.fontawesome.com/d8438e7f2f.js" crossorigin="anonymous"></script>
