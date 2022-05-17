@@ -206,6 +206,7 @@ footer a {
 
 .pictureCharacter {
     width: 65%;
+    max-width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.125);
     border-bottom: none;
     border-top-left-radius: 12px;
@@ -222,8 +223,9 @@ footer a {
 
 .pictureCharacter img {
     border-radius: 15px;
-   max-width: 1200px;
+    max-width: 100%;
     max-height: 700px;
+    margin-bottom: 50px;
 }
 
 .pictureCharacter a {
@@ -870,8 +872,9 @@ input[type=mail]:focus {
     }
 
     .pictureCharacter img {
-        width: 90%;
-        margin-left: 5%;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 50px;
     }
 
     .description {
