@@ -887,6 +887,7 @@ input[type=mail]:focus {
         width: 90%;
         border: rgba(255, 255, 255, 0.36) 2px groove;
     }
+
     #comment {
         width: 100%;
         display: flex;
