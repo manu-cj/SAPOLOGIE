@@ -24,7 +24,7 @@ class Character_imageManager
                         <div class="pictureCharacter">
                             <?php
                             if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user']['id'] === $data['user_fk']) {
+                                if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
                                     ?>
                                     <div id="button">
                                         <p style="display: inline" id="update"><i class="fas fa-cog"></i></p>
@@ -49,7 +49,7 @@ class Character_imageManager
                             <div class="description" style="display: inline"><?= $data['description'] ?></div>
                             <?php
                             if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user']['id'] === $data['user_fk']) {
+                                if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
                                     ?>
                                     <div class="formDerscription">
                                         <button id="previous" style="display: none; width: 8%" title="Précédent">⇦
@@ -349,12 +349,12 @@ class Character_imageManager
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
-                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                    if ($data['user_fk'] === $_SESSION['user']['id'] or $_SESSION['role'] === 'admin') {
                         $delete = Connect::getPDO()->prepare("Delete  From aiu12_character_image WHERE image = :image");
                         $delete->bindValue(':image', $picture);
 
                         if ($delete->execute()) {
-                            unlink('uploads/'.$picture);
+                            unlink('uploads/' . $picture);
                             $alert = [];
                             $alert[] = '<div class="alert-succes">Le photo a été supprimé !</div>';
                             if (count($alert) > 0) {
@@ -394,18 +394,53 @@ class Character_imageManager
     public
     static function updatePictureDescription(Character_image $description, int $id)
     {
-        $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description, view_fk = :view_fk WHERE id = :id");
-        $update->bindValue(':description', $description->getDescription());
-        $update->bindValue(':view_fk', $description->getViewFk());
-        $update->bindValue(':id', $id);
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE id = :id");
+        $select->bindValue(':id', $id);
+        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if (isset($_SESSION['user'])) {
+                    if ($data['user_fk'] === $_SESSION['user']['id'] or $_SESSION['role'] === 'admin') {
+                        $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description, view_fk = :view_fk WHERE id = :id");
+                        $update->bindValue(':description', $description->getDescription());
+                        $update->bindValue(':view_fk', $description->getViewFk());
+                        $update->bindValue(':id', $id);
 
-        if ($update->execute()) {
+                        if ($update->execute()) {
+                            $alert = [];
+                            $alert[] = '<div class="alert-succes">Description mise à jour !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('LOCATION: ?c=picture&id=' . $id);
+                            }
+                        }
+                    } else {
+                        $alert = [];
+                        $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                        if (count($alert) > 0) {
+                            $_SESSION['alert'] = $alert;
+                            header('Location: ' . $referer);
+                        }
+                    }
+                } else {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('Location: ' . $referer);
+                    }
+                }
+            }
+        } else {
             $alert = [];
-            $alert[] = '<div class="alert-succes">Description mise à jour !</div>';
+            $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=picture&id=' . $id);
+                header('Location: ' . $referer);
             }
         }
     }
+
+
 }

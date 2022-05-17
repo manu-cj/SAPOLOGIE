@@ -44,7 +44,6 @@ class CommentManager
 
 
         if ($select->execute()) {
-
             $datas = $select->fetchAll();
             ?>
             <div class="allDataComment">

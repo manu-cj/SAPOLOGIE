@@ -367,7 +367,7 @@ class CharacterManager
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
-                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                    if ($data['user_fk'] === $_SESSION['user']['id'] or $_SESSION['role'] === 'admin') {
                         $delete = Connect::getPDO()->prepare("Delete  From aiu12_character WHERE id = :id");
                         $delete->bindValue(':id', $id);
 
@@ -418,7 +418,7 @@ class CharacterManager
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
                 if (isset($_SESSION['user'])) {
-                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                    if ($data['user_fk'] === $_SESSION['user']['id'] or $_SESSION['role'] === 'admin') {
                         $update = Connect::getPDO()->prepare("UPDATE aiu12_character SET character_name = :character_name, server_name = :server_name
                                                     WHERE id = :id");
                         $update->bindValue(':character_name', $character->getCharacterName());
