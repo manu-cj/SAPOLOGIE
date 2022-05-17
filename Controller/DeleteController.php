@@ -9,7 +9,6 @@ class DeleteController extends AbstractController
         if ($this->getPost('deletePicture')){
             $picture = htmlentities($_POST['filename']);
             if (file_exists('uploads/'.$picture)) {
-                unlink('uploads/'.$picture);
                 Character_imageManager::deletePicture($picture);
             }
         }

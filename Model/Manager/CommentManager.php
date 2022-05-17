@@ -102,15 +102,39 @@ class CommentManager
 
     public static function deleteComment($id)
     {
-        $delete = Connect::getPDO()->prepare("Delete  From aiu12_comment WHERE id = :id");
-        $delete->bindValue(':id', $id);
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_comment WHERE id = :id");
+        $select->bindValue(':id', $id);
+        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if (isset($_SESSION['user'])) {
+                    if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
+                        $delete = Connect::getPDO()->prepare("Delete  From aiu12_comment WHERE id = :id");
+                        $delete->bindValue(':id', $id);
 
-        if ($delete->execute()) {
-            $alert = [];
-            $alert[] = '<div class="alert-succes">Le commentaire a été supprimé !</div>';
-            if (count($alert) > 0) {
-                $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=home');
+                        if ($delete->execute()) {
+                            $alert = [];
+                            $alert[] = '<div class="alert-succes">Le commentaire a été supprimé !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('Location: ' . $referer);
+                            }
+                        }
+                    } else {
+                        $alert[] = '<div class="alert-error">Vous ne pouvez pas effectuer cette action !</div>';
+                        if (count($alert) > 0) {
+                            $_SESSION['alert'] = $alert;
+                            header('Location: ' . $referer);
+                        }
+                    }
+                } else {
+                    $alert[] = '<div class="alert-error">Vous ne pouvez pas effectuer cette action !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('Location: ' . $referer);
+                    }
+                }
             }
         }
     }

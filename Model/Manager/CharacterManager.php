@@ -360,48 +360,101 @@ class CharacterManager
 
     public static function deleteCharacter($id)
     {
-        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character WHERE id = :id");
-        $delete->bindValue(':id', $id);
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE id = :id");
+        $select->bindValue(':id', $id);
+        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if (isset($_SESSION['user'])) {
+                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character WHERE id = :id");
+                        $delete->bindValue(':id', $id);
 
-        if ($delete->execute()) {
-            $alert = [];
-            $_SESSION['id'] = '';
-            $alert[] = '<div class="alert-succes">Le personnage a été supprimé !</div>';
-            if (count($alert) > 0) {
-                $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
-                header('Location: ' . $referer);
+                        if ($delete->execute()) {
+                            $alert = [];
+                            $_SESSION['id'] = '';
+                            $alert[] = '<div class="alert-succes">Le personnage a été supprimé !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('Location: ' . $referer);
+                            }
+                        } else {
+                            $alert = [];
+                            $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('Location: ' . $referer);
+                            }
+                        }
+                    }
+                } else {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('Location: ' . $referer);
+                    }
+                }
             }
         } else {
             $alert = [];
             $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=home');
+                header('Location: ' . $referer);
             }
         }
+
+
     }
 
     public static function updateCharacter(Character $character, $id)
     {
-        $update = Connect::getPDO()->prepare("UPDATE aiu12_character SET character_name = :character_name, server_name = :server_name
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character WHERE id = :id");
+        $select->bindValue(':id', $id);
+        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if (isset($_SESSION['user'])) {
+                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                        $update = Connect::getPDO()->prepare("UPDATE aiu12_character SET character_name = :character_name, server_name = :server_name
                                                     WHERE id = :id");
-        $update->bindValue(':character_name', $character->getCharacterName());
-        $update->bindValue(':server_name', $character->getServer());
-        $update->bindValue(':id', $id);
-        if ($update->execute()) {
-            $alert = [];
-            $alert[] = '<div class="alert-succes">Le personnage a été mis à jour !</div>';
-            if (count($alert) > 0) {
-                $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id=' . $id);
+                        $update->bindValue(':character_name', $character->getCharacterName());
+                        $update->bindValue(':server_name', $character->getServer());
+                        $update->bindValue(':id', $id);
+                        if ($update->execute()) {
+                            $alert = [];
+                            $alert[] = '<div class="alert-succes">Le personnage a été mis à jour !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('LOCATION: ?c=character&id=' . $id);
+                            }
+                        }
+                    } else {
+                        $alert[] = '<div class="alert-error">Vous ne pouvez pas effectuer cette action !</div>';
+                        if (count($alert) > 0) {
+                            $_SESSION['alert'] = $alert;
+                            header('Location: ' . $referer);
+                        }
+                    }
+                } else {
+                    $alert[] = '<div class="alert-error">Vous ne pouvez pas effectuer cette action !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('Location: ' . $referer);
+                    }
+                }
             }
         } else {
             $alert = [];
-            $alert[] = '<div class="alert-succes">Une erreur c\'est produite !</div>';
+            $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=character&id=' . $id);
+                header('Location: ' . $referer);
             }
         }
+
     }
 }

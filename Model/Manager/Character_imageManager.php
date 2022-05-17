@@ -189,42 +189,42 @@ class Character_imageManager
                                 if (isset($_SESSION['mailValidate'])) {
                                     if ($_SESSION['mailValidate'] === '1') {
 
-                                            if ($_SESSION['banni'] === '0') {
+                                        if ($_SESSION['banni'] === '0') {
 
-                                                ?>
-                                                <div id="comment">
-                                                    <form method="post"
-                                                          action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                                        <input type="number" name="userFk"
-                                                               value="<?= $_SESSION['user']['id'] ?>"
-                                                               style="display: none">
-                                                        <input type="number" name="characterImageFk"
-                                                               value="<?= $data['id'] ?>"
-                                                               style="display: none">
-                                                        <input type="text" name="comment"
-                                                               placeholder="Ecrire un commentaire"
-                                                               style="display: inline">
-                                                        <input type="submit" name="send" value="▶"
-                                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
-                                                    </form>
-                                                </div>
-                                                <br>
-                                                <?php
-                                            }
-                                        }
-                                        if ($_SESSION['mailValidate'] === '0') {
                                             ?>
-                                            <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
-                                                commentaire</h4>
+                                            <div id="comment">
+                                                <form method="post"
+                                                      action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                    <input type="number" name="userFk"
+                                                           value="<?= $_SESSION['user']['id'] ?>"
+                                                           style="display: none">
+                                                    <input type="number" name="characterImageFk"
+                                                           value="<?= $data['id'] ?>"
+                                                           style="display: none">
+                                                    <input type="text" name="comment"
+                                                           placeholder="Ecrire un commentaire"
+                                                           style="display: inline">
+                                                    <input type="submit" name="send" value="▶"
+                                                           style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                                </form>
+                                            </div>
+                                            <br>
                                             <?php
                                         }
                                     }
-                                    if ($_SESSION['banni'] === '1') {
+                                    if ($_SESSION['mailValidate'] === '0') {
                                         ?>
-                                        <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
-                                            commentaire !</h4>
+                                        <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
+                                            commentaire</h4>
                                         <?php
                                     }
+                                }
+                                if ($_SESSION['banni'] === '1') {
+                                    ?>
+                                    <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
+                                        commentaire !</h4>
+                                    <?php
+                                }
                             } else {
                                 ?>
                                 <h4>Veuillez vous connecter pour écrire un commentaire</h4>
@@ -342,20 +342,57 @@ class Character_imageManager
 
     public static function deletePicture($picture)
     {
-        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character_image WHERE image = :image");
-        $delete->bindValue(':image', $picture);
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE image = :image");
+        $select->bindValue(':image', $picture);
+        $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
+        if ($select->execute()) {
+            $datas = $select->fetchAll();
+            foreach ($datas as $data) {
+                if (isset($_SESSION['user'])) {
+                    if ($data['user_fk'] === $_SESSION['user']['id']) {
+                        $delete = Connect::getPDO()->prepare("Delete  From aiu12_character_image WHERE image = :image");
+                        $delete->bindValue(':image', $picture);
 
-        if ($delete->execute()) {
+                        if ($delete->execute()) {
+                            unlink('uploads/'.$picture);
+                            $alert = [];
+                            $alert[] = '<div class="alert-succes">Le photo a été supprimé !</div>';
+                            if (count($alert) > 0) {
+                                $_SESSION['alert'] = $alert;
+                                header('LOCATION: ?c=home');
+                            }
+                        }
+                    } else {
+                        $alert = [];
+                        $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                        if (count($alert) > 0) {
+                            $_SESSION['alert'] = $alert;
+                            header('Location: ' . $referer);
+                        }
+                    }
+
+                } else {
+                    $alert = [];
+                    $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
+                    if (count($alert) > 0) {
+                        $_SESSION['alert'] = $alert;
+                        header('Location: ' . $referer);
+                    }
+                }
+            }
+        } else {
             $alert = [];
-            $alert[] = '<div class="alert-succes">Le photo a été supprimé !</div>';
+            $alert[] = '<div class="alert-error">Une erreur c\'est produite !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=home');
+                header('Location: ' . $referer);
             }
         }
+
     }
 
-    public static function updatePictureDescription(Character_image $description, int $id)
+    public
+    static function updatePictureDescription(Character_image $description, int $id)
     {
         $update = Connect::getPDO()->prepare("UPDATE aiu12_character_image SET description = :description, view_fk = :view_fk WHERE id = :id");
         $update->bindValue(':description', $description->getDescription());
