@@ -129,6 +129,9 @@ switch ($page) {
     case 'reset-password':
         Routeur::route('ResetPasswordController', $action);
         break;
+    case 'contact':
+        Routeur::route('ContactController', $action);
+        break;
     default:
         ErrorController::error404($page);
 }
