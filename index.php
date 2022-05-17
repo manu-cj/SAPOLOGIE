@@ -61,7 +61,7 @@ require __DIR__ . '/require.php';
                     <li><a href="?c=profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                     <?php
 
-                    if ($_SESSION['role'] === 'admin') {
+                    if (isset($_SESSION['role']['admin'])) {
                         ?>
                         <li><a href="?c=espace-admin">Espace-Admin</a></li>
                         <?php
