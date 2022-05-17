@@ -77,9 +77,6 @@ if (hideUserData) {
 let changeUsernameButton = document.querySelector('.changeUsernameButton');
 let changeMailButton = document.querySelector('.changeMailButton');
 let changePasswordButton = document.querySelector('.changePasswordButton');
-let usernameData = document.querySelector('.userData');
-let mailData = document.querySelector('.mailData');
-let passwordData = document.querySelector('.passwordData');
 let formUsername = document.querySelector('#formUsername');
 let formMail = document.querySelector('#formMail');
 let formPassword = document.querySelector('#formPassword');
@@ -142,7 +139,6 @@ if (deleteCheck) {
 let faUser = document.querySelector('.profil');
 
 if (faUser) {
-    let clic = 1;
     faUser.addEventListener("click", () => {
         document.querySelector('#profil').style.display = 'block';
     })
@@ -153,7 +149,7 @@ if (faUser) {
     document.querySelector('#profil').addEventListener("mouseout", () => {
         setTimeout(()=> {
             document.querySelector('#profil').style.display = 'none';
-        }, 2500)
+        }, 5000)
     })
 }
 
@@ -171,16 +167,6 @@ if (profil) {
 
 let  header = document.querySelector('header');
 
-if (header) {
-    header.addEventListener('mouseover', ()=> {
-        document.querySelector('.menu').style.height = '100px';
-
-
-    })
-    header.addEventListener('mouseleave', ()=> {
-            document.querySelector('.menu').style.height = '70px';
-    })
-}
 
 let deleteChoice = document.querySelector('input[name=deleteChoice]');
 let deleteChoiceComment = document.querySelector('input[name=deleteChoiceComment]');
@@ -209,7 +195,7 @@ if (deleteChoiceComment) {
             document.querySelector('input[name=deleteComment]').style.display = 'inline';
             document.querySelector('input[name=notDeleteComment]').style.display = 'inline';
             deleteChoiceComment.style.display = 'none';
-            ask.style.display = "inline";
+
             if (document.querySelector('input[name=notDeleteComment]'))
                 document.querySelector('input[name=notDeleteComment]').addEventListener("click", () => {
                     document.querySelector('input[name=deleteComment]').style.display = 'none';
