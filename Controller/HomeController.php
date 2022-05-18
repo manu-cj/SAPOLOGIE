@@ -28,4 +28,8 @@ class HomeController extends AbstractController
         }
 
     }
+
+    public function mention() {
+        $this->render('public/mentionLegales');
+    }
 }

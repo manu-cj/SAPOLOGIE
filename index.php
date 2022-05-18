@@ -132,12 +132,17 @@ switch ($page) {
     case 'contact':
         Routeur::route('ContactController', $action);
         break;
+    case 'about':
+        Routeur::route('AboutController', $action);
+        break;
     default:
         ErrorController::error404($page);
 }
 ?>
 <footer>
     <div class="footerMenu"><a href="?c=contact" title="Contact">Contact</a></div>
+    <div class="footerMenu"><a href="?c=about&a=politique" title="Mentions légales">Politique de confidentialité</a></div>
+    <div class="footerMenu"><a href="?c=about&a=mention-legales" title="Mentions légales">Mention légales</a></div>
 </footer>
 
 <script src="https://kit.fontawesome.com/d8438e7f2f.js" crossorigin="anonymous"></script>

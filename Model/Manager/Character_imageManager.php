@@ -157,7 +157,6 @@ class Character_imageManager
                 $select2->execute();
                 $datas2 = $select2->fetchAll();
                 foreach ($datas2 as $data2) {
-
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
                         ?>

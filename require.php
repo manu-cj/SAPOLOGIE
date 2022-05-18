@@ -39,6 +39,7 @@ require __DIR__. '/Controller/VerificationController.php';
 require __DIR__. '/Controller/ForgotPasswordController.php';
 require __DIR__ . '/Controller/ResetPasswordController.php';
 require __DIR__ . '/Controller/ContactController.php';
+require __DIR__ . '/Controller/AboutController.php';
 
 
 require __DIR__. '/Routeur/Routeur.php';

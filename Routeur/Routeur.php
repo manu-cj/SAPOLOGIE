@@ -27,6 +27,12 @@ class Routeur
             case 'delete-profil':
                 $control->deleteAccount();
                 break;
+            case 'mention-legales':
+                $control->mention();
+                break;
+            case 'politique':
+                $control->politique();
+                break;
         }
     }
 
