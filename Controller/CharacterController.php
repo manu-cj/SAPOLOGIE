@@ -18,14 +18,18 @@ class CharacterController extends AbstractController
 
     public function addPicture() {
         if ($this->getPost('upload')) {
+
+            $test = $_POST['characterImage'];
             $picture = htmlentities($_SESSION['picture']);
             $id = htmlentities($_POST['characterId']);
             $description = nl2br(htmlentities($_POST['description']));
             $visibility = htmlentities($_POST['visibility']);
 
+
+
             $alert = [];
             if (empty($picture)) {
-                $alert[] = '<div class="alert-error">Veuillez sélectionner un fichier au format "jpeg" ou "png" !</div>';
+                $alert[] = '<div class="alert-error">Veuillez sélectionner un fichier au format "jpeg" ou "png" '. $test.'!</div>';
             }
             if (empty($description)) {
                 $description = '';

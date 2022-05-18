@@ -2,6 +2,9 @@
 
 class Routeur
 {
+
+//Router which is responsible for making the link between the view and the controllers, the switch is used to trigger a function corresponding to the second url parameter
+
     public static function route(string $controller, ?string $action = null) {
         $control = new $controller();
         $control->index();
@@ -33,10 +36,11 @@ class Routeur
             case 'politique':
                 $control->politique();
                 break;
+
         }
     }
 
-
+//Function that secures URL parameters
     public static function secureUrl(?string $param): ?string
     {
         if(null === $param) {

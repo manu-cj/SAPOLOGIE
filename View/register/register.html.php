@@ -18,5 +18,5 @@
     <br>
     <input type="password" name="password-repeat" id="password-repeat" required>
     <br>
-    <input type="submit" name="send" id="password" required>
+    <input type="submit" name="send" id="send" required>
 </form>

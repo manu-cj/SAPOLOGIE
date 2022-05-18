@@ -85,8 +85,9 @@ class Character_imageManager
                             }
                             ?>
                             <br>
-                            <img class="gallerieImage" src="<?= $filename ?> " alt="<?= $data['image'] ?>"
-                            >
+                            <img class="gallerieImage" src="<?= $filename ?> "    alt="image du personnage"
+                                 title="image du personnage"?>
+
                             <?php
                             if (isset($_SESSION['user'])) {
                                 if (isset($_SESSION['mailValidate'])) {
@@ -182,7 +183,8 @@ class Character_imageManager
                             ?>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
-                                                                            alt="<?= $data['image'] ?>"></a>
+                                                                            alt="image du personnage"
+                                                                            title="image du personnage"
                             <?php
                             if (isset($_SESSION['user'])) {
                                 if (isset($_SESSION['mailValidate'])) {
@@ -280,7 +282,8 @@ class Character_imageManager
                             ?>
                             <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                             src="<?= $filename ?> "
-                                                                            alt="<?= $data['image'] ?>"
+                                                                            alt="image du personnage"
+                                                                            title="image du personnage"
                                 ></a>
                             <?php
                             if (isset($_SESSION['user'])) {
@@ -440,6 +443,4 @@ class Character_imageManager
             }
         }
     }
-
-
 }

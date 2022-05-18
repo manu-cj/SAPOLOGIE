@@ -11,11 +11,11 @@
         <br>
         <label for="mail">E-mail :</label>
         <br>
-        <input type="email" name="mail" id="mail">
+        <input type="email" name="mail" id="mail" required>
         <br>
         <label for="sujet">Sujet :</label>
         <br>
-        <input type="text" name="sujet">
+        <input type="text" name="sujet" id="sujet" required>
         <br>
         <br>
         <label for="message">Message :</label>
@@ -25,7 +25,7 @@
                 referrerpolicy="origin"></script>
         </head>
         <body>
-        <textarea name="message"></textarea>
+        <textarea name="message" id="message"></textarea>
 
         <br>
         <input type="submit" name="send" id="send">

@@ -12,7 +12,7 @@ if (AbstractController::getSession('user')) {
     <br>
     <input type="password" name="password" id="password" required>
     <br>
-    <input type="submit" name="send">
+    <input type="submit" name="send" id="send">
     <br>
     <a href="?c=forgot-password">Mot de passe oublié ?</a>
 </form>

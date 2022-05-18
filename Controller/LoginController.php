@@ -13,14 +13,19 @@ class LoginController extends AbstractController
             $alert = [];
             if (empty($mail)) {
                 $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+                if (count($alert) > 0) {
+                    $_SESSION['alert'] = $alert;
+                    header('LOCATION: ?c=login');
+                }
             }
             if (empty($password)) {
                 $alert[] = '<div class="alert-error">Un des champs est vide</div>';
+                if (count($alert) > 0) {
+                    $_SESSION['alert'] = $alert;
+                    header('LOCATION: ?c=login');
+                }
             }
-            if (count($alert) > 0) {
-                $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=login');
-            }
+
             else {
                 UserManager::ConnectUser($mail, $password);
             }

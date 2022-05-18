@@ -47,6 +47,7 @@ class UserController extends AbstractController
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil&id=' . $id);
             } else {
+
                 $user = new User();
                 $user
                     ->setUsername($username);
@@ -70,13 +71,35 @@ class UserController extends AbstractController
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil&id=' . $id);
             } else {
-                $user = new User();
-                $user
-                    ->setMail($mail);
-                UserManager::getMailExist($mail);
-                UserManager::mailUpdate($user, $id);
+                $destinataire = $_SESSION['user']['mail'];
+                $sujet = 'Activer votre compte';
+                $message = "<div style='text-align: center; word-break: break-word;'>
+                            <h1>Bienvenue sur notre Site</h1>
+                             <p>Votre adresse mail vient d'être changé, si vous n'êtes pas à l'origine 
+                             de cette demande veuillez nous contacter, dans le cas contraire vous pouvez ignorer ce message</p><br>
+                             <p>Assistance de du site world of sapologie.com</p>
+                        </div>";
+
+                $header = "From: blog@world-of-sapologie.com";
+                $header .= 'Reply-To: blog@world-of-sapologie.com' . "\n";
+                $header .= 'Content-Type: text/html; charset="iso-8859-1"' . "\n";
+                $header .= 'Content-Transfer-Encoding: 8bit';
+                if (mail($destinataire, $sujet, $message, $header)) {
+                    echo 'Votre message a bien été envoyé ';
+                } else // Non envoyé
+                {
+                    echo "Votre message n'a pas pu être envoyé";
+                }
             }
+
+            $user = new User();
+            $user
+                ->setMail($mail);
+            UserManager::getMailExist($mail);
+            UserManager::mailUpdate($user, $id);
         }
+
+
         if ($this->getPost('changePassword')) {
             $password = htmlentities($_POST['password']);
             $newPassword = htmlentities($_POST['newPassword']);
@@ -104,11 +127,31 @@ class UserController extends AbstractController
                 $_SESSION['alert'] = $alert;
                 header('LOCATION: ?c=profil&id=' . $id);
             } else {
-                $user = new User();
-                $user
-                    ->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
-                UserManager::passwordUpdate($user, $id, $password);
+                $destinataire = $_SESSION['user']['mail'];
+                $sujet = 'Activer votre compte';
+                $message = "<div style='text-align: center; word-break: break-word;'>
+                            <h1>Bienvenue sur notre Site</h1>
+                             <p>Votre mot de passe vient d'être changé, si vous n'êtes pas à l'origine 
+                             de cette demande veuillez nous contacter, dans le cas contraire vous pouvez ignorer ce message</p><br>
+                             <p>Assistance de du site world of sapologie.com</p>
+                        </div>";
+
+                $header = "From: blog@world-of-sapologie.com";
+                $header .= 'Reply-To: blog@world-of-sapologie.com' . "\n";
+                $header .= 'Content-Type: text/html; charset="iso-8859-1"' . "\n";
+                $header .= 'Content-Transfer-Encoding: 8bit';
+                if (mail($destinataire, $sujet, $message, $header)) {
+                    echo 'Votre message a bien été envoyé ';
+                } else // Non envoyé
+                {
+                    echo "Votre message n'a pas pu être envoyé";
+                }
             }
+
+            $user = new User();
+            $user
+                ->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+            UserManager::passwordUpdate($user, $id, $password);
         }
     }
 
@@ -169,15 +212,11 @@ class UserController extends AbstractController
                 $id = $_SESSION['user']['id'];
                 UserManager::deleteAccount($password, $id);
             }
-        }
-        else {
+        } else {
             $referer = $_SERVER['HTTP_REFERER'] ?? 'index.php';
             header('Location: ' . $referer);
         }
     }
-
-
-
 
 
 }

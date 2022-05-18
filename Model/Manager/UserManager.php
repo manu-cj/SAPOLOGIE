@@ -243,7 +243,7 @@ class UserManager extends User
 
     public static function mailUpdate(User $user, $id)
     {
-        $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET mail = :mail WHERE id = :id");
+        $update = Connect::getPDO()->prepare("UPDATE aiu12_user SET mail = :mail, validate = 0 WHERE id = :id");
         $update->bindValue(':mail', $user->getMail());
         $update->bindValue(':id', $id);
         $alert = [];
