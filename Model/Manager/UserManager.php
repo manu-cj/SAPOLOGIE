@@ -26,7 +26,7 @@ class UserManager extends User
             $alert[] = '<div class="alert-succes">Inscription réussi !</div>';
             if (count($alert) > 0) {
                 $_SESSION['alert'] = $alert;
-                header('LOCATION: ?c=home');
+                header('LOCATION: ?c=login');
             }
         } else {
             $alert[] = '<div class="alert-error">Une erreur c\est produite lors de l\'inscription !</div>';
