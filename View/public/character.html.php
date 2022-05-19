@@ -34,7 +34,7 @@ function checkImage($image) {
         finfo_close($finfo);
 }
 
-
+//function to change the name of the image
 
 function getRandomName(string $regularName)
 {

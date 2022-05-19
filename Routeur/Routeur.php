@@ -3,7 +3,9 @@
 class Routeur
 {
 
-//Router which is responsible for making the link between the view and the controllers, the switch is used to trigger a function corresponding to the second url parameter
+/**Router which is responsible for making the link between the view and the controllers, the switch is used to trigger a
+function corresponding to the second url parameter
+ **/
 
     public static function route(string $controller, ?string $action = null) {
         $control = new $controller();

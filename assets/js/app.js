@@ -277,44 +277,43 @@ let registerForm = document.querySelector("#registerForm");
 let loginForm = document.querySelector('#loginForm');
 if (loginForm) {
     if (mail.value === "") {
-        mail.setCustomValidity("Cher sapologue veuillez entrer votre addresse mail");
+        mail.onvalid = mail.setCustomValidity("Cher sapologue veuillez entrer votre addresse mail");
     } else {
-        mail.setCustomValidity("");
+        mail.oninput = mail.setCustomValidity("");
     }
 
     if (mail.value.indexOf("@", 0) < 0) {
-        mail.setCustomValidity("Cher sapologue veuillez entrer une adresse e-mail valide");
+        mail.onvalid = mail.setCustomValidity("Cher sapologue veuillez entrer une adresse e-mail valide");
     } else {
-        mail.setCustomValidity("");
+        mail.oninput = mail.setCustomValidity("");
     }
 }
 if (registerForm) {
         sendForm.addEventListener('click', () => {
-            console.log('hello')
             if (inputUsername.value === "") {
-                inputUsername.setCustomValidity("Cher sapologue veuillez entrer nom d'utilisateur");
+                mail.onvalid =  inputUsername.setCustomValidity("Cher sapologue veuillez entrer nom d'utilisateur");
             }
             else {
-                inputUsername.setCustomValidity("");
+                mail.oninput =  inputUsername.setCustomValidity("");
             }
 
             if (inputUsername.value.length <= 2 || inputUsername.value.length >= 255) {
-                inputUsername.setCustomValidity(" Cher sapologue votre nom d'utilisateur doit contenir entre 2 et 255 caractères")
+                mail.onvalid =  inputUsername.setCustomValidity(" Cher sapologue votre nom d'utilisateur doit contenir entre 2 et 255 caractères")
             }
             else {
-                inputUsername.setCustomValidity("");
+                mail.oninput =  inputUsername.setCustomValidity("");
             }
 
             if (mail.value === "") {
-                mail.setCustomValidity("Cher sapologue veuillez entrer votre addresse mail");
+                mail.onvalid =   mail.setCustomValidity("Cher sapologue veuillez entrer votre addresse mail");
             } else {
-                mail.setCustomValidity("");
+                mail.oninput =  mail.setCustomValidity("");
             }
 
             if (mail.value.indexOf("@", 0) < 0) {
-                mail.setCustomValidity("Cher sapologue veuillez entrer une adresse e-mail valide");
+                mail.onvalid =  mail.setCustomValidity("Cher sapologue veuillez entrer une adresse e-mail valide");
             } else {
-                mail.setCustomValidity("");
+                mail.oninput =  mail.setCustomValidity("");
             }
 
             if (password.value === "") {
