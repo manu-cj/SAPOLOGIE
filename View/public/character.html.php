@@ -52,6 +52,9 @@ if (isset($_FILES["characterImage"])) {
         if (in_array($_FILES["characterImage"]['type'], $allowedMimeTypes)) {
             if ($_FILES["characterImage"]['error'] === 0) {
                 $tmp_name = $_FILES["characterImage"]["tmp_name"];
+                $finfo = finfo_open(FILEINFO_MIME_TYPE); // Retourne le type mime à la extension mimetype
+                $file_MimeType = finfo_file($finfo, $_FILES['characterImage']['tmp_name']);
+                finfo_close($finfo);
                 $name = getRandomName($_FILES["characterImage"]["name"]);
                 if (!is_dir('uploads')) {
                     mkdir('uploads', '0755');

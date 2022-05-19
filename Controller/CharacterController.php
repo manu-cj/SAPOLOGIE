@@ -10,7 +10,9 @@ class CharacterController extends AbstractController
     {
         $this->render('public/character');
         if (isset($_GET['id'])) {
-            Mail_validateManager::getMailValidate();
+            if (isset($_SESSION['user'])) {
+                Mail_validateManager::getMailValidate();
+            }
             CharacterManager::getCharacterId(htmlentities($_GET['id']));
             Character_imageManager::getCharacterPicture(htmlentities($_GET['id']), 1);
         }

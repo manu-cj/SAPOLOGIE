@@ -85,8 +85,8 @@ class Character_imageManager
                             }
                             ?>
                             <br>
-                            <img class="gallerieImage" src="<?= $filename ?> "    alt="image du personnage"
-                                 title="image du personnage"?>
+                            <img class="gallerieImage" src="<?= $filename ?> " alt="image du personnage"
+                                 title="image du personnage" ?>
 
                             <?php
                             if (isset($_SESSION['user'])) {
@@ -147,7 +147,7 @@ class Character_imageManager
 
     public static function getCharacterPictureForHome()
     {
-        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE view_fk = 2");
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE view_fk = 2 ORDER BY id DESC");
 
 
         if ($select->execute()) {
@@ -160,83 +160,91 @@ class Character_imageManager
                 foreach ($datas2 as $data2) {
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        ?>
-                        <div class="pictureCharacter">
-                            <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%">
-                                <h3><?= ucfirst($data2['username']) ?></h3></a>
-                            <div class="description" style="display: inline"><?= $data['description'] ?></div>
-                            <br>
-                            <br>
-                            <?php
-                            if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user'] === $data['user_fk']) {
-                                    ?>
-                                    <form method="post" action="?c=delete">
-                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
-                                               style="display: none">
-                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer"
-                                               style=" border: none; background-color: rgba(0, 139, 129, 0)">
-                                    </form>
-                                    <?php
-                                }
-                            }
+                        $finfo = finfo_open(FILEINFO_MIME_TYPE); // Retourne le type mime à la extension mimetype
+                        $type = finfo_file($finfo, $filename) . "\n";
+                        if (strpos($type, 'image/') === 0) {
                             ?>
-                            <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
-                                                                            src="<?= $filename ?> "
-                                                                            alt="image du personnage"
-                                                                            title="image du personnage"
-                            <?php
-                            if (isset($_SESSION['user'])) {
-                                if (isset($_SESSION['mailValidate'])) {
-                                    if ($_SESSION['mailValidate'] === '1') {
+                            <div class="pictureCharacter">
+                                <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%">
+                                    <h3><?= ucfirst($data2['username']) ?></h3></a>
+                                <div class="description" style="display: inline"><?= $data['description'] ?></div>
+                                <br>
+                                <br>
+                                <?php
+                                if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user'] === $data['user_fk']) {
+                                ?>
+                                <form method="post" action="?c=delete">
+                                    <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                           style="display: none">
+                                    <input type="submit" name="deletePicture" value="❌" title="Supprimer"
+                                           style=" border: none; background-color: rgba(0, 139, 129, 0)">
+                                </form>
+                                <?php
+                                }
+                                }
+                                ?>
+                                <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
+                                                                                src="<?= $filename ?> "
+                                                                                alt="image du personnage"
+                                                                                title="image du personnage"
+                                    <?php
+                                    if (isset($_SESSION['user'])) {
+                                        if (isset($_SESSION['mailValidate'])) {
+                                            if ($_SESSION['mailValidate'] === '1') {
 
-                                        if ($_SESSION['banni'] === '0') {
+                                                if ($_SESSION['banni'] === '0') {
 
+                                                    ?>
+                                                    <div id="comment">
+                                                        <form method="post"
+                                                              action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                            <input type="number" name="userFk"
+                                                                   value="<?= $_SESSION['user']['id'] ?>"
+                                                                   style="display: none">
+                                                            <input type="number" name="characterImageFk"
+                                                                   value="<?= $data['id'] ?>"
+                                                                   style="display: none">
+                                                            <input type="text" name="comment"
+                                                                   placeholder="Ecrire un commentaire"
+                                                                   style="display: inline">
+                                                            <input type="submit" name="send" value="▶"
+                                                                   style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                                        </form>
+                                                    </div>
+                                                    <br>
+                                                    <?php
+                                                }
+                                            }
+                                            if ($_SESSION['mailValidate'] === '0') {
+                                                ?>
+                                                <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
+                                                    commentaire</h4>
+                                                <?php
+                                            }
+                                        }
+                                        if ($_SESSION['banni'] === '1') {
                                             ?>
-                                            <div id="comment">
-                                                <form method="post"
-                                                      action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                                    <input type="number" name="userFk"
-                                                           value="<?= $_SESSION['user']['id'] ?>"
-                                                           style="display: none">
-                                                    <input type="number" name="characterImageFk"
-                                                           value="<?= $data['id'] ?>"
-                                                           style="display: none">
-                                                    <input type="text" name="comment"
-                                                           placeholder="Ecrire un commentaire"
-                                                           style="display: inline">
-                                                    <input type="submit" name="send" value="▶"
-                                                           style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
-                                                </form>
-                                            </div>
-                                            <br>
+                                            <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
+                                                commentaire !</h4>
                                             <?php
                                         }
-                                    }
-                                    if ($_SESSION['mailValidate'] === '0') {
-                                        ?>
-                                        <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
-                                            commentaire</h4>
-                                        <?php
-                                    }
-                                }
-                                if ($_SESSION['banni'] === '1') {
+                                    } else {
                                     ?>
-                                    <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
-                                        commentaire !</h4>
-                                    <?php
-                                }
-                            } else {
-                                ?>
-                                <h4>Veuillez vous connecter pour écrire un commentaire</h4>
+                                    <h4>Veuillez vous connecter pour écrire un commentaire</h4>
                                 <?php
-                            } ?> </div>
-                        <?php
-                        CommentManager::getLastComment($data['id'], 1);
-                        ?>
-                        <br>
-                        <?php
+                                } ?></div>
+                            <?php
+                            CommentManager::getLastComment($data['id'], 1);
+                            ?>
+                            <br>
+                            <?php
+                        } else {
+                            self::deletePicture($data['image']);
+                            unlink($filename);
 
+                        }
+                        finfo_close($finfo);
 
                     }
                 }
@@ -246,14 +254,14 @@ class Character_imageManager
 
     public static function getCharacterPicture(int $characterFK, $limit)
     {
-        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE character_fk = :character_fk");
+        $select = Connect::getPDO()->prepare("SELECT * FROM aiu12_character_image WHERE character_fk = :character_fk order by id DESC ");
 
         $select->bindValue(':character_fk', $characterFK);
 
         if ($select->execute()) {
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
+                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id ");
                 $select2->bindValue(':id', $data['user_fk']);
                 $select2->execute();
                 $datas2 = $select2->fetchAll();
@@ -261,84 +269,100 @@ class Character_imageManager
 
                     $files = glob('uploads/' . $data['image']);
                     foreach ($files as $filename) {
-                        ?>
-                        <div class="pictureCharacter">
-                            <h3 style="display: none"><?= ucfirst($data2['username']) ?></h3>
-                            <div class="description" style="display: inline"><?= $data['description'] ?></div>
-                            <br>
-                            <br>
-                            <?php
-                            if (isset($_SESSION['user'])) {
-                                if ($_SESSION['user'] === $data['user_fk']) {
-                                    ?>
-                                    <form method="post" action="?c=delete">
-                                        <input type="text" name="filename" value="<?= $data['image'] ?>"
-                                               style="display: none">
-                                        <input type="submit" name="deletePicture" value="❌" title="Supprimer">
-                                    </form>
-                                    <?php
-                                }
-                            }
+                        $finfo = finfo_open(FILEINFO_MIME_TYPE); // Retourne le type mime à la extension mimetype
+                        $type = finfo_file($finfo, $filename) . "\n";
+                        if (strpos($type, 'image/') === 0) {
                             ?>
-                            <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
-                                                                            src="<?= $filename ?> "
-                                                                            alt="image du personnage"
-                                                                            title="image du personnage"
-                                ></a>
-                            <?php
-                            if (isset($_SESSION['user'])) {
-                                if (isset($_SESSION['mailValidate'])) {
-                                    if ($_SESSION['mailValidate'] === '1') {
-
-                                        if ($_SESSION['banni'] === '0') {
-
-                                            ?>
-                                            <div id="comment">
-                                                <form method="post"
-                                                      action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
-                                                    <input type="number" name="userFk"
-                                                           value="<?= $_SESSION['user']['id'] ?>"
-                                                           style="display: none">
-                                                    <input type="number" name="characterImageFk"
-                                                           value="<?= $data['id'] ?>"
-                                                           style="display: none">
-                                                    <input type="text" name="comment"
-                                                           placeholder="Ecrire un commentaire"
-                                                           style="display: inline">
-                                                    <input type="submit" name="send" value="▶"
-                                                           style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
-                                                </form>
-                                            </div>
-                                            <br>
-                                            <?php
-                                        }
-                                    }
-                                    if ($_SESSION['mailValidate'] === '0') {
+                            <div class="pictureCharacter">
+                                <h3 style="display: none"><?= ucfirst($data2['username']) ?></h3>
+                                <div class="description" style="display: inline"><?= $data['description'] ?></div>
+                                <br>
+                                <br>
+                                <?php
+                                if (isset($_SESSION['user'])) {
+                                    if ($_SESSION['user'] === $data['user_fk']) {
                                         ?>
-                                        <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
-                                            commentaire</h4>
+                                        <form method="post" action="?c=delete">
+                                            <input type="text" name="filename" value="<?= $data['image'] ?>"
+                                                   style="display: none">
+                                            <input type="submit" name="deletePicture" value="❌" title="Supprimer">
+                                        </form>
                                         <?php
                                     }
                                 }
-                                if ($_SESSION['banni'] === '1') {
-                                    ?>
-                                    <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
-                                        commentaire !</h4>
-                                    <?php
-                                }
-                            } else {
+
                                 ?>
-                                <h4>Veuillez vous connecter pour écrire un commentaire</h4>
+                                <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
+                                                                                src="<?= $filename ?> "
+                                                                                alt="image du personnage"
+                                                                                title="image du personnage"
+                                    ></a>
                                 <?php
-                            } ?> </div>
-                        <?php
-                        CommentManager::getLastComment($data['id'], $limit);
-                        ?>
-                        <br>
-                        <?php
+
+                                ?>
+
+                                <?php
+                                if (isset($_SESSION['user'])) {
+                                    if (isset($_SESSION['mailValidate'])) {
+                                        if ($_SESSION['mailValidate'] === '1') {
+
+                                            if ($_SESSION['banni'] === '0') {
+
+                                                ?>
+                                                <div id="comment">
+                                                    <form method="post"
+                                                          action="?c=character&a=comment&id=<?= $data['character_fk'] ?>">
+                                                        <input type="number" name="userFk"
+                                                               value="<?= $_SESSION['user']['id'] ?>"
+                                                               style="display: none">
+                                                        <input type="number" name="characterImageFk"
+                                                               value="<?= $data['id'] ?>"
+                                                               style="display: none">
+                                                        <input type="text" name="comment"
+                                                               placeholder="Ecrire un commentaire"
+                                                               style="display: inline">
+                                                        <input type="submit" name="send" value="▶"
+                                                               style=" border: none; background-color: rgba(0, 139, 129, 0); color: beige">
+                                                    </form>
+                                                </div>
+                                                <br>
+                                                <?php
+                                            }
+                                        }
+                                        if ($_SESSION['mailValidate'] === '0') {
+                                            ?>
+                                            <h4>Veuillez vérifier l'adresse mail de votre compte pour écrire un
+                                                commentaire</h4>
+                                            <?php
+                                        }
+                                    }
+                                    if ($_SESSION['banni'] === '1') {
+                                        ?>
+                                        <h4>Vous avez été bannis par un Admin, vous n'avez pas le droit d'écrire un
+                                            commentaire !</h4>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <h4>Veuillez vous connecter pour écrire un commentaire</h4>
+                                    <?php
+                                } ?> </div>
+                            <?php
+                            CommentManager::getLastComment($data['id'], $limit);
+                            ?>
+                            <br>
+                            <?php
+                        } else {
+                            self::deletePicture($data['image']);
+                            unlink($filename);
+
+                        }
+                        finfo_close($finfo);
                     }
                 }
             }
+
+
         }
     }
 

@@ -131,12 +131,12 @@ class CharacterManager
             <?php
             $datas = $select->fetchAll();
             foreach ($datas as $data) {
-                if (isset($_SESSION['user'])) {
-                    ?>
+                ?>
                     <a href="https://worldofwarcraft.com/fr-fr/character/<?= $data['server_name'] ?>/<?= $data['character_name'] ?>"
                        target="_blank" style="display: inline" title="Armurerie" alt="Armurerie"><i
                                 class="fas fa-external-link-alt"></i></a>
-                    <?php
+                <?php
+                if (isset($_SESSION['user'])) {
                     $validate = $_SESSION['mailValidate'];
                     if ($validate === '0') {
                         ?>

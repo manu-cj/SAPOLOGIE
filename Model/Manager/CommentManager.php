@@ -47,53 +47,53 @@ class CommentManager
             $datas = $select->fetchAll();
             ?>
             <div class="allDataComment">
-            <?php
-            foreach ($datas as $data) {
-                $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
-                $select2->bindValue(':id', $data['user_fk']);
-                $select2->execute();
-                $datas2 = $select2->fetchAll();
-                foreach ($datas2 as $data2) {
-                    ?>
-                    <div class="commentContent">
-                        <div class="CommentAuthor" style="display: inline"> <a href="?c=profil&id=<?= $data2['id'] ?>" style="width: 100%"><b><?= $data2['username'] ?>
-                                </b></a></b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
-                        <?php
-                        if (isset($_SESSION['user'])) {
-                            if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
-                                ?>
-                                <form method="post" action="?c=delete" style="display: inline; width: 100%">
-                                    <input type="text" name="idComment" value="<?= $data['id'] ?>"
-                                           style="display: none">
-                                    <p class="Ask" style="display: none">Voulez vous vraiment supprimer ce commentaire ?</p>
-                                    <input type="submit" name="deleteComment" value="❌" title="Supprimer" style="cursor: pointer">
-                                </form>
-                                <?php
-                            }
-                        }
+                <?php
+                foreach ($datas as $data) {
+                    $select2 = Connect::getPDO()->prepare("SELECT * FROM aiu12_user where id = :id");
+                    $select2->bindValue(':id', $data['user_fk']);
+                    $select2->execute();
+                    $datas2 = $select2->fetchAll();
+                    foreach ($datas2 as $data2) {
                         ?>
-                        <br>
-                        <div class="comment"><?= $data['content'] ?></div>
-                        <br>
-                    </div>
+                        <div class="commentContent">
+                            <div class="CommentAuthor" style="display: inline"><a
+                                        href="?c=profil&id=<?= $data2['id'] ?>"
+                                        style="width: 100%"><b><?= $data2['username'] ?>
+                                    </b></a></b> le <?= date('d-m-Y à H:i:', strtotime($data['date'])) ?></div>
+                            <?php
+                            if (isset($_SESSION['user'])) {
+                                if ($_SESSION['user']['id'] === $data['user_fk'] or $_SESSION['role'] === 'admin') {
+                                    ?>
+                                    <form method="post" action="?c=delete" style="display: inline; width: 100%">
+                                        <input type="text" name="idComment" value="<?= $data['id'] ?>"
+                                               style="display: none">
+                                        <p class="Ask" style="display: none">Voulez vous vraiment supprimer ce
+                                            commentaire ?</p>
+                                        <input type="submit" name="deleteComment" value="❌" title="Supprimer"
+                                               style="cursor: pointer">
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <br>
+                            <div class="comment"><?= $data['content'] ?></div>
+                            <br>
+                        </div>
 
-                    <?php
+                        <?php
+                    }
+                    $id = $data['character_image_fk'];
                 }
-                $id = $data['character_image_fk'];
-            }
-            if (!isset($_GET['picture'])) {
-                if ($select->rowCount() === 1) {
-                    echo '<a href="?c=picture&id=' . $id . '">Voir plus de commentaires ⬇</a><br><br>';
-                }
-                if ($select->rowCount() === 0 or $select->rowCount() > 2) {
-                    echo '<a href="?c=picture&id=' . $id . '" style="display: none">Voir plus de commentaires ⬇</a><br><br>';
-                }
-            }
-            ?>
+
+                echo '<a href="?c=picture&id=' . $id . '">Voir plus ⬇</a><br><br>';
+
+
+                ?>
             </div>
             <br>
 
-<?php
+            <?php
 
 
         }
