@@ -187,7 +187,8 @@ class Character_imageManager
                                 <a href="?c=picture&id=<?= $data['id'] ?>"><img class="gallerieImage"
                                                                                 src="<?= $filename ?> "
                                                                                 alt="image du personnage"
-                                                                                title="image du personnage"
+                                                                                title="image du personnage">
+                                </a>
                                     <?php
                                     if (isset($_SESSION['user'])) {
                                         if (isset($_SESSION['mailValidate'])) {
