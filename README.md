@@ -28,3 +28,7 @@ Ce projet est une plateforme de blog interactive développée en PHP suivant le 
 - **JavaScript** : Pour les interactions dynamiques et les opérations C.R.U.D.
 - **Fonction `mail()` de PHP** : Pour l'envoi des e-mails de validation et de réinitialisation de mot de passe.
 - **reCAPTCHA** : Pour l'intégration du captcha anti-spam.
+
+## Voir le projet
+
+-> [ici](https://world-of-sapologie.com/)
